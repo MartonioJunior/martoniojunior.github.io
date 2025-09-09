@@ -1,3 +1,51 @@
+/*
+MARK: Imports
+*/
+@font-face {
+    font-family: "Berylium";
+    src: url("Fonts/Berylium/berylium_rg.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Berylium";
+    src: url("Fonts/Berylium/berylium_rg_it.otf");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Berylium";
+    src: url("Fonts/Berylium/berylium_bd.otf");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Berylium";
+    src: url("Fonts/Berylium/berylium_bd_it.otf");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Poetsen One";
+    src: url("Fonts/PoetsenOne/PoetsenOne-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Primer";
+    src: url("Fonts/Primer/primer_print.otf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Primer";
+    src: url("Fonts/Primer/primer_print_bold.otf");
+    font-weight: bold;
+}
+
 /* 
 MARK: Variables
 */
@@ -37,16 +85,22 @@ MARK: Variables
     --primary-font: "Optima", "Poetsen One", "Trebuchet MS", sans-serif;
     --secondary-font: "Berylium", "Garamond", serif;
     --cursive-font: "Primer", "MV Boli", "Verdana", sans-serif;
-    --monospace-font: "American Typewriter", "SF Mono", "Courier New", monospace;
+    --monospace-font: "American Typewriter", "SF Mono", monospace;
     --document-font: "Arial", sans-serif;
 
     /* Font Sizes */
     --reading-text-size: 1.2em;
     --tag-text-size: 1.5em;
+    --headline-text-size: 4em;
 
     /* Other Constants */
     --element-spacing: 12px;
     --card-radius: 8px;
+
+    @media(max-width: 600px) {
+        --headline-text-size: 2em;
+        --tag-text-size: 1.3em;
+    }
 }
 /* 
 MARK: *
@@ -180,8 +234,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    border-radius: 20px;
-    font-size: 4em;
+    border-radius: var(--card-radius);
+    font-size: var(--headline-text-size);
     margin-bottom: calc(var(--element-spacing) * 2);
     text-align: center;
 }
@@ -246,6 +300,18 @@ header {
     }
 }
 /* 
+MARK: <li>
+*/
+li {
+    font-size: var(--reading-text-size);
+    margin-left: 24px;
+    text-decoration: none;
+
+    & li {
+        font-size: 1em;
+    }
+}
+/* 
 MARK: <nav>
 */
 nav {
@@ -292,31 +358,6 @@ nav {
             color: var(--nav-secondary);
             font-family: var(--primary-font);
         }
-    }
-}
-/* 
-MARK: <p>
-*/
-p {
-    color: var(--mono0);
-    font-family: var(--secondary-font);
-    font-size: var(--reading-text-size);
-    margin-bottom: 10px;
-
-    @media(prefers-color-scheme: dark) {
-        color: var(--mono100)
-    }
-}
-/* 
-MARK: <li>
-*/
-li {
-    font-size: var(--reading-text-size);
-    margin-left: 24px;
-    text-decoration: none;
-
-    & li {
-        font-size: 1em;
     }
 }
 /*
@@ -366,6 +407,25 @@ ol, ul {
     &.tag {
         margin-bottom: 10px;
     }
+}
+/* 
+MARK: <p>
+*/
+p {
+    color: var(--mono0);
+    font-family: var(--secondary-font);
+    font-size: var(--reading-text-size);
+    margin-bottom: 10px;
+
+    @media(prefers-color-scheme: dark) {
+        color: var(--mono100)
+    }
+}
+/*
+MARK: <summary>
+*/
+summary {
+    font-size: var(--reading-text-size);
 }
 /*
 MARK: <time>
