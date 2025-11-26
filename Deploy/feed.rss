@@ -6,7 +6,7 @@
         <name>Martônio Júnior</name>
     </author>
     <link rel="self" href="https://martoniojunior.github.io"></link>
-    <updated>2025-11-03T20:09:40Z</updated>
+    <updated>2025-11-26T18:40:43Z</updated>
     <entry>
         <id>https://martoniojunior.github.io/posts/ramblings/2025-10-03/</id>
         <title>"Windows 10: An oldie, but a goodie"</title>
@@ -27,7 +27,7 @@
     <entry>
         <id>https://martoniojunior.github.io/posts/swift/standard-library/swizzling/</id>
         <title>Swizzling SIMD in Modern Swift</title>
-        <updated>2025-10-20T23:21:32Z</updated>
+        <updated>2025-11-03T21:22:53Z</updated>
         <summary>Combining `KeyPath` and `InlineArray` to improve `SIMD` types and applying the concept beyond</summary>
         <content type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;Swizzling is the act of transforming vectors by rearranging it’s components to create new vectors with components swapped around or even projected into another dimensionality. It’s most commonly used in computer graphics and games to quickly form new data structures using it’s components, with a less verbose approach for initialization.&lt;/p&gt;
@@ -128,7 +128,7 @@ var swizzled: SIMD3&amp;lt;Int&amp;gt; = .init(vector[\.x, \.y, { _ in .zero}]) 
 
 // Performing a Swizzle with KeyPath, Functions and always(_:)
 var vector = SIMD3(x: 3, y: 2, z: 5)
-var swizzled: SIMD3&amp;lt;Int&amp;gt; = .init(vector[always(1), \.z, { _ in .zero }]) // [1, 5, 0]
+var swizzled: SIMD3&amp;lt;Int&amp;gt; = .init(vector[always(1), \.z, always(.zero)]) // [1, 5, 0]
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We finally are able to swizzle around of components, but we still have some issues: we have no way of guaranteeing that the size of &lt;code&gt;[Scalar]&lt;/code&gt; actually corresponds to the &lt;code&gt;SIMD&lt;/code&gt; we’re planning to initialize, as it does not warn at compile-time about a size-mismatch and invokes a precondition failure at runtime.&lt;/p&gt;
 &lt;p&gt;For that, we’d need to have a guarantee that the data structure we’re returning always has the same size as the &lt;code&gt;SIMD&lt;/code&gt; we’d want to output or directly return the &lt;code&gt;SIMD&lt;/code&gt; that we want, which would both require us to go back to having a method per type, with  &lt;code&gt;swizzle&lt;/code&gt;  having a different definition for each one while mostly repeating the same implementation.&lt;/p&gt;
@@ -215,7 +215,7 @@ public func extract&amp;lt;Element, let A: Int, T&amp;gt;(_ element: Element, fe
 var elements = extract(vector, features: [\.[0], \.[2]])
 &lt;/code&gt;&lt;/pre&gt;
 &lt;blockquote&gt;
-&lt;p&gt;🔮 While the ideal approach for the method would be to use variadic generics, this is not possible here due to the lack of a fixed-size heterogeneous data structure that is able to maintain the type-safety of it’s properties (~~sounds like a future post idea if I’ve ever seen one~~).&lt;/p&gt;
+&lt;p&gt;🔮 While the ideal approach for the method would be to use variadic generics, this is not possible here due to the lack of a fixed-size heterogeneous data structure that is able to maintain the type-safety of it’s properties (&lt;del&gt;sounds like a future post idea if I’ve ever seen one&lt;/del&gt;).&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;While swizzling can be pretty easy to grasp as a concept, implementing it can be a pretty challenging experience for developers, as we need to take into account performance, ease of use and flexibility when choosing them. By using clever abstractions and some modern language features, we can take features that already exist in Swift and combine them into more powerful and efficient types that can be used even in situations outside of it’s intended purpose to make code that feels good to write while maintaining important guarantees to strengthen our codebase.&lt;/p&gt;</content>

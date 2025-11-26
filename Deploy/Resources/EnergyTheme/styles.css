@@ -487,12 +487,6 @@ MARK: .tag
 MARK: .tag-browser
 */
 /*
-MARK: .timestamps
-*/
-.timestamps {
-    font-family: var(--monospace-font);
-}
-/*
 MARK: .wip
 */
 .wip {
