@@ -15,10 +15,7 @@ import SagaParsleyMarkdownReader
 import Settings
 
 public extension ArtsBlueprintsCodeWebsite {
-    func deploy() async throws {
-        let source = "ArtsBlueprintsCode"
-        let destination = "Deploy"
-
+    func deploy(_ source: String, to destination: String) async throws {
         try await Saga(input: .init(source), output: .init(destination))
             .registerAreas(self)
             .registerPosts(self)

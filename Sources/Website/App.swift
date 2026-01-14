@@ -11,6 +11,9 @@ import StaticSiteGenerator
 @main
 public enum App {
     static func main() async throws {
-        try await ArtsBlueprintsCodeWebsite().deploy()
+        try await ArtsBlueprintsCodeWebsite().deploy(
+            "ArtsBlueprintsCode",
+            to: "Deploy"
+        )
     }
 }
