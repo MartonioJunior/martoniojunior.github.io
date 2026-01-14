@@ -53,10 +53,10 @@ let markdownReader = targetDep(name: "SagaParsleyMarkdownReader", package: "Saga
 let saga = targetDep(name: "Saga", package: "Saga")
 
 let dependencies = [
-    dep(url: "https://github.com/coenttb/swift-html", .upToNextMajor(from: "0.11.1")),
+    dep(url: "https://github.com/coenttb/swift-html", .upToNextMajor(from: "0.12.1")),
     dep(url: "https://github.com/JohnSundell/Files", .upToNextMajor(from: "4.3.0")),
-    dep(url: "https://github.com/loopwerk/Saga", .upToNextMajor(from: "2.0.0")),
-    dep(url: "https://github.com/loopwerk/SagaParsleyMarkdownReader", .upToNextMajor(from: "1.0.0")),
+    dep(url: "https://github.com/loopwerk/Saga", .upToNextMajor(from: "2.8.1")),
+    dep(url: "https://github.com/loopwerk/SagaParsleyMarkdownReader", .upToNextMajor(from: "1.1.0")),
     dep(url: "https://github.com/nmdias/FeedKit", .upToNextMajor(from: "10.1.3"))
 ]
 

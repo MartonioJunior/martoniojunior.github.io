@@ -1,15 +1,6 @@
 {
-  "originHash" : "1daf0aaae333438129408adc523e67d760be4b2abd6c428a71b92e7455575baf",
+  "originHash" : "11f91f61258563fa0b7f84e74219b7c78735234693d36def0c16adec654d4668",
   "pins" : [
-    {
-      "identity" : "combine-schedulers",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/combine-schedulers",
-      "state" : {
-        "revision" : "5928286acce13def418ec36d05a001a9641086f2",
-        "version" : "1.0.3"
-      }
-    },
     {
       "identity" : "feedkit",
       "kind" : "remoteSourceControl",
@@ -33,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Parsley",
       "state" : {
-        "revision" : "ad35091c7a790f04fc5a912c8bde8963eba753d2",
-        "version" : "0.9.1"
+        "revision" : "3de7eebc252450414fa91d96ec2dedf4785994e9",
+        "version" : "1.0.1"
       }
     },
     {
@@ -47,21 +38,12 @@
       }
     },
     {
-      "identity" : "pointfree-html",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/pointfree-html.git",
-      "state" : {
-        "revision" : "0867cb15127d9db0fe54e53d5a47fb5438d84710",
-        "version" : "2.0.0"
-      }
-    },
-    {
       "identity" : "saga",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Saga",
       "state" : {
-        "revision" : "c28b5c2da918bf5e873a5bb87d9e739e09ac7b97",
-        "version" : "2.7.0"
+        "revision" : "075ba234ac16d99d862a37e0e9f1116b96dbc49a",
+        "version" : "2.8.1"
       }
     },
     {
@@ -69,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/SagaParsleyMarkdownReader",
       "state" : {
-        "revision" : "b5f26f35d8843b01bd9a884a6a9d9922c58b1cba",
-        "version" : "1.0.1"
+        "revision" : "5a9fa57a5b123afa4acdb0800e348aef549bceba",
+        "version" : "1.1.0"
       }
     },
     {
@@ -83,21 +65,21 @@
       }
     },
     {
-      "identity" : "swift-builders",
+      "identity" : "swift-argument-parser",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/swift-builders",
+      "location" : "https://github.com/apple/swift-argument-parser",
       "state" : {
-        "revision" : "d9df6fa20e2ae7d9467baf9d19daa5b6d25d0644",
-        "version" : "0.1.0"
+        "revision" : "c5d11a805e765f52ba34ec7284bd4fcd6ba68615",
+        "version" : "1.7.0"
       }
     },
     {
-      "identity" : "swift-clocks",
+      "identity" : "swift-async-algorithms-fork",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-clocks",
+      "location" : "https://github.com/coenttb/swift-async-algorithms-fork.git",
       "state" : {
-        "revision" : "cc46202b53476d64e824e0b6612da09d84ffde8e",
-        "version" : "1.0.6"
+        "revision" : "9352a14c5693451c0f76a433d22dbe86a92f61ae",
+        "version" : "1.2.0"
       }
     },
     {
@@ -128,21 +110,48 @@
       }
     },
     {
-      "identity" : "swift-concurrency-extras",
+      "identity" : "swift-color-standard",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-concurrency-extras",
+      "location" : "https://github.com/swift-standards/swift-color-standard",
       "state" : {
-        "revision" : "5a3825302b1a0d744183200915a47b508c828e6f",
-        "version" : "1.3.2"
+        "revision" : "b8ce9ddb6ae0c94bc011f04c03a9e5f7a201ff92",
+        "version" : "0.1.0"
       }
     },
     {
-      "identity" : "swift-css-types",
+      "identity" : "swift-css",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/swift-css-types.git",
+      "location" : "https://github.com/coenttb/swift-css",
       "state" : {
-        "revision" : "be78ecea36f036ab165cbf7b1134b3fb7bcf036b",
-        "version" : "0.1.0"
+        "revision" : "d5823570e1d5ffb63b65bd86701dbfec18cca989",
+        "version" : "0.6.1"
+      }
+    },
+    {
+      "identity" : "swift-css-html-rendering",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/swift-css-html-rendering",
+      "state" : {
+        "revision" : "6a3243581a801cdeeaa6386d73d045a9eb249fce",
+        "version" : "0.2.1"
+      }
+    },
+    {
+      "identity" : "swift-css-standard",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-css-standard",
+      "state" : {
+        "revision" : "0a2a5af89981237e1679a1cd25f5966f9da4c49a",
+        "version" : "0.1.7"
+      }
+    },
+    {
+      "identity" : "swift-cssom",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-cssom",
+      "state" : {
+        "revision" : "076170ac2ed9507a0c6424a384cc7cf2cf480a69",
+        "version" : "0.1.2"
       }
     },
     {
@@ -155,12 +164,12 @@
       }
     },
     {
-      "identity" : "swift-dependencies",
+      "identity" : "swift-domain-standard",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-dependencies",
+      "location" : "https://github.com/swift-standards/swift-domain-standard",
       "state" : {
-        "revision" : "a10f9feeb214bc72b5337b6ef6d5a029360db4cc",
-        "version" : "1.10.0"
+        "revision" : "6420a73fd381f274849e7fcbc9805fd1d0b3ba98",
+        "version" : "0.4.4"
       }
     },
     {
@@ -168,26 +177,71 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coenttb/swift-html",
       "state" : {
-        "revision" : "72e487f4c3cffe5d9f8eb76302430c7b8e2ea5ea",
-        "version" : "0.11.1"
+        "revision" : "ce4a656e585ae739da81ddbcfd00ae5e19f4762f",
+        "version" : "0.17.2"
       }
     },
     {
-      "identity" : "swift-html-css-pointfree",
+      "identity" : "swift-html-rendering",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/swift-html-css-pointfree",
+      "location" : "https://github.com/coenttb/swift-html-rendering",
       "state" : {
-        "revision" : "925b36fa89e8247f7b01240905930886c46dd32f",
-        "version" : "0.0.1"
+        "revision" : "2ff2b3985ed6c32dc385f69f8b778701f1dec428",
+        "version" : "0.1.15"
       }
     },
     {
-      "identity" : "swift-html-types",
+      "identity" : "swift-html-standard",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/swift-html-types",
+      "location" : "https://github.com/swift-standards/swift-html-standard",
       "state" : {
-        "revision" : "64659fe7a4e4fd341ae0c425776c061e44f89761",
-        "version" : "0.1.1"
+        "revision" : "8abcad58f413aa7090ce6e6d4e6c3519102b25d9",
+        "version" : "0.1.6"
+      }
+    },
+    {
+      "identity" : "swift-iec-61966",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-iec-61966",
+      "state" : {
+        "revision" : "1ca9cdd5c205b8c39a47c5a06af92fff92325adb",
+        "version" : "0.1.3"
+      }
+    },
+    {
+      "identity" : "swift-ieee-754",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-ieee-754",
+      "state" : {
+        "revision" : "212ccccefdfd1f28b1d55398cb6900b5393a0b1e",
+        "version" : "0.3.4"
+      }
+    },
+    {
+      "identity" : "swift-incits-4-1986",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-incits-4-1986",
+      "state" : {
+        "revision" : "5e0ac8ce2e69663d690bc12993c9cebefffae613",
+        "version" : "0.7.1"
+      }
+    },
+    {
+      "identity" : "swift-iso-8601",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-iso-8601",
+      "state" : {
+        "revision" : "6ce3cfeecfcaa2984e5f2ed48c9563adf7ec1eb7",
+        "version" : "0.2.3"
+      }
+    },
+    {
+      "identity" : "swift-iso-9899",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-iso-9899",
+      "state" : {
+        "revision" : "06ef38e0892db0a96709d6f4ec7d05225739957c",
+        "version" : "0.2.3"
       }
     },
     {
@@ -200,6 +254,150 @@
       }
     },
     {
+      "identity" : "swift-markdown-html-rendering",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/swift-markdown-html-rendering",
+      "state" : {
+        "revision" : "af97d1b84c7e62cd0f378ef51c3ace506565ae92",
+        "version" : "0.1.3"
+      }
+    },
+    {
+      "identity" : "swift-memory-allocation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/swift-memory-allocation",
+      "state" : {
+        "revision" : "afe7e86f16981007b841470d5ea79f0026868bc3",
+        "version" : "0.2.0"
+      }
+    },
+    {
+      "identity" : "swift-numerics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-numerics",
+      "state" : {
+        "revision" : "0c0290ff6b24942dadb83a929ffaaa1481df04a2",
+        "version" : "1.1.1"
+      }
+    },
+    {
+      "identity" : "swift-renderable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/swift-renderable",
+      "state" : {
+        "revision" : "1f2d35465dcd50e827ea4b0560f2be4685b2a29d",
+        "version" : "3.2.2"
+      }
+    },
+    {
+      "identity" : "swift-rfc-1035",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-rfc-1035",
+      "state" : {
+        "revision" : "1337c080b27e63508f610fc6abf0c25b582c8626",
+        "version" : "0.4.5"
+      }
+    },
+    {
+      "identity" : "swift-rfc-1123",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-rfc-1123",
+      "state" : {
+        "revision" : "ba84c94f98d766c14f10407edd8ea1b93bc43895",
+        "version" : "0.5.4"
+      }
+    },
+    {
+      "identity" : "swift-rfc-2045",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-rfc-2045",
+      "state" : {
+        "revision" : "9a18c76d0b5f01c463592b23d9ffd9612afba219",
+        "version" : "0.3.5"
+      }
+    },
+    {
+      "identity" : "swift-rfc-3492",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-rfc-3492",
+      "state" : {
+        "revision" : "a5be424322ef27279340074bb885c39b4f715b47",
+        "version" : "0.1.2"
+      }
+    },
+    {
+      "identity" : "swift-rfc-3987",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-rfc-3987",
+      "state" : {
+        "revision" : "52739e11f635a4e3cd3e4a73d0646822bd699f45",
+        "version" : "0.3.5"
+      }
+    },
+    {
+      "identity" : "swift-rfc-4291",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-rfc-4291",
+      "state" : {
+        "revision" : "e209bd09264801c91985aa2d6e7f7b7f5daf6cf6",
+        "version" : "0.2.0"
+      }
+    },
+    {
+      "identity" : "swift-rfc-4648",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-rfc-4648",
+      "state" : {
+        "revision" : "029f384ec63890d98da9a09844bb2ef91a176872",
+        "version" : "0.6.0"
+      }
+    },
+    {
+      "identity" : "swift-rfc-5321",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-rfc-5321",
+      "state" : {
+        "revision" : "5ecbf020e2fc35c9fabe609369b35eb7735b387c",
+        "version" : "0.3.4"
+      }
+    },
+    {
+      "identity" : "swift-rfc-5322",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-rfc-5322",
+      "state" : {
+        "revision" : "3e65ebb0ac0928630d1ebfc5bdb19a37c2d42ef8",
+        "version" : "0.7.4"
+      }
+    },
+    {
+      "identity" : "swift-rfc-5890",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-rfc-5890",
+      "state" : {
+        "revision" : "e77d9bab2179287d6b2839ad297eaeb4c5317f16",
+        "version" : "0.1.2"
+      }
+    },
+    {
+      "identity" : "swift-rfc-5952",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-rfc-5952",
+      "state" : {
+        "revision" : "28470d631e4a916ab9909e027ae676112b4d68ea",
+        "version" : "0.1.5"
+      }
+    },
+    {
+      "identity" : "swift-rfc-791",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-rfc-791",
+      "state" : {
+        "revision" : "a5d7238b80d88ed434d45f7e1e34af449d562a47",
+        "version" : "0.3.0"
+      }
+    },
+    {
       "identity" : "swift-snapshot-testing",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-snapshot-testing.git",
@@ -209,30 +407,39 @@
       }
     },
     {
+      "identity" : "swift-standards",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-standards",
+      "state" : {
+        "revision" : "948b7642f57f9aac26f4b6d1e3a86b5c1861ecbb",
+        "version" : "0.30.1"
+      }
+    },
+    {
       "identity" : "swift-svg",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/coenttb/swift-svg",
       "state" : {
-        "revision" : "4f57d3592b5cd9b6239537a49a151d45c735bb01",
-        "version" : "0.1.0"
+        "revision" : "d8ad927421169f79e3f62e3cfbc3d17371876eb4",
+        "version" : "0.3.0"
       }
     },
     {
-      "identity" : "swift-svg-printer",
+      "identity" : "swift-svg-rendering",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/swift-svg-printer",
+      "location" : "https://github.com/coenttb/swift-svg-rendering",
       "state" : {
-        "revision" : "90761ac4d4b0ccf7f5707267b2435d021a13bb91",
-        "version" : "0.1.0"
+        "revision" : "1c8f0c4980aa1929fbb3bb248df311ba3e9d89d3",
+        "version" : "0.3.1"
       }
     },
     {
-      "identity" : "swift-svg-types",
+      "identity" : "swift-svg-standard",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/coenttb/swift-svg-types",
+      "location" : "https://github.com/swift-standards/swift-svg-standard.git",
       "state" : {
-        "revision" : "068b920b3c742741b7df9e0a26cc23449cf9ef00",
-        "version" : "0.1.0"
+        "revision" : "165b9652c437d920411ba3feef62128cf26025f2",
+        "version" : "0.3.0"
       }
     },
     {
@@ -242,6 +449,51 @@
       "state" : {
         "revision" : "4799286537280063c85a32f09884cfbca301b1a1",
         "version" : "602.0.0"
+      }
+    },
+    {
+      "identity" : "swift-testing-performance",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/coenttb/swift-testing-performance",
+      "state" : {
+        "revision" : "1a1967f7acfcb081e57122db463817c142cc7186",
+        "version" : "0.3.1"
+      }
+    },
+    {
+      "identity" : "swift-w3c-css",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-w3c-css",
+      "state" : {
+        "revision" : "fc9760ed78195bfbf90b35d9390e02ccb3ec205b",
+        "version" : "0.3.0"
+      }
+    },
+    {
+      "identity" : "swift-w3c-svg",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-w3c-svg.git",
+      "state" : {
+        "revision" : "23d99b6491afd7a0286f98b83789ecf5bb5f3bb9",
+        "version" : "0.3.0"
+      }
+    },
+    {
+      "identity" : "swift-whatwg-html",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-whatwg-html",
+      "state" : {
+        "revision" : "6d49408abb5452d5572230e5256c772114db454e",
+        "version" : "0.2.2"
+      }
+    },
+    {
+      "identity" : "swift-whatwg-url",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-standards/swift-whatwg-url",
+      "state" : {
+        "revision" : "aa81b2fed40a5eaedf9ee3e97255949a7c664c24",
+        "version" : "0.2.5"
       }
     },
     {
