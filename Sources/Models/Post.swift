@@ -13,14 +13,14 @@ public struct Post {
 
     // MARK: Variables
     public var content: Content
-    public var created: Date
+    public var creationDate: Date
     public var lastModified: Date?
     public var summary: String
     public var tags: [Tag]
     public var title: String
     public var url: URL
 
-    public var date: Date { lastModified ?? created }
+    public var date: Date { lastModified ?? creationDate }
 
     // MARK: Initializers
     public init<T: HTMLComponent>(
@@ -33,7 +33,7 @@ public struct Post {
         @HTMLBuilder content: () -> T
     ) {
         self.content = AnyHTML(content)
-        self.created = created
+        self.creationDate = created
         self.lastModified = modified
         self.summary = summary
         self.tags = tags

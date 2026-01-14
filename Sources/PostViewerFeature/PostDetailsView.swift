@@ -28,7 +28,7 @@ extension PostDetailsView: HTMLComponent {
             Description(post.summary)
             p {
                 "Posted "
-                Time.date(post.created)
+                Time.date(post.creationDate)
                 if let lastModified = post.lastModified {
                     ", Last Updated "
                     Time.date(lastModified)
