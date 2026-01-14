@@ -20,7 +20,7 @@ public extension ArtsBlueprintsCodeWebsite {
             .registerAreas(self)
             .registerPosts(self)
             .registerProjects(self)
-            .blockPages(in: "about/templates/")
+            .blockPages(in: "about/")
             .registerStandalone(self)
             .run()
 
