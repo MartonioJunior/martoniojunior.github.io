@@ -68,7 +68,7 @@ public extension Array where Element == Target.Dependency {
 var targets: [Target] = [
     .executableTarget(
         name: "Website",
-        dependencies: ["Models", "SagaIntegration"]
+        dependencies: ["Models", "StaticSiteGenerator"]
     ),
     .target(
         name: "CSS",
@@ -107,7 +107,7 @@ var targets: [Target] = [
         dependencies: [feedKit]
     ),
     .target(
-        name: "SagaIntegration",
+        name: "StaticSiteGenerator",
         dependencies: [
             "Assets", "FileClient", "HTML", "HomeFeature", "Models", "PageFeature",
             "PostViewerFeature", "RSS", "Settings", "TagViewerFeature",

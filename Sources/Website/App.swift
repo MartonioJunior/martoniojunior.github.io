@@ -6,7 +6,7 @@
 //
 
 import Models
-import SagaIntegration
+import StaticSiteGenerator
 
 @main
 public enum App {
