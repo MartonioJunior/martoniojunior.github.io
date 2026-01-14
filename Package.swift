@@ -48,7 +48,8 @@ func targetDep(name: String, package: String) -> Target.Dependency {
 // MARK: Dependencies
 let feedKit = targetDep(name: "FeedKit", package: "FeedKit")
 let files = targetDep(name: "Files", package: "Files")
-let html: Target.Dependency = .product(name: "HTML", package: "swift-html", moduleAliases: ["HTML": "SwiftHTML"])
+let html: Target.Dependency = .product(name: "HTML", package: "swift-html")
+let css: Target.Dependency = .product(name: "CSS", package: "swift-css")
 let markdownReader = targetDep(name: "SagaParsleyMarkdownReader", package: "SagaParsleyMarkdownReader")
 let saga = targetDep(name: "Saga", package: "Saga")
 
@@ -61,7 +62,7 @@ let dependencies = [
 ]
 
 public extension Array where Element == Target.Dependency {
-    static let ui: [Target.Dependency] = ["CSS", "HTML"]
+    static let ui: [Target.Dependency] = ["Styleguide"]
 }
 
 // MARK: Targets
@@ -71,24 +72,16 @@ var targets: [Target] = [
         dependencies: ["Models", "StaticSiteGenerator"]
     ),
     .target(
-        name: "CSS",
-        dependencies: [html]
-    ),
-    .target(
         name: "FileClient",
-        dependencies: [files, "HTML"]
+        dependencies: [files, "Styleguide"]
     ),
     .target(
         name: "HomeFeature",
         dependencies: ["PageFeature", "PostViewerFeature", "Settings"] + .ui
     ),
     .target(
-        name: "HTML",
-        dependencies: ["CSS", html]
-    ),
-    .target(
         name: "Models",
-        dependencies: ["HTML"]
+        dependencies: ["Styleguide"]
     ),
     .target(
         name: "NavigationFeature",
@@ -116,11 +109,15 @@ var targets: [Target] = [
     .target(
         name: "StaticSiteGenerator",
         dependencies: [
-            "Assets", "FileClient", "HTML", "HomeFeature", "Models", "PageFeature",
+            "Assets", "FileClient", "Styleguide", "HomeFeature", "Models", "PageFeature",
             "PostViewerFeature", "RSS", "Settings", "TagViewerFeature",
             markdownReader, saga
         ],
         resources: [.process("Resources/")]
+    ),
+    .target(
+        name: "Styleguide",
+        dependencies: [css, html]
     ),
     .target(
         name: "Settings"
