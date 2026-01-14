@@ -32,11 +32,11 @@ public extension Post {
         item.title = item.metadata.title.isEmpty ? item.title : item.metadata.title
     }
 
-    static func writer(_ context: ItemRenderingContext<Metadata>) throws -> some HTMLComponent {
+    static func writer(_ context: ItemRenderingContext<Metadata>) -> some HTMLComponent {
         PostDetailsView(Post(context.item))
     }
 
-    static func listWriter(_ context: ItemsRenderingContext<Metadata>) throws -> some HTMLComponent {
+    static func listWriter(_ context: ItemsRenderingContext<Metadata>) -> some HTMLComponent {
         PostsListView(context.items.map(Post.init))
     }
 }
@@ -53,7 +53,7 @@ public extension Saga {
             metadata: Post.Metadata.self,
             readers: [.parsleyMarkdownReader],
             itemProcessor: Post.preprocessor,
-            filter: { $0.metadata.isPublic },
+            filter: \.metadata.isPublic,
             writers: [
                 .itemWriter(html(Post.Metadata.self, website, Post.writer)),
                 .listWriter(htmlMany(Post.Metadata.self, website, selected: .posts, Post.listWriter)),

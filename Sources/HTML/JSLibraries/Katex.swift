@@ -87,10 +87,10 @@ extension Katex: JSLibrary {
     }
 
     var autoRenderScript: String {
-        var source =  "renderMathInElement(document.body"
+        var source = "renderMathInElement(document.body"
 
         if let argument = try? options.encodeToJS() {
-            source += ", "+argument
+            source += ", " + argument
         }
 
         source += ");"

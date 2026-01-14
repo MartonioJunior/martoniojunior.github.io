@@ -33,6 +33,10 @@ public struct WebsiteSectionsListView<Content: HTML> {
 }
 
 // MARK: Self.Model
+public extension WebsiteSectionsListView {
+    typealias Model = WebsiteSectionsListViewModel
+}
+
 public struct WebsiteSectionsListViewModel {
     var sections: [WebsiteSection]
     var selected: WebsiteSection?
@@ -50,13 +54,12 @@ public struct WebsiteSectionsListViewModel {
     public func selecting(_ section: WebsiteSection? = nil) -> Self {
         .init(sections, selected: section)
     }
+}
 
-    public static var home: Self {
+public extension WebsiteSectionsListViewModel {
+    static var home: Self {
         .init(WebsiteSection.allCases, selected: nil)
     }
-}
-public extension WebsiteSectionsListView {
-    typealias Model = WebsiteSectionsListViewModel
 }
 
 // MARK: Self: HTMLComponent

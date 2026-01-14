@@ -52,20 +52,24 @@ public extension SwiftHTML.Class {
 #if canImport(SwiftUI)
 import SwiftUI
 
-#Preview {
-    let post = Post(
-        title: "Something about Apples",
-        summary: "A detailed showcase of how apples work",
-        created: .distantPast,
-        modified: .now,
-        url: URL(string: "/test/element")!
-    ) {
-        h1 { "Cool Post" }
-        p { "This is a paragraph." }
+public extension Post {
+    static var preview: Self {
+        .init(
+            title: "Something about Apples",
+            summary: "A detailed showcase of how apples work",
+            created: .distantPast,
+            modified: .now,
+            url: URL(string: "/test/element")!
+        ) {
+            h1 { "Cool Post" }
+            p { "This is a paragraph." }
+        }
     }
+}
 
+#Preview {
     HTMLDocument {
-        PostDetailsView(post)
+        PostDetailsView(Post.preview)
     } head: {
         title { "Post Example" }
         meta(charset: .utf8)()

@@ -10,12 +10,12 @@ import Models
 import Saga
 
 public extension Project {
-    static func writer(_ context: ItemRenderingContext<Metadata>) throws -> some HTMLComponent {
+    static func writer(_: ItemRenderingContext<Metadata>) -> some HTMLComponent {
         HTMLRaw("Writer was not yet implemented!")
     }
 
     @HTMLBuilder
-    static func listWriter(_ context: ItemsRenderingContext<Metadata>) throws -> some HTMLComponent {
+    static func listWriter(_: ItemsRenderingContext<Metadata>) -> some HTMLComponent {
         h1 { "Projects "}
         EmptyView()
     }
@@ -33,7 +33,7 @@ public extension Saga {
             metadata: Project.Metadata.self,
             readers: [.parsleyMarkdownReader],
             // itemProcessor: Project.preprocessor,
-            filter: { $0.metadata.isPublic },
+            filter: \.metadata.isPublic,
             writers: [
                 .itemWriter(html(Project.Metadata.self, website, Project.writer)),
                 .listWriter(htmlMany(Project.Metadata.self, website, selected: .projects, Project.listWriter))

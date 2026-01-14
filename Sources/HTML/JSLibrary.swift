@@ -5,7 +5,6 @@
 //  Created by Martônio Júnior on 15/10/2025.
 //
 
-
 public protocol JSLibrary: HTMLComponent {}
 
 // MARK: Default Implementation
@@ -19,5 +18,4 @@ public extension Encodable {
         let data = try encoder.encode(self)
         return String(data: data, encoding: .utf8)
     }
-
 }

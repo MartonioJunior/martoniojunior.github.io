@@ -8,8 +8,8 @@
 import AreasFeature
 import HomeFeature
 import HTML
-import Plot
 import PageFeature
+import Plot
 import PostsFeature
 import Publish
 import TagViewerFeature
@@ -28,7 +28,7 @@ public extension Energy {
 
 extension Energy.HTMLFactory: Publish.HTMLFactory {
     // MARK: Index
-    public func makeIndexHTML(for index: Publish.Index, context: Publish.PublishingContext<Site>) throws -> Plot.HTML {
+    public func makeIndexHTML(for index: Publish.Index, context: Publish.PublishingContext<Site>) -> Plot.HTML {
         HTML(
             .lang(context.site.language),
             .head(for: index, on: context.site, stylesheetPaths: styleSheetPaths),
@@ -50,7 +50,7 @@ extension Energy.HTMLFactory: Publish.HTMLFactory {
     public func makeSectionHTML(
         for section: Publish.Section<Site>,
         context: Publish.PublishingContext<Site>
-    ) throws -> Plot.HTML {
+    ) -> Plot.HTML {
         HTML(
             .lang(context.site.language),
             .head(for: section, on: context.site, stylesheetPaths: styleSheetPaths),
@@ -61,9 +61,9 @@ extension Energy.HTMLFactory: Publish.HTMLFactory {
                             if let area = WebsiteArea(section.id) {
                                 h1 { area.title }
                             }
-                            PostsListView(section.items.remap(using: context.site).sorted(by: {
+                            PostsListView(section.items.remap(using: context.site).sorted {
                                 $0.date > $1.date
-                            }))
+                            })
                         } else {
                             section.content.body.html
                         }
@@ -77,7 +77,7 @@ extension Energy.HTMLFactory: Publish.HTMLFactory {
     public func makeItemHTML(
         for item: Publish.Item<Site>,
         context: Publish.PublishingContext<Site>
-    ) throws -> Plot.HTML {
+    ) -> Plot.HTML {
         HTML(
             .lang(context.site.language),
             .head(for: item, on: context.site, stylesheetPaths: styleSheetPaths),
@@ -111,7 +111,7 @@ extension Energy.HTMLFactory: Publish.HTMLFactory {
     public func makeTagListHTML(
         for page: Publish.TagListPage,
         context: Publish.PublishingContext<Site>
-    ) throws -> Plot.HTML? {
+    ) -> Plot.HTML? {
         HTML(
             .lang(context.site.language),
             .head(for: page, on: context.site, stylesheetPaths: styleSheetPaths),
@@ -127,7 +127,7 @@ extension Energy.HTMLFactory: Publish.HTMLFactory {
     public func makeTagDetailsHTML(
         for page: Publish.TagDetailsPage,
         context: Publish.PublishingContext<Site>
-    ) throws -> Plot.HTML? {
+    ) -> Plot.HTML? {
         HTML(
             .lang(context.site.language),
             .head(for: page, on: context.site, stylesheetPaths: styleSheetPaths),

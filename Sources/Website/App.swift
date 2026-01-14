@@ -9,7 +9,7 @@ import Models
 import SagaIntegration
 
 @main
-struct App {
+public enum App {
     static func main() async throws {
         try await ArtsBlueprintsCodeWebsite().deploy()
     }

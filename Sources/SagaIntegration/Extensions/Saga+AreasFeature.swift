@@ -12,7 +12,7 @@ import Saga
 
 public extension Saga {
     func registerAreas(_ website: ArtsBlueprintsCodeWebsite) throws -> Self {
-        return try registerAreas(website) {
+        try registerAreas(website) {
             switch $0 {
                 case .about, .contact, .posts:
                     AnyHTML { }
@@ -37,7 +37,7 @@ public extension Saga {
             }
         }
 
-        let rerouteToIndex: (Item<WebsiteAreaMetadata>) async -> Void = {
+        let rerouteToIndex: (Item<WebsiteAreaMetadata>) -> Void = {
             var components = $0.relativeDestination.components
             components.removeFirst()
             $0.relativeDestination = .init(components: components)

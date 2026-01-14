@@ -6,9 +6,9 @@
 //
 
 import HTML
+import PageFeature
 import Plot
 import Publish
-import PageFeature
 
 // MARK: Page (EX)
 public extension Publish.Page {

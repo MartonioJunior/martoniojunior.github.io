@@ -10,12 +10,12 @@ import HTML
 
 public enum Section: String {
     // MARK: Cases
+    case about
+    case artsCrafts
+    case contact
     case posts
     case projects
-    case artsCrafts
     case web
-    case about
-    case contact
 
     // MARK: Variables
     public var title: String {

@@ -6,8 +6,8 @@
 //
 
 import CSS
-import HTML
 import HomeFeature
+import HTML
 import Models
 import PageFeature
 import Saga
@@ -30,7 +30,7 @@ public extension ArtsBlueprintsCodeWebsite {
         // writeIndex(to: destination, posts: [])
 
         try deployFolder("Sources/Assets/Resources", to: "Resources/EnergyTheme")
-        try deployFolder(source+"/assets", to: "assets")
+        try deployFolder(source + "/assets", to: "assets")
         try deployFolder("Sources/SagaIntegration/Resources", to: "")
 
         func deployFolder(_ path: String, to targetPath: String) throws {

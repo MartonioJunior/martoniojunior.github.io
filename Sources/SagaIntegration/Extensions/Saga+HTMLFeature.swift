@@ -13,14 +13,14 @@ import Saga
 
 // MARK: html
 public func html<T>(
-    _ metadata: T.Type = T.self,
+    _: T.Type = T.self,
     _ builder: @escaping (ItemRenderingContext<T>) throws -> some HTMLDoc
 ) -> (ItemRenderingContext<T>) throws -> String {
     { try String(builder($0), encoding: .utf8) }
 }
 
 public func html<T>(
-    _ metadata: T.Type = T.self,
+    _: T.Type = T.self,
     _ website: ArtsBlueprintsCodeWebsite,
     _ builder: @escaping (ItemRenderingContext<T>) throws -> some HTMLComponent
 ) -> (ItemRenderingContext<T>) throws -> String {
@@ -43,14 +43,14 @@ public func htmlRaw<T>(
 
 // MARK: htmlMany
 public func htmlMany<T>(
-    _ metadata: T.Type = T.self,
+    _: T.Type = T.self,
     _ builder: @escaping (ItemsRenderingContext<T>) throws -> some HTMLDoc
 ) -> (ItemsRenderingContext<T>) throws -> String {
     { try String(builder($0), encoding: .utf8) }
 }
 
 public func htmlMany<T>(
-    _ metadata: T.Type = T.self,
+    _: T.Type = T.self,
     _ website: ArtsBlueprintsCodeWebsite,
     selected: Models.Section? = nil,
     _ builder: @escaping (ItemsRenderingContext<T>) throws -> some HTMLComponent
