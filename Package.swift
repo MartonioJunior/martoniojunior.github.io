@@ -152,7 +152,7 @@ let products: [Product] = [
 let package = Package(
     name: "Website",
     platforms: [
-        .macOS(.v14)
+        .macOS(.v26)
     ],
     products: products,
     dependencies: dependencies,
