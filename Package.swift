@@ -103,6 +103,10 @@ var targets: [Target] = [
         dependencies: ["Models", "TagViewerFeature"] + .ui
     ),
     .target(
+        name: "Router",
+        dependencies: ["Models"]
+    ),
+    .target(
         name: "RSS",
         dependencies: [feedKit]
     ),
