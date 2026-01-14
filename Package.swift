@@ -107,6 +107,9 @@ var targets: [Target] = [
         dependencies: [feedKit]
     ),
     .target(
+        name: "Sitemap"
+    ),
+    .target(
         name: "StaticSiteGenerator",
         dependencies: [
             "Assets", "FileClient", "HTML", "HomeFeature", "Models", "PageFeature",
