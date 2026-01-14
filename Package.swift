@@ -55,6 +55,7 @@ let saga = targetDep(name: "Saga", package: "Saga")
 
 let dependencies = [
     dep(url: "https://github.com/coenttb/swift-html", .upToNextMajor(from: "0.12.1")),
+    dep(url: "https://github.com/coenttb/swift-css", .upToNextMajor(from: "0.5.0")),
     dep(url: "https://github.com/JohnSundell/Files", .upToNextMajor(from: "4.3.0")),
     dep(url: "https://github.com/loopwerk/Saga", .upToNextMajor(from: "2.8.1")),
     dep(url: "https://github.com/loopwerk/SagaParsleyMarkdownReader", .upToNextMajor(from: "1.1.0")),
