@@ -6,6 +6,7 @@
 //
 
 import CSS
+import HTML
 
 public struct Description {
     // MARK: Variables

@@ -5,7 +5,7 @@
 //  Created by Martônio Júnior on 15/10/2025.
 //
 
-import SwiftHTML
+import HTML
 
 public struct HighlightJS {
     var languages: [String] = ["csharp", "swift"]

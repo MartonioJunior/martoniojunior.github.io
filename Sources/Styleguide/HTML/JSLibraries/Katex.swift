@@ -5,6 +5,8 @@
 //  Created by Martônio Júnior on 15/10/2025.
 //
 
+import HTML
+
 public typealias KaTeX = Katex
 
 /// Definition for KaTeX's auto-render plugin
