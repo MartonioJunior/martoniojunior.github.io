@@ -16,8 +16,6 @@ public extension Class {
     static var description: Self { "description" }
     /// Represents an entry inside of a list
     static var item: Self { "item" }
-    /// Null object definition for CSSClass
-    static var none: Self { "" }
     /// Indicates that the component has been selected
     static var selected: Self { "selected" }
     /// Indicates that the content is still a work-in-progress
