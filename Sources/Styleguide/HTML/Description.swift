@@ -17,9 +17,9 @@ public struct Description {
     }
 }
 
-// MARK: Self: HTMLComponent
-extension Description: HTMLComponent {
-    public var body: some HTMLComponent {
+// MARK: Self: HTML.View
+extension Description: HTML.View {
+    public var body: some HTML.View {
         p { text }.descriptionStyle()
     }
 }
