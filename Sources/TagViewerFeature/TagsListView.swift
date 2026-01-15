@@ -30,6 +30,6 @@ extension TagsListView: HTML.View {
             HTMLForEach(tags) { tag in
                 li { content(tag) }
             }
-        }.style(css: .tag)
+        }.class(.tag)
     }
 }

@@ -70,7 +70,7 @@ extension WebsiteSectionsListView: HTML.View {
             HTMLForEach(model.sections) { section in
                 li {
                     content(section)
-                }.style(css: section == model.selected ? .selected : .none)
+                }.class(section == model.selected ? .selected : nil)
             }
         }
     }

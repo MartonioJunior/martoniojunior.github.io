@@ -26,12 +26,8 @@ extension Description: HTML.View {
 
 // MARK: HTMLComponent (EX)
 public extension HTMLComponent {
-    func style(css cssClass: SwiftHTML.Class) -> some HTML {
-        `class`(cssClass)
-    }
-
-    func descriptionStyle() -> some HTML {
-        style(css: .description)
+    func descriptionStyle() -> some HTML.View {
+        `class`(.description)
         // fontFamily(nil) // Secondary Font
         // .fontStyle(.italic)
         // .marginTop(.px(4))

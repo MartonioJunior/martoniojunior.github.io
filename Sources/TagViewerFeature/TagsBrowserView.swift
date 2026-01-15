@@ -28,9 +28,9 @@ extension TagsBrowserView: HTML.View {
             li {
                 TagView(tag)
             }
-            .style(css: .tag)
+            .class(.tag)
         }
-        .style(css: .tagBrowser)
+        .class(.tagBrowser)
     }
 }
 

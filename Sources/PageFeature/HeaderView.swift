@@ -34,21 +34,21 @@ extension HeaderView: HTML.View {
     public var body: some HTML.View {
         header {
             div {
-                a(href: "/") { title }.style(css: .websiteTitle)
-                p { description }.style(css: .description)
-                p { "Website still in development..." }.style(css: .workInProgress)
+                a(href: "/") { title }.class(.websiteTitle)
+                p { description }.class(.description)
+                p { "Website still in development..." }.class(.workInProgress)
                 if sectionModel.numberOfSections > 1 {
                     nav {
                         WebsiteSectionsListView(sectionModel)
                     }
                 }
             }
-            .style(css: .wrapper)
+            .class(.wrapper)
         }
     }
 }
 
 // MARK: CSSClass (EX)
-extension SwiftHTML.Class {
+extension Class {
     static var websiteTitle: Self { "site-name" }
 }

@@ -10,6 +10,7 @@ import Foundation
 import HTML
 import Models
 import NavigationFeature
+import Styleguide
 
 public struct PageDocument<Content: HTML.View> {
     // MARK: Variables
@@ -50,7 +51,7 @@ extension PageDocument: HTML.DocumentProtocol {
         )
         div {
             content()
-        }.style(css: .wrapper)
+        }.class(.wrapper)
         FooterView()
         KaTeX()
         HighlightJS()
