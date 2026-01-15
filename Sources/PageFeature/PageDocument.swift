@@ -38,8 +38,8 @@ extension PageDocument: HTML.DocumentProtocol {
     public var head: some HTML.View {
         Title { title }
         Meta(charset: .utf8)
-        Link.css(from: .energyTheme, path: "styles.css")
-        Link.css(from: .energyTheme, path: "code.css")
+        CSSTheme.energyTheme.reference(subpath: "styles.css")
+        CSSTheme.energyTheme.reference(subpath: "code.css")
         // lang(.americanEnglish)
     }
 
