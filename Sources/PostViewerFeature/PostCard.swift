@@ -7,6 +7,7 @@
 
 import HTML
 import Models
+import Styleguide
 import TagViewerFeature
 
 public struct PostCard {
@@ -23,7 +24,7 @@ public struct PostCard {
 extension PostCard: HTML.View {
     public var body: some HTML.View {
         article {
-            h1 { a(href: .init(post.url)) { post.title } }
+            h1 { a(href: .init(post.url.relativePath)) { post.title } }
             if !post.tags.isEmpty {
                 TagsListView(post.tags)
             }

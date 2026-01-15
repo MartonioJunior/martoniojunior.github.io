@@ -8,6 +8,7 @@
 import CSS
 import HTML
 import Models
+import Styleguide
 import TagViewerFeature
 
 public struct PostDetailsView {
@@ -33,8 +34,8 @@ extension PostDetailsView: HTML.View {
                     ", Last Updated "
                     Time.date(lastModified)
                 }
-            }.style(css: .timestamps)
-            div { post.content }.style(css: .content)
+            }.class(.timestamps)
+            div { post.content }.class(.content)
             if !post.tags.isEmpty {
                 span { "Tagged with: " }
                 TagsListView(post.tags)
@@ -44,7 +45,7 @@ extension PostDetailsView: HTML.View {
 }
 
 // MARK: Class (EX)
-public extension SwiftHTML.Class {
+public extension Class {
     static var timestamps: Self { "timestamps" }
 }
 
@@ -68,11 +69,11 @@ public extension Post {
 }
 
 #Preview {
-    HTMLDocument {
+    HTML.Document {
         PostDetailsView(Post.preview)
     } head: {
         title { "Post Example" }
-        meta(charset: .utf8)()
+        Meta(charset: .utf8)
     }
 }
 

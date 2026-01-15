@@ -8,6 +8,7 @@
 import CSS
 import HTML
 import Models
+import Styleguide
 import TagViewerFeature
 
 public struct TagPostsListView {
@@ -27,10 +28,10 @@ extension TagPostsListView: HTML.View {
     public var body: some HTML.View {
         h1 {
             "Tagged with "
-            span { tag.name }.style(css: .tag)
+            span { tag.name }.class(.tag)
         }
 
-        a(href: .init(tag.url)) { "Browse all tags" }
+        a(href: .init(tag.url.relativePath)) { "Browse all tags" }
 
         PostsListView(posts)
     }

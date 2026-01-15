@@ -9,6 +9,7 @@ import CSS
 import Foundation
 import HTML
 import Models
+import Styleguide
 
 public struct PostsListView<Content: HTML.View> {
     // MARK: Variables
@@ -20,7 +21,7 @@ public struct PostsListView<Content: HTML.View> {
     public init(
         _ posts: [Post],
         order sortOrder: SortOrder = .reverse,
-        @HTMLBuilder content: @escaping (Post) -> Content = PostCard.init
+        @HTML.Builder content: @escaping (Post) -> Content = PostCard.init
     ) {
         self.posts = posts
         self.content = content
@@ -39,13 +40,13 @@ extension PostsListView: HTML.View {
                     li { content(post) }
                 }
             }
-            .style(css: .post)
+            .class(.post)
         }
     }
 }
 
 // MARK: CSSClass (EX)
-public extension SwiftHTML.Class {
+public extension Class {
     static var post: Self { "post" }
 }
 
