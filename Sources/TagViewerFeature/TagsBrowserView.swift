@@ -35,7 +35,7 @@ extension TagsBrowserView: HTML.View {
 }
 
 // MARK: CSS Classes (EX)
-public extension SwiftHTML.Class {
+public extension Class {
     static var tag: Self { "tag" }
     internal static var tagBrowser: Self { "tag-browser" }
 }

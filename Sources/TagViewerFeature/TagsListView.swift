@@ -9,14 +9,14 @@ import CSS
 import HTML
 import Models
 
-public struct TagsListView<Content: HTML> {
+public struct TagsListView<Content: HTML.View> {
     var tags: [Tag]
     var content: (Tag) -> Content
 
     // MARK: Initializers
     public init(
         _ tags: [Tag],
-        @HTMLBuilder content: @escaping (Tag) -> Content = TagView.init
+        @HTML.Builder content: @escaping (Tag) -> Content = TagView.init
     ) {
         self.tags = tags
         self.content = content
