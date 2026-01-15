@@ -18,9 +18,9 @@ public struct TagView {
     }
 }
 
-// MARK: Self: HTMLComponent
-extension TagView: HTMLComponent {
-    public var body: some HTMLComponent {
-        a(href: .init(tag.url)) { tag.name }
+// MARK: Self: HTML.View
+extension TagView: HTML.View {
+    public var body: some HTML.View {
+        a(href: .init(tag.url.relativePath)) { tag.name }
     }
 }

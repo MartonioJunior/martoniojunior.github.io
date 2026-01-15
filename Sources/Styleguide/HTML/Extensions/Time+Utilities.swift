@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import HTML
 
 public extension HTMLElementTypes.Time {
     static func date(
         _ date: Date,
         dateFormat: Date.FormatStyle.DateStyle = .abbreviated,
         timeFormat: Date.FormatStyle.TimeStyle = .shortened
-    ) -> some HTMLComponent {
+    ) -> some HTML.View {
         Self(datetime: .init(stringLiteral: date.formatted())) {
             date.formatted(date: dateFormat, time: timeFormat)
         }

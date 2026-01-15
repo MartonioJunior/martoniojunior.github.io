@@ -32,11 +32,11 @@ public extension Post {
         item.title = item.metadata.title.isEmpty ? item.title : item.metadata.title
     }
 
-    static func writer(_ context: ItemRenderingContext<Metadata>) -> some HTMLComponent {
+    static func writer(_ context: ItemRenderingContext<Metadata>) -> some HTML.View {
         PostDetailsView(Post(context.item))
     }
 
-    static func listWriter(_ context: ItemsRenderingContext<Metadata>) -> some HTMLComponent {
+    static func listWriter(_ context: ItemsRenderingContext<Metadata>) -> some HTML.View {
         PostsListView(context.items.map(Post.init))
     }
 }

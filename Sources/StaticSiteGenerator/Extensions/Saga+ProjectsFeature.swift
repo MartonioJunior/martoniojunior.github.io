@@ -10,12 +10,12 @@ import Models
 import Saga
 
 public extension Project {
-    static func writer(_: ItemRenderingContext<Metadata>) -> some HTMLComponent {
+    static func writer(_: ItemRenderingContext<Metadata>) -> some HTML.View {
         HTMLRaw("Writer was not yet implemented!")
     }
 
     @HTMLBuilder
-    static func listWriter(_: ItemsRenderingContext<Metadata>) -> some HTMLComponent {
+    static func listWriter(_: ItemsRenderingContext<Metadata>) -> some HTML.View {
         h1 { "Projects "}
         EmptyView()
     }

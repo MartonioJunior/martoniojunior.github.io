@@ -20,9 +20,9 @@ public struct PostDetailsView {
     }
 }
 
-// MARK: Self: HTMLComponent
-extension PostDetailsView: HTMLComponent {
-    public var body: some HTMLComponent {
+// MARK: Self: HTML.View
+extension PostDetailsView: HTML.View {
+    public var body: some HTML.View {
         article {
             h1 { post.title }
             Description(post.summary)

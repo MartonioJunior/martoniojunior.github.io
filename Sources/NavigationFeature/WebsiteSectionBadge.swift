@@ -7,6 +7,7 @@
 
 import HTML
 import Models
+import Styleguide
 
 public struct WebsiteSectionBadge {
     // MARK: Variables
@@ -18,9 +19,9 @@ public struct WebsiteSectionBadge {
     }
 }
 
-// MARK: Self: HTMLComponent
-extension WebsiteSectionBadge: HTMLComponent {
-    public var body: some HTMLComponent {
-        a(href: .init(area.url)) { area.title }
+// MARK: Self: HTML.View
+extension WebsiteSectionBadge: HTML.View {
+    public var body: some HTML.View {
+        a(href: .init(area.url.relativePath)) { area.title }
     }
 }

@@ -65,7 +65,7 @@ extension Katex.Options: Codable {}
 
 // MARK: Self: JSLibrary
 extension Katex: JSLibrary {
-    public var body: some HTMLComponent {
+    public var body: some HTML.View {
         link(
             crossorigin: .anonymous,
             href: "https://cdn.jsdelivr.net/npm/katex@0.16.23/dist/katex.min.css",

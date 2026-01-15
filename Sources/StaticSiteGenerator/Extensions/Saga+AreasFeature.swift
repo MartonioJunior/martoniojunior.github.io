@@ -24,7 +24,7 @@ public extension Saga {
 
     func registerAreas(
         _ website: ArtsBlueprintsCodeWebsite,
-        content: @escaping (WebsiteSection) -> some HTMLComponent
+        content: @escaping (WebsiteSection) -> some HTML.View
     ) throws -> Self {
         let htmlWriter = html(WebsiteAreaMetadata.self) { context in
             let section = context.item.metadata.section

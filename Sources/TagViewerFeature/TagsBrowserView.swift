@@ -20,9 +20,9 @@ public struct TagsBrowserView {
     }
 }
 
-// MARK: Self: HTMLComponent
-extension TagsBrowserView: HTMLComponent {
-    public var body: some HTMLComponent {
+// MARK: Self: HTML.View
+extension TagsBrowserView: HTML.View {
+    public var body: some HTML.View {
         h1 { "Browse all tags" }
         TagsListView(tags) { tag in
             li {

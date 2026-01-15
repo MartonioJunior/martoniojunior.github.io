@@ -16,7 +16,7 @@ public struct HighlightJS {
 
 // MARK: Self: JSLibrary
 extension HighlightJS: JSLibrary {
-    public var body: some HTMLComponent {
+    public var body: some HTML.View {
         if importDefaultCSS {
             link(
                 href: "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/default.min.css",

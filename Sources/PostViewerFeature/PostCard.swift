@@ -19,9 +19,9 @@ public struct PostCard {
     }
 }
 
-// MARK: Self: HTMLComponent
-extension PostCard: HTMLComponent {
-    public var body: some HTMLComponent {
+// MARK: Self: HTML.View
+extension PostCard: HTML.View {
+    public var body: some HTML.View {
         article {
             h1 { a(href: .init(post.url)) { post.title } }
             if !post.tags.isEmpty {

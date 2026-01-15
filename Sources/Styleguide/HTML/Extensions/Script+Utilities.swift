@@ -6,14 +6,14 @@
 //
 
 import Foundation
-import SwiftHTML
+import HTML
 
 public extension Script {
-    func onload(js source: String) -> some HTMLComponent {
+    func onload(js source: String) -> some HTML.View {
         attribute("onload", source)
     }
 
-    static func inlineSource(from url: URL) throws -> some HTMLComponent {
+    static func inlineSource(from url: URL) throws -> some HTML.View {
         let sourceCode = try String(contentsOf: url, encoding: .utf8)
 
         return script { sourceCode }

@@ -11,14 +11,14 @@ import Models
 import PageFeature
 
 public extension ArtsBlueprintsCodeWebsite {
-    func bake(_ html: some HTMLComponent) -> some HTMLDoc {
+    func bake(_ html: some HTML.View) -> some HTML.DocumentProtocol {
         bake { html }
     }
 
-    func bake<Content: HTMLComponent>(
+    func bake<Content: HTML.View>(
         selected: Area? = nil,
         @HTMLBuilder _ content: @escaping () -> Content
-    ) -> some HTMLDoc {
+    ) -> some HTML.DocumentProtocol {
         PageDocument(
             name,
             description: description,

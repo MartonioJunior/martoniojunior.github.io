@@ -10,7 +10,7 @@ import Foundation
 import HTML
 import Models
 
-public struct PostsListView<Content: HTMLComponent> {
+public struct PostsListView<Content: HTML.View> {
     // MARK: Variables
     var posts: [Post]
     var content: (Post) -> Content
@@ -28,9 +28,9 @@ public struct PostsListView<Content: HTMLComponent> {
     }
 }
 
-// MARK: Self: HTMLComponent
-extension PostsListView: HTMLComponent {
-    public var body: some HTMLComponent {
+// MARK: Self: HTML.View
+extension PostsListView: HTML.View {
+    public var body: some HTML.View {
         if posts.isEmpty {
             EmptyView()
         } else {

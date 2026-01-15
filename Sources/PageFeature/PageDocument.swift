@@ -11,7 +11,7 @@ import HTML
 import Models
 import NavigationFeature
 
-public struct PageDocument<Content: HTML> {
+public struct PageDocument<Content: HTML.View> {
     // MARK: Variables
     var title: String
     var description: String
@@ -23,7 +23,7 @@ public struct PageDocument<Content: HTML> {
         _ title: String,
         description: String,
         navigation: WebsiteSectionsListViewModel = .home,
-        @HTMLBuilder content: @escaping () -> Content
+        @HTML.Builder content: @escaping () -> Content
     ) {
         self.title = title
         self.description = description
@@ -32,17 +32,17 @@ public struct PageDocument<Content: HTML> {
     }
 }
 
-// MARK: Self: HTMLDoc
-extension PageDocument: HTMLDoc {
-    public var head: some HTMLComponent {
-        SwiftHTML.title { title }
-        meta(charset: .utf8)()
+// MARK: Self: HTML.DocumentProtocol
+extension PageDocument: HTML.DocumentProtocol {
+    public var head: some HTML.View {
+        Title { title }
+        Meta(charset: .utf8)
         Link.css(from: .energyTheme, path: "styles.css")
         Link.css(from: .energyTheme, path: "code.css")
         // lang(.americanEnglish)
     }
 
-    public var body: some HTMLComponent {
+    public var body: some HTML.View {
         HeaderView(
             title: title,
             description: description,
@@ -59,8 +59,8 @@ extension PageDocument: HTMLDoc {
 
 // MARK: ArtsBlueprintsCodeWebsite (EX)
 public extension ArtsBlueprintsCodeWebsite {
-    func createPage<Content: HTML>(
-        @HTMLBuilder content: @escaping () -> Content
+    func createPage<Content: HTML.View>(
+        @HTML.Builder content: @escaping () -> Content
     ) -> PageDocument<Content> {
         .init(name, description: description, content: content)
     }

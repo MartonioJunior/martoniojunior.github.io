@@ -5,7 +5,7 @@
 //  Created by Martônio Júnior on 20/10/2025.
 //
 
-import SwiftHTML
+import HTML
 
 public extension Class {
     /// Represents a Card in the interface

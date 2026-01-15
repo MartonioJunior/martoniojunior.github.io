@@ -14,7 +14,7 @@ import Saga
 // MARK: html
 public func html<T>(
     _: T.Type = T.self,
-    _ builder: @escaping (ItemRenderingContext<T>) throws -> some HTMLDoc
+    _ builder: @escaping (ItemRenderingContext<T>) throws -> some HTML.DocumentProtocol
 ) -> (ItemRenderingContext<T>) throws -> String {
     { try String(builder($0), encoding: .utf8) }
 }
@@ -22,7 +22,7 @@ public func html<T>(
 public func html<T>(
     _: T.Type = T.self,
     _ website: ArtsBlueprintsCodeWebsite,
-    _ builder: @escaping (ItemRenderingContext<T>) throws -> some HTMLComponent
+    _ builder: @escaping (ItemRenderingContext<T>) throws -> some HTML.View
 ) -> (ItemRenderingContext<T>) throws -> String {
     html { context in
         let page = try builder(context)
@@ -44,7 +44,7 @@ public func htmlRaw<T>(
 // MARK: htmlMany
 public func htmlMany<T>(
     _: T.Type = T.self,
-    _ builder: @escaping (ItemsRenderingContext<T>) throws -> some HTMLDoc
+    _ builder: @escaping (ItemsRenderingContext<T>) throws -> some HTML.DocumentProtocol
 ) -> (ItemsRenderingContext<T>) throws -> String {
     { try String(builder($0), encoding: .utf8) }
 }
@@ -53,7 +53,7 @@ public func htmlMany<T>(
     _: T.Type = T.self,
     _ website: ArtsBlueprintsCodeWebsite,
     selected: Models.Section? = nil,
-    _ builder: @escaping (ItemsRenderingContext<T>) throws -> some HTMLComponent
+    _ builder: @escaping (ItemsRenderingContext<T>) throws -> some HTML.View
 ) -> (ItemsRenderingContext<T>) throws -> String {
     htmlMany { context in
         let page = try builder(context)

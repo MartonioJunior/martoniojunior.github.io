@@ -12,9 +12,9 @@ public struct FooterView {
     public init() {}
 }
 
-// MARK: Self: HTMLComponent
-extension FooterView: HTMLComponent {
-    public var body: some HTMLComponent {
+// MARK: Self: HTML.View
+extension FooterView: HTML.View {
+    public var body: some HTML.View {
         footer {
             p { "© 2025 Martônio Júnior" }
             p {

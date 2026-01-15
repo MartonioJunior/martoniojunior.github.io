@@ -24,9 +24,9 @@ public struct HomePageScreen {
     }
 }
 
-// MARK: Self: HTMLComponent
-extension HomePageScreen: HTMLComponent {
-    public var body: some HTMLComponent {
+// MARK: Self: HTML.View
+extension HomePageScreen: HTML.View {
+    public var body: some HTML.View {
         WebsiteSectionScreen {
             PostsListView(latestPosts)
         }

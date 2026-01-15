@@ -9,6 +9,7 @@ import CSS
 import HTML
 import Models
 import NavigationFeature
+import Styleguide
 
 public struct HeaderView {
     // MARK: Variables
@@ -28,9 +29,9 @@ public struct HeaderView {
     }
 }
 
-// MARK: Self: HTMLComponent
-extension HeaderView: HTMLComponent {
-    public var body: some HTMLComponent {
+// MARK: Self: HTML.View
+extension HeaderView: HTML.View {
+    public var body: some HTML.View {
         header {
             div {
                 a(href: "/") { title }.style(css: .websiteTitle)

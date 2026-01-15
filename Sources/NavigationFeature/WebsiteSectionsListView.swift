@@ -8,8 +8,9 @@
 import CSS
 import HTML
 import Models
+import Styleguide
 
-public struct WebsiteSectionsListView<Content: HTML> {
+public struct WebsiteSectionsListView<Content: HTML.View> {
     // MARK: Variables
     var model: Model
     var content: (WebsiteSection) -> Content
@@ -17,7 +18,7 @@ public struct WebsiteSectionsListView<Content: HTML> {
     // MARK: Initializers
     public init(
         _ model: Model,
-        @HTMLBuilder content: @escaping (WebsiteSection) -> Content = WebsiteSectionBadge.init
+        @HTML.Builder content: @escaping (WebsiteSection) -> Content = WebsiteSectionBadge.init
     ) {
         self.model = model
         self.content = content
@@ -26,7 +27,7 @@ public struct WebsiteSectionsListView<Content: HTML> {
     public init(
         _ sections: [WebsiteSection],
         selected: WebsiteSection? = nil,
-        @HTMLBuilder content: @escaping (WebsiteSection) -> Content = WebsiteSectionBadge.init
+        @HTML.Builder content: @escaping (WebsiteSection) -> Content = WebsiteSectionBadge.init
     ) {
         self.init(.init(sections, selected: selected), content: content)
     }
@@ -62,9 +63,9 @@ public extension WebsiteSectionsListViewModel {
     }
 }
 
-// MARK: Self: HTMLComponent
-extension WebsiteSectionsListView: HTMLComponent {
-    public var body: some HTMLComponent {
+// MARK: Self: HTML.View
+extension WebsiteSectionsListView: HTML.View {
+    public var body: some HTML.View {
         ul {
             HTMLForEach(model.sections) { section in
                 li {

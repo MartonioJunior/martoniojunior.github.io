@@ -22,9 +22,9 @@ public struct TagPostsListView {
     }
 }
 
-// MARK: Self: HTMLComponent
-extension TagPostsListView: HTMLComponent {
-    public var body: some HTMLComponent {
+// MARK: Self: HTML.View
+extension TagPostsListView: HTML.View {
+    public var body: some HTML.View {
         h1 {
             "Tagged with "
             span { tag.name }.style(css: .tag)

@@ -23,9 +23,9 @@ public struct TagsListView<Content: HTML> {
     }
 }
 
-// MARK: Self: HTMLComponent
-extension TagsListView: HTMLComponent {
-    public var body: some HTMLComponent {
+// MARK: Self: HTML.View
+extension TagsListView: HTML.View {
+    public var body: some HTML.View {
         ul {
             HTMLForEach(tags) { tag in
                 li { content(tag) }

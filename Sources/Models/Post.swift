@@ -23,14 +23,14 @@ public struct Post {
     public var date: Date { lastModified ?? creationDate }
 
     // MARK: Initializers
-    public init<T: HTMLComponent>(
+    public init<T: HTML.View>(
         title: String,
         summary: String,
         created: Date,
         modified: Date? = nil,
         tags: [Tag] = [],
         url: URL,
-        @HTMLBuilder content: () -> T
+        @HTML.Builder content: () -> T
     ) {
         self.content = AnyHTML(content)
         self.creationDate = created
