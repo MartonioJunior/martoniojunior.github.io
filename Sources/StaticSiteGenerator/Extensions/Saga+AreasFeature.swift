@@ -9,6 +9,7 @@ import HTML
 import Models
 import NavigationFeature
 import Saga
+import Styleguide
 
 public extension Saga {
     func registerAreas(_ website: ArtsBlueprintsCodeWebsite) throws -> Self {
@@ -31,7 +32,7 @@ public extension Saga {
 
             return website.bake(selected: section) {
                 WebsiteSectionScreen(section) {
-                    HTMLRaw(context.item.body)
+                    HTML.Raw(context.item.body)
                     content(section)
                 }
             }

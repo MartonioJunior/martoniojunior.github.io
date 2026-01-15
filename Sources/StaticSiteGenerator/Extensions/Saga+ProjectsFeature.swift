@@ -8,13 +8,14 @@
 import HTML
 import Models
 import Saga
+import Styleguide
 
 public extension Project {
     static func writer(_: ItemRenderingContext<Metadata>) -> some HTML.View {
-        HTMLRaw("Writer was not yet implemented!")
+        HTML.Raw("Writer was not yet implemented!")
     }
 
-    @HTMLBuilder
+    @HTML.Builder
     static func listWriter(_: ItemsRenderingContext<Metadata>) -> some HTML.View {
         h1 { "Projects "}
         EmptyView()

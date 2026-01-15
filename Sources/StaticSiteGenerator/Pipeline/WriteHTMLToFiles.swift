@@ -12,7 +12,7 @@ import HTML
 import Models
 
 public extension ArtsBlueprintsCodeWebsite {
-    func write(_ htmlMap: [String: any HTMLDoc], to outputFolder: Folder) throws {
+    func write(_ htmlMap: [String: any HTML.DocumentProtocol], to outputFolder: Folder) throws {
         for (relativePath, html) in htmlMap {
             let file = try outputFolder.createFileIfNeeded(at: relativePath)
             try file.write(String(html))

@@ -24,7 +24,7 @@ public extension Post {
             modified: item.lastModified,
             url: URL(string: item.url)!
         ) {
-            HTMLRaw(item.body)
+            HTML.Raw(item.body)
         }
     }
 

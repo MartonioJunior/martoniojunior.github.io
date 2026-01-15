@@ -17,7 +17,7 @@ public extension ArtsBlueprintsCodeWebsite {
 
     func bake<Content: HTML.View>(
         selected: Area? = nil,
-        @HTMLBuilder _ content: @escaping () -> Content
+        @HTML.Builder _ content: @escaping () -> Content
     ) -> some HTML.DocumentProtocol {
         PageDocument(
             name,
