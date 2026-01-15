@@ -8,7 +8,7 @@
 import Foundation
 import HTML
 
-public extension HTMLElementTypes.Time {
+public extension HTML.Time {
     static func date(
         _ date: Date,
         dateFormat: Date.FormatStyle.DateStyle = .abbreviated,
