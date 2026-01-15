@@ -63,7 +63,7 @@ let dependencies = [
 ]
 
 public extension Array where Element == Target.Dependency {
-    static let ui: [Target.Dependency] = ["Styleguide"]
+    static let ui: [Target.Dependency] = ["Styleguide", css, html]
 }
 
 // MARK: Targets
@@ -78,11 +78,11 @@ var targets: [Target] = [
     ),
     .target(
         name: "HomeFeature",
-        dependencies: ["PageFeature", "PostViewerFeature", "Settings"] + .ui
+        dependencies: ["Models", "NavigationFeature", "PageFeature", "PostViewerFeature", "Settings"] + .ui
     ),
     .target(
         name: "Models",
-        dependencies: ["Styleguide"]
+        dependencies: [html]
     ),
     .target(
         name: "NavigationFeature",
