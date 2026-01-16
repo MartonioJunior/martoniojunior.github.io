@@ -10,7 +10,6 @@ import HTML
 import Models
 import PageFeature
 import Saga
-import SagaParsleyMarkdownReader
 
 // MARK: html
 public func html<T>(
@@ -84,7 +83,7 @@ public extension Saga {
         try register(
             folder: .init(folderPath),
             metadata: EmptyMetadata.self,
-            readers: [.parsleyMarkdownReader],
+            readers: [.customMarkdownRenderer],
             filter: { _ in false },
             writers: [.itemWriter(HTML.Raw.itemWriter)]
         )
@@ -93,7 +92,7 @@ public extension Saga {
     func registerStandalone(_ website: ArtsBlueprintsCodeWebsite) throws -> Self {
         try register(
             metadata: EmptyMetadata.self,
-            readers: [.parsleyMarkdownReader],
+            readers: [.customMarkdownRenderer],
             writers: [.itemWriter(HTML.Raw.itemWriter)]
         )
     }

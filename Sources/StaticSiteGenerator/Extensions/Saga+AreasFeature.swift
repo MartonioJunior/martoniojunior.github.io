@@ -47,7 +47,7 @@ public extension Saga {
         return try register(
             folder: "index",
             metadata: WebsiteSection.Metadata.self,
-            readers: [.parsleyMarkdownReader],
+            readers: [.customMarkdownRenderer],
             itemProcessor: rerouteToIndex,
             writers: [.itemWriter(htmlWriter)]
         )

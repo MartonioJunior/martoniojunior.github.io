@@ -32,7 +32,7 @@ public extension Saga {
         try register(
             folder: "projects",
             metadata: Project.Metadata.self,
-            readers: [.parsleyMarkdownReader],
+            readers: [.customMarkdownRenderer],
             // itemProcessor: Project.preprocessor,
             filter: \.metadata.isPublic,
             writers: [
