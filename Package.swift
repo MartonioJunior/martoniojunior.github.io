@@ -50,17 +50,19 @@ let feedKit = targetDep(name: "FeedKit", package: "FeedKit")
 let files = targetDep(name: "Files", package: "Files")
 let html: Target.Dependency = .product(name: "HTML", package: "swift-html")
 let css: Target.Dependency = .product(name: "CSS", package: "swift-css")
-let markdownReader = targetDep(name: "SagaParsleyMarkdownReader", package: "SagaParsleyMarkdownReader")
+let markdown: Target.Dependency = targetDep(name: "Markdown", package: "swift-markdown")
+let htmlMarkdown: Target.Dependency = targetDep(name: "Markdown HTML Rendering", package: "swift-markdown-html-rendering")
 let saga = targetDep(name: "Saga", package: "Saga")
 
 let dependencies = [
     dep(url: "https://github.com/coenttb/swift-html", .upToNextMajor(from: "0.12.1")),
     dep(url: "https://github.com/coenttb/swift-css", .upToNextMajor(from: "0.5.0")),
+    dep(url: "https://github.com/coenttb/swift-markdown-html-rendering", .upToNextMajor(from: "0.1.3")),
     .package(url: "https://github.com/swift-standards/swift-standards", exact: "0.24.1"),
     dep(url: "https://github.com/JohnSundell/Files", .upToNextMajor(from: "4.3.0")),
     dep(url: "https://github.com/loopwerk/Saga", .upToNextMajor(from: "2.8.1")),
-    dep(url: "https://github.com/loopwerk/SagaParsleyMarkdownReader", .upToNextMajor(from: "1.1.0")),
-    dep(url: "https://github.com/nmdias/FeedKit", .upToNextMajor(from: "10.1.3"))
+    dep(url: "https://github.com/nmdias/FeedKit", .upToNextMajor(from: "10.1.3")),
+    dep(url: "https://github.com/swiftlang/swift-markdown", .upToNextMajor(from: "0.7.0"))
 ]
 
 public extension Array where Element == Target.Dependency {
@@ -80,6 +82,10 @@ var targets: [Target] = [
     .target(
         name: "HomeFeature",
         dependencies: ["Models", "NavigationFeature", "PageFeature", "PostViewerFeature", "Settings"] + .ui
+    ),
+    .target(
+        name: "MarkdownHTML",
+        dependencies: [markdown, htmlMarkdown]
     ),
     .target(
         name: "Models",
@@ -111,9 +117,8 @@ var targets: [Target] = [
     .target(
         name: "StaticSiteGenerator",
         dependencies: [
-            "Assets", "FileClient", "Styleguide", "HomeFeature", "Models", "PageFeature",
-            "PostViewerFeature", "RSS", "Settings", "TagViewerFeature",
-            markdownReader, saga
+            "Assets", "FileClient", "Styleguide", "HomeFeature", "MarkdownHTML", "Models",
+            "PageFeature", "PostViewerFeature", "RSS", "Settings", "TagViewerFeature", saga
         ],
         resources: [.process("Resources/")]
     ),

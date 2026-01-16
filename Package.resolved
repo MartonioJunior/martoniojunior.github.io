@@ -1,5 +1,5 @@
 {
-  "originHash" : "7b1fbb010146196b2cccc49058347b547c226792b12835e8709be1c6e7e1923c",
+  "originHash" : "6424d92216a40dac2f0cade9946d2737476386a553bc1e4fc44b2320a95e6f51",
   "pins" : [
     {
       "identity" : "feedkit",
@@ -20,15 +20,6 @@
       }
     },
     {
-      "identity" : "parsley",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/loopwerk/Parsley",
-      "state" : {
-        "revision" : "3de7eebc252450414fa91d96ec2dedf4785994e9",
-        "version" : "1.0.1"
-      }
-    },
-    {
       "identity" : "pathkit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kylef/PathKit",
@@ -44,15 +35,6 @@
       "state" : {
         "revision" : "075ba234ac16d99d862a37e0e9f1116b96dbc49a",
         "version" : "2.8.1"
-      }
-    },
-    {
-      "identity" : "sagaparsleymarkdownreader",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/loopwerk/SagaParsleyMarkdownReader",
-      "state" : {
-        "revision" : "5a9fa57a5b123afa4acdb0800e348aef549bceba",
-        "version" : "1.1.0"
       }
     },
     {
@@ -89,15 +71,6 @@
       "state" : {
         "revision" : "5d9bdaa4228b381639fff09403e39a04926e2dbe",
         "version" : "0.7.1"
-      }
-    },
-    {
-      "identity" : "swift-cmark-gfm",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/stackotter/swift-cmark-gfm",
-      "state" : {
-        "revision" : "7ec44e7384793e507cf046336aef68586719a24e",
-        "version" : "1.0.2"
       }
     },
     {
@@ -411,8 +384,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swift-standards/swift-standards",
       "state" : {
-        "revision" : "948b7642f57f9aac26f4b6d1e3a86b5c1861ecbb",
-        "version" : "0.30.1"
+        "revision" : "183ed8383f6f91243c0ac90274de70951f86b9d4",
+        "version" : "0.24.1"
       }
     },
     {
