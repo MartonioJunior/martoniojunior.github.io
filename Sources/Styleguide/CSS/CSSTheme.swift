@@ -19,11 +19,11 @@ public extension CSSTheme {
         .init(folder: "/Resources/EnergyTheme")
     }
 
-    static func reference(relativePath: String) -> Link {
+    static func reference(relativePath: String) -> HTML.Link {
         link(href: .init(value: relativePath), rel: .stylesheet, type: .css)
     }
     
-    func reference(subpath: String) -> Link {
-        Self.cssTheme(relativePath: "\(theme.folder)/\(subpath)")
+    func reference(subpath: String) -> HTML.Link {
+        Self.reference(relativePath: "\(folder)/\(subpath)")
     }
 }
