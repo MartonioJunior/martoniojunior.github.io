@@ -146,11 +146,22 @@ targets.append(
     )
 )
 
+targets.append(
+    .target(
+        name: "Playgrounds",
+        dependencies: ["MarkdownHTML"]
+    )
+)
+
 // MARK: Products
 let products: [Product] = [
     .executable(
         name: "Website",
         targets: ["Website"]
+    ),
+    .library(
+        name: "Markdown Playground",
+        targets: ["Playgrounds"]
     )
 ]
 
