@@ -14,7 +14,7 @@ public extension Reader {
         .init(supportedExtensions: ["markdown", "md"], convert: { absoluteSource in
             let rawContent: String = try absoluteSource.read()
             let document = Document(parsing: rawContent)
-            let page = MarkdownPage(document)
+            let page = MarkdownPage(document, configuration: .default)
             return (page.title, try String(page.content), page.metadata?.parameters)
         })
     }

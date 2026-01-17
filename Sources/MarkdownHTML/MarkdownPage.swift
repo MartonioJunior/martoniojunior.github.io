@@ -15,9 +15,9 @@ public struct MarkdownPage {
     public var metadata: MarkdownMetadata?
 
     // MARK: Initializers
-    public init(_ document: Document) {
+    public init(_ document: Document, configuration: Markdown.HTML.Configuration) {
         metadata = document.metadata
-        content = Markdown.HTML {
+        content = Markdown.HTML(configuration: configuration) {
             var metadataRemover = MarkdownMetadataRemover()
             document.accept(&metadataRemover)?.format()
         }
