@@ -51,7 +51,7 @@ public extension Saga {
         try register(
             folder: "posts",
             metadata: Post.Metadata.self,
-            readers: [.customMarkdownRenderer],
+            readers: [.customMarkdownRenderer(for: .website)],
             itemProcessor: Post.preprocessor,
             filter: \.metadata.isPublic,
             writers: [

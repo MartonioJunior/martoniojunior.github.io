@@ -83,7 +83,7 @@ public extension Saga {
         try register(
             folder: .init(folderPath),
             metadata: EmptyMetadata.self,
-            readers: [.customMarkdownRenderer],
+            readers: [.customMarkdownRenderer(for: .website)],
             filter: { _ in false },
             writers: [.itemWriter(HTML.Raw.itemWriter)]
         )
@@ -92,7 +92,7 @@ public extension Saga {
     func registerStandalone(_ website: ArtsBlueprintsCodeWebsite) throws -> Self {
         try register(
             metadata: EmptyMetadata.self,
-            readers: [.customMarkdownRenderer],
+            readers: [.customMarkdownRenderer(for: .website)],
             writers: [.itemWriter(HTML.Raw.itemWriter)]
         )
     }
