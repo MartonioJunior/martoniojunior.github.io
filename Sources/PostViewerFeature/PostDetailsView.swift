@@ -26,7 +26,7 @@ extension PostDetailsView: HTML.View {
     public var body: some HTML.View {
         article {
             h1 { post.title }
-            Description(post.summary)
+            p { post.summary }.class(.description)
             p {
                 "Posted "
                 Time.date(post.creationDate)

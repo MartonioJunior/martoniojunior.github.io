@@ -29,7 +29,7 @@ extension PostCard: HTML.View {
                 TagsListView(post.tags)
             }
             Time.date(post.date)
-            Description(post.summary)
+            p { post.summary }.class(.description)
         }
     }
 }
