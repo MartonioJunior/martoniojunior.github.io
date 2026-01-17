@@ -17,12 +17,18 @@ public extension Document {
     var metadata: MarkdownMetadata? {
         guard child(through: 0, as: ThematicBreak.self) != nil,
               let propertiesBlock = child(through: 1, as: Heading.self) else { return nil }
-        
-        let textProperties = propertiesBlock.children.compactMap { $0 as? Text }
+
+        let textProperties = propertiesBlock.children.split {
+            $0 is SoftBreak
+        }.map {
+            $0.reduce("") { $0 + $1.format() }
+        }
 
         let result = textProperties.compactMap {
-            let separators = $0.string.split(separator: ":", maxSplits: 1)
-            
+            let separators = $0.split(separator: ":", maxSplits: 1).map {
+                $0.trimmingCharacters(in: .whitespaces)
+            }
+
             return separators.count == 2 ? (separators[0].description, separators[1].description) : nil
         }
 
