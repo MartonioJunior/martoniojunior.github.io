@@ -10,9 +10,9 @@ import Markdown_HTML_Rendering
 
 public struct MarkdownPage {
     // MARK: Variables
-    var content: any WHATWG_HTML.View
-    var title: String
-    var metadata: MarkdownMetadata?
+    public var content: any WHATWG_HTML.View
+    public var title: String
+    public var metadata: MarkdownMetadata?
 
     // MARK: Initializers
     public init(_ document: Document) {
@@ -21,6 +21,7 @@ public struct MarkdownPage {
             var metadataRemover = MarkdownMetadataRemover()
             document.accept(&metadataRemover)?.format()
         }
+
         title = document.title ?? "Untitled"
     }
 }

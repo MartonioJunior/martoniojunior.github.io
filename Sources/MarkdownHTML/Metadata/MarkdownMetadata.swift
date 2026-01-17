@@ -9,7 +9,7 @@ import Markdown
 
 public struct MarkdownMetadata {
     // MARK: Variables
-    var parameters: [String: String]
+    public var parameters: [String: String]
 }
 
 // MARK: Document (EX)
