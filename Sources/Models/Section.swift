@@ -33,7 +33,11 @@ public enum Section: String {
 }
 
 // MARK: Self: CaseIterable
-extension Section: CaseIterable {}
+extension Section: CaseIterable {
+    public static var allCases: [Section] {
+        [.posts, .projects, .artsCrafts, .web, .about, .contact]
+    }
+}
 
 // MARK: Self: Codable
 extension Section: Codable {}
