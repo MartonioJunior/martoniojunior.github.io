@@ -12,16 +12,20 @@ import Models
 import PostViewerFeature
 import Saga
 
+// MARK: Item (EX)
+public extension Item where M == Post.Metadata {
+    var publishDate: Date { Date.websiteParse(metadata.created ?? "") ?? created }
+    var lastUpdateDate: Date { Date.websiteParse(metadata.modified ?? "") ?? lastModified }
+}
+
 // MARK: Post (EX)
 public extension Post {
     init(_ item: Item<Metadata>) {
-        let postDescription = item.metadata.description ?? ""
-
         self.init(
             title: item.title,
-            summary: postDescription,
-            created: item.created,
-            modified: item.lastModified,
+            summary: item.metadata.description ?? "",
+            created: item.publishDate,
+            modified: item.lastUpdateDate,
             url: URL(string: item.url)!
         ) {
             HTML.Raw(item.body)
@@ -66,7 +70,7 @@ public extension Saga {
                         author: website.author,
                         baseURL: website.url,
                         summary: \.metadata.description,
-                        dateKeyPath: \.lastModified
+                        dateKeyPath: \.lastUpdateDate
                     ),
                     output: "../feed.rss"
                 )
