@@ -310,6 +310,10 @@ li {
     & li {
         font-size: 1em;
     }
+
+    > p {
+        font-size: 1em;
+    }
 }
 /* 
 MARK: <nav>
