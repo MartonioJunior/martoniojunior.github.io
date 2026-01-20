@@ -148,7 +148,7 @@ targets.append(
 
 targets.append(
     .target(
-        name: "Playgrounds",
+        name: "WebsitePlaygrounds",
         dependencies: ["MarkdownHTML"]
     )
 )
@@ -160,8 +160,8 @@ let products: [Product] = [
         targets: ["Website"]
     ),
     .library(
-        name: "Markdown Playground",
-        targets: ["Playgrounds"]
+        name: "Website Playgrounds",
+        targets: ["WebsitePlaygrounds"]
     )
 ]
 
