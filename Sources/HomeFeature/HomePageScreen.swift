@@ -5,7 +5,7 @@
 //  Created by Martônio Júnior on 19/08/2025.
 //
 
-import HTML
+import Elementary
 import Models
 import NavigationFeature
 import PageFeature
@@ -24,9 +24,9 @@ public struct HomePageScreen {
     }
 }
 
-// MARK: Self: HTML.View
-extension HomePageScreen: HTML.View {
-    public var body: some HTML.View {
+// MARK: Self: HTML
+extension HomePageScreen: HTML {
+    public var body: some HTML {
         WebsiteSectionScreen {
             PostsListView(latestPosts)
         }
