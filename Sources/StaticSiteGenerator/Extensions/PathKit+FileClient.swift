@@ -6,7 +6,7 @@
 //
 
 import FileClient
-import PathKit
+import SagaPathKit
 
 // MARK: File (EX)
 public extension File {
