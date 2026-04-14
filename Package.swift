@@ -46,27 +46,24 @@ func targetDep(name: String, package: String) -> Target.Dependency {
 }
 
 // MARK: Dependencies
+let elementary = targetDep(name: "Elementary", package: "Elementary")
 let feedKit = targetDep(name: "FeedKit", package: "FeedKit")
 let files = targetDep(name: "Files", package: "Files")
-let html: Target.Dependency = .product(name: "HTML", package: "swift-html")
-let css: Target.Dependency = .product(name: "CSS", package: "swift-css")
-let markdown: Target.Dependency = targetDep(name: "Markdown", package: "swift-markdown")
-let htmlMarkdown: Target.Dependency = targetDep(name: "Markdown HTML Rendering", package: "swift-markdown-html-rendering")
+let markdown = targetDep(name: "Markdown", package: "swift-markdown")
+let parsley = targetDep(name: "Parsley", package: "Parsley")
 let saga = targetDep(name: "Saga", package: "Saga")
 
 let dependencies = [
-    dep(url: "https://github.com/coenttb/swift-html", .upToNextMajor(from: "0.12.1")),
-    dep(url: "https://github.com/coenttb/swift-css", .upToNextMajor(from: "0.5.0")),
-    dep(url: "https://github.com/coenttb/swift-markdown-html-rendering", .upToNextMajor(from: "0.1.3")),
-    .package(url: "https://github.com/swift-standards/swift-standards", exact: "0.24.1"),
+    dep(url: "https://github.com/elementary-swift/elementary", .upToNextMajor(from: "0.7.1")),
     dep(url: "https://github.com/JohnSundell/Files", .upToNextMajor(from: "4.3.0")),
-    dep(url: "https://github.com/loopwerk/Saga", .upToNextMajor(from: "2.8.1")),
+    dep(url: "https://github.com/loopwerk/Saga", .upToNextMajor(from: "3.3.2")),
+    dep(url: "https://github.com/loopwerk/Parsley", .upToNextMajor(from: "1.2.0")),
     dep(url: "https://github.com/nmdias/FeedKit", .upToNextMajor(from: "10.1.3")),
     dep(url: "https://github.com/swiftlang/swift-markdown", .upToNextMajor(from: "0.7.0"))
 ]
 
 public extension Array where Element == Target.Dependency {
-    static let ui: [Target.Dependency] = ["Styleguide", css, html]
+    static let ui: [Target.Dependency] = ["Styleguide", elementary]
 }
 
 // MARK: Targets
@@ -85,11 +82,11 @@ var targets: [Target] = [
     ),
     .target(
         name: "MarkdownHTML",
-        dependencies: [markdown, htmlMarkdown]
+        dependencies: [markdown, parsley, elementary]
     ),
     .target(
         name: "Models",
-        dependencies: [html]
+        dependencies: [elementary]
     ),
     .target(
         name: "NavigationFeature",
@@ -124,7 +121,7 @@ var targets: [Target] = [
     ),
     .target(
         name: "Styleguide",
-        dependencies: [css, html]
+        dependencies: [elementary]
     ),
     .target(
         name: "Settings"
@@ -158,12 +155,12 @@ let products: [Product] = [
     .executable(
         name: "Website",
         targets: ["Website"]
-    ),
-    .library(
-        name: "Website Playgrounds",
-        targets: ["WebsitePlaygrounds"]
     )
-]
+] + targets.filter {
+    $0.name != "Website"
+}.map {
+    .library(name: $0.name, targets: [$0.name])
+}
 
 // MARK: PackageDescription
 let package = Package(
