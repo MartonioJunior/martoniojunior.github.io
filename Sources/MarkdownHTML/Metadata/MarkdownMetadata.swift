@@ -10,13 +10,18 @@ import Markdown
 public struct MarkdownMetadata {
     // MARK: Variables
     public var parameters: [String: String]
+    
+    // MARK: Initializers
+    public init(parameters: [String : String]) {
+        self.parameters = parameters
+    }
 }
 
 // MARK: Document (EX)
 public extension Document {
-    var metadata: MarkdownMetadata? {
+    var metadataDictionary: [String: String] {
         guard child(through: 0, as: ThematicBreak.self) != nil,
-              let propertiesBlock = child(through: 1, as: Heading.self) else { return nil }
+              let propertiesBlock = child(through: 1, as: Heading.self) else { return [:] }
 
         let textProperties = propertiesBlock.children.split {
             $0 is SoftBreak
@@ -32,6 +37,6 @@ public extension Document {
             return separators.count == 2 ? (separators[0].description, separators[1].description) : nil
         }
 
-        return .init(parameters: .init(uniqueKeysWithValues: result))
+        return .init(uniqueKeysWithValues: result)
     }
 }

@@ -19,7 +19,7 @@ extension MarkdownMetadataRemover: MarkupRewriter {
         foundThematicBreak = true
         return nil
     }
-    
+
     public mutating func visitHeading(_ heading: Heading) -> Optional<any Markup> {
         guard heading.parent is Document, heading.indexInParent == 1, foundThematicBreak else { return heading }
         
