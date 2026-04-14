@@ -5,9 +5,9 @@
 //  Created by Martônio Júnior on 14/10/2025.
 //
 
+import Elementary
 import Foundation
 import HomeFeature
-import HTML
 import Models
 import PostViewerFeature
 import Saga
@@ -28,7 +28,7 @@ public extension Post {
             modified: item.lastUpdateDate,
             url: URL(string: item.url)!
         ) {
-            HTML.Raw(item.body)
+            HTMLRaw(item.body)
         }
     }
 
@@ -36,11 +36,11 @@ public extension Post {
         item.title = item.metadata.title.isEmpty ? item.title : item.metadata.title
     }
 
-    static func writer(_ context: ItemRenderingContext<Metadata>) -> some HTML.View {
+    static func writer(_ context: ItemRenderingContext<Metadata>) -> some HTML {
         PostDetailsView(Post(context.item))
     }
 
-    static func listWriter(_ context: ItemsRenderingContext<Metadata>) -> some HTML.View {
+    static func listWriter(_ context: ItemsRenderingContext<Metadata>) -> some HTML {
         PostsListView(context.items.map(Post.init))
     }
 }
@@ -52,20 +52,20 @@ public extension Saga {
     func registerPosts(
         _ website: ArtsBlueprintsCodeWebsite
     ) throws -> Self {
-        try register(
+        register(
             folder: "posts",
             metadata: Post.Metadata.self,
-            readers: [.customMarkdownRenderer(for: .website)],
+            readers: [.customMarkdownRenderer()],
             itemProcessor: Post.preprocessor,
             filter: \.metadata.isPublic,
             writers: [
-                .itemWriter(html(Post.Metadata.self, website, Post.writer)),
+                .itemWriter(parseHTML(Post.Metadata.self, website, Post.writer)),
                 .listWriter(htmlMany(Post.Metadata.self, website, selected: .posts, Post.listWriter)),
                 .listWriter(htmlMany(Post.Metadata.self, website) {
                     HomePageScreen(posts: $0.items.map(Post.init))
                 }, output: "../index.html"),
                 .listWriter(
-                    atomFeed(
+                    Self.atomFeed(
                         title: website.name,
                         author: website.author,
                         baseURL: website.url,

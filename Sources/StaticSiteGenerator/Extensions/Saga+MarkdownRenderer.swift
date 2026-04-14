@@ -6,17 +6,16 @@
 //
 
 import Markdown
-import Markdown_HTML_Rendering
 import MarkdownHTML
 import Saga
 
 public extension Reader {
-    static func customMarkdownRenderer(for configuration: Markdown.HTML.Configuration) -> Self {
+    static func customMarkdownRenderer() -> Self {
         .init(supportedExtensions: ["markdown", "md"], convert: { absoluteSource in
             let rawContent: String = try absoluteSource.read()
             let document = Document(parsing: rawContent)
-            let page = MarkdownPage(document, configuration: configuration)
-            return (page.title, try String(page.content), page.metadata?.parameters)
+            let page = MarkdownPage(document)
+            return (page.title, page.content, page.metadata?.parameters)
         })
     }
 }

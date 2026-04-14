@@ -5,17 +5,17 @@
 //  Created by Martônio Júnior on 14/10/2025.
 //
 
+import Elementary
 import FileClient
 import Foundation
 import HomeFeature
-import HTML
 import Models
 
 public extension ArtsBlueprintsCodeWebsite {
-    func write(_ htmlMap: [String: any HTML.DocumentProtocol], to outputFolder: Folder) throws {
+    func write(_ htmlMap: [String: any HTMLDocument], to outputFolder: Folder) throws {
         for (relativePath, html) in htmlMap {
             let file = try outputFolder.createFileIfNeeded(at: relativePath)
-            try file.write(String(html))
+            try file.write(html.renderFormatted())
             print("Generated HTML at \(file)")
         }
     }

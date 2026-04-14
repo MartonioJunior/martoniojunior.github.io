@@ -5,7 +5,7 @@
 //  Created by Martônio Júnior on 20/10/2025.
 //
 
-import HTML
+import Elementary
 import Models
 import NavigationFeature
 import Saga
@@ -14,25 +14,25 @@ import Styleguide
 public extension Saga {
     func registerAreas(_ website: ArtsBlueprintsCodeWebsite) throws -> Self {
         try registerAreas(website) {
-            switch $0 {
+            return switch $0 {
                 case .about, .contact, .posts:
-                    AnyHTML { }
+                    EmptyView()
                 default:
-                    AnyHTML { EmptyView() }
+                    EmptyView()
             }
         }
     }
 
     func registerAreas(
         _ website: ArtsBlueprintsCodeWebsite,
-        content: @escaping (WebsiteSection) -> some HTML.View
+        content: @escaping (WebsiteSection) -> some HTML
     ) throws -> Self {
-        let htmlWriter = html(WebsiteAreaMetadata.self) { context in
+        let htmlWriter = parseHTML(WebsiteAreaMetadata.self) { context in
             let section = context.item.metadata.section
 
             return website.bake(selected: section) {
                 WebsiteSectionScreen(section) {
-                    HTML.Raw(context.item.body)
+                    HTMLRaw(context.item.body)
                     content(section)
                 }
             }
@@ -47,7 +47,7 @@ public extension Saga {
         return try register(
             folder: "index",
             metadata: WebsiteSection.Metadata.self,
-            readers: [.customMarkdownRenderer(for: .website)],
+            readers: [.customMarkdownRenderer()],
             itemProcessor: rerouteToIndex,
             writers: [.itemWriter(htmlWriter)]
         )

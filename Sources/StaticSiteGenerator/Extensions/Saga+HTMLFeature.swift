@@ -5,30 +5,28 @@
 //  Created by Martônio Júnior on 14/10/2025.
 //
 
+import Elementary
 import HomeFeature
-import HTML
 import Models
 import PageFeature
 import Saga
 
 // MARK: html
-public func html<T>(
+public func parseHTML<T>(
     _: T.Type = T.self,
-    _ builder: @escaping (ItemRenderingContext<T>) throws -> some HTML.DocumentProtocol
+    _ builder: @escaping (ItemRenderingContext<T>) throws -> some HTMLDocument
 ) -> (ItemRenderingContext<T>) throws -> String {
     { renderContext in
-        try HTML.Context.Configuration.$current.withValue(.pretty) {
-            try String(builder(renderContext))
-        }
+        try builder(renderContext).renderFormatted()
     }
 }
 
-public func html<T>(
+public func parseHTML<T>(
     _: T.Type = T.self,
     _ website: ArtsBlueprintsCodeWebsite,
-    _ builder: @escaping (ItemRenderingContext<T>) throws -> some HTML.View
+    _ builder: @escaping (ItemRenderingContext<T>) throws -> some HTML
 ) -> (ItemRenderingContext<T>) throws -> String {
-    html { context in
+    parseHTML { context in
         let page = try builder(context)
         return website.bake(page)
     }
@@ -40,20 +38,18 @@ public func htmlRaw<T>(
     _ website: ArtsBlueprintsCodeWebsite,
     _ builder: @escaping (ItemRenderingContext<T>) throws -> String
 ) -> (ItemRenderingContext<T>) throws -> String {
-    html(metadata, website) {
-        HTML.Raw(try builder($0))
+    parseHTML(metadata, website) {
+        HTMLRaw(try builder($0))
     }
 }
 
 // MARK: htmlMany
 public func htmlMany<T>(
     _: T.Type = T.self,
-    _ builder: @escaping (ItemsRenderingContext<T>) throws -> some HTML.DocumentProtocol
+    _ builder: @escaping (ItemsRenderingContext<T>) throws -> some HTMLDocument
 ) -> (ItemsRenderingContext<T>) throws -> String {
     { renderContext in
-        try HTML.Context.Configuration.$current.withValue(.pretty) {
-            try String(builder(renderContext))
-        }
+        try builder(renderContext).renderFormatted()
     }
 }
 
@@ -61,7 +57,7 @@ public func htmlMany<T>(
     _: T.Type = T.self,
     _ website: ArtsBlueprintsCodeWebsite,
     selected: Models.Section? = nil,
-    _ builder: @escaping (ItemsRenderingContext<T>) throws -> some HTML.View
+    _ builder: @escaping (ItemsRenderingContext<T>) throws -> some HTML
 ) -> (ItemsRenderingContext<T>) throws -> String {
     htmlMany { context in
         let page = try builder(context)
@@ -69,10 +65,10 @@ public func htmlMany<T>(
     }
 }
 
-// MARK: HTML.Raw (EX)
-public extension HTML.Raw {
+// MARK: HTMLRaw (EX)
+public extension HTMLRaw {
     static func itemWriter(_ context: ItemRenderingContext<EmptyMetadata>) throws -> String {
-        try String(h1 { context.item.title }) +
+        h1 { context.item.title }.render() +
         context.item.body
     }
 }
@@ -80,20 +76,20 @@ public extension HTML.Raw {
 // MARK: Saga (EX)
 public extension Saga {
     func blockPages(in folderPath: String) throws -> Self {
-        try register(
+        register(
             folder: .init(folderPath),
             metadata: EmptyMetadata.self,
-            readers: [.customMarkdownRenderer(for: .website)],
+            readers: [.customMarkdownRenderer()],
             filter: { _ in false },
-            writers: [.itemWriter(HTML.Raw.itemWriter)]
+            writers: [.itemWriter(HTMLRaw.itemWriter)]
         )
     }
 
     func registerStandalone(_ website: ArtsBlueprintsCodeWebsite) throws -> Self {
-        try register(
+        register(
             metadata: EmptyMetadata.self,
-            readers: [.customMarkdownRenderer(for: .website)],
-            writers: [.itemWriter(HTML.Raw.itemWriter)]
+            readers: [.customMarkdownRenderer()],
+            writers: [.itemWriter(HTMLRaw.itemWriter)]
         )
     }
 }

@@ -5,20 +5,20 @@
 //  Created by Martônio Júnior on 15/10/2025.
 //
 
+import Elementary
 import FileClient
-import HTML
 import Models
 import PageFeature
 
 public extension ArtsBlueprintsCodeWebsite {
-    func bake(_ html: some HTML.View) -> some HTML.DocumentProtocol {
+    func bake(_ html: some HTML) -> some HTMLDocument {
         bake { html }
     }
 
-    func bake<Content: HTML.View>(
+    func bake<Content: HTML>(
         selected: Area? = nil,
-        @HTML.Builder _ content: @escaping () -> Content
-    ) -> some HTML.DocumentProtocol {
+        @HTMLBuilder _ content: @escaping () -> Content
+    ) -> some HTMLDocument {
         PageDocument(
             name,
             description: description,
