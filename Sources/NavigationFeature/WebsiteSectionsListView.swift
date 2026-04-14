@@ -5,12 +5,11 @@
 //  Created by Martônio Júnior on 20/08/2025.
 //
 
-import CSS
-import HTML
+import Elementary
 import Models
 import Styleguide
 
-public struct WebsiteSectionsListView<Content: HTML.View> {
+public struct WebsiteSectionsListView<Content: HTML> {
     // MARK: Variables
     var model: Model
     var content: (WebsiteSection) -> Content
@@ -18,7 +17,7 @@ public struct WebsiteSectionsListView<Content: HTML.View> {
     // MARK: Initializers
     public init(
         _ model: Model,
-        @HTML.Builder content: @escaping (WebsiteSection) -> Content = WebsiteSectionBadge.init
+        @HTMLBuilder content: @escaping (WebsiteSection) -> Content = WebsiteSectionBadge.init
     ) {
         self.model = model
         self.content = content
@@ -27,7 +26,7 @@ public struct WebsiteSectionsListView<Content: HTML.View> {
     public init(
         _ sections: [WebsiteSection],
         selected: WebsiteSection? = nil,
-        @HTML.Builder content: @escaping (WebsiteSection) -> Content = WebsiteSectionBadge.init
+        @HTMLBuilder content: @escaping (WebsiteSection) -> Content = WebsiteSectionBadge.init
     ) {
         self.init(.init(sections, selected: selected), content: content)
     }
@@ -63,14 +62,15 @@ public extension WebsiteSectionsListViewModel {
     }
 }
 
-// MARK: Self: HTML.View
-extension WebsiteSectionsListView: HTML.View {
-    public var body: some HTML.View {
+// MARK: Self: HTML
+extension WebsiteSectionsListView: HTML {
+    public var body: some HTML {
         ul {
-            HTMLForEach(model.sections) { section in
+            for section in model.sections {
                 li {
                     content(section)
-                }.class(section == model.selected ? .selected : nil)
+                }
+                .attributes(.class(.selected), when: section == model.selected)
             }
         }
     }

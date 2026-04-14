@@ -5,7 +5,7 @@
 //  Created by Martônio Júnior on 20/08/2025.
 //
 
-import HTML
+import Elementary
 import Models
 import Styleguide
 
@@ -19,9 +19,11 @@ public struct WebsiteSectionBadge {
     }
 }
 
-// MARK: Self: HTML.View
-extension WebsiteSectionBadge: HTML.View {
-    public var body: some HTML.View {
-        a(href: .init(area.url.relativePath)) { area.title }
+// MARK: Self: HTML
+extension WebsiteSectionBadge: HTML {
+    public var body: some HTML {
+        a(.href(area.url.relativePath)) {
+            area.title
+        }
     }
 }

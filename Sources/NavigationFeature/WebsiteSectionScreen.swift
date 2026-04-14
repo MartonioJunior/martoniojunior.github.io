@@ -5,29 +5,29 @@
 //  Created by Martônio Júnior on 14/10/2025.
 //
 
-import HTML
+import Elementary
 import Models
 
 public typealias WebsiteSection = Models.Section
 
-public struct WebsiteSectionScreen<Content: HTML.View> {
+public struct WebsiteSectionScreen<Content: HTML> {
     // MARK: Variables
     var area: WebsiteSection?
-    @HTML.Builder var content: () -> Content
+    @HTMLBuilder var content: () -> Content
 
     // MARK: Initializers
     public init(
         _ area: WebsiteSection? = nil,
-        @HTML.Builder content: @escaping () -> Content
+        @HTMLBuilder content: @escaping () -> Content
     ) {
         self.area = area
         self.content = content
     }
 }
 
-// MARK: Self: HTML.View
-extension WebsiteSectionScreen: HTML.View {
-    public var body: some HTML.View {
+// MARK: Self: HTML
+extension WebsiteSectionScreen: HTML {
+    public var body: some HTML {
         div {
             h1 { area?.title ?? "What's new?" }
             content()
