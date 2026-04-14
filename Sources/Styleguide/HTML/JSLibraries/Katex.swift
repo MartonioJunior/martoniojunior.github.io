@@ -5,7 +5,7 @@
 //  Created by Martônio Júnior on 15/10/2025.
 //
 
-import HTML
+import Elementary
 
 public typealias KaTeX = Katex
 
@@ -67,25 +67,26 @@ extension Katex.Options: Codable {}
 
 // MARK: Self: JSLibrary
 extension Katex: JSLibrary {
-    public var body: some HTML.View {
+    public var body: some HTML {
         link(
-            crossorigin: .anonymous,
-            href: "https://cdn.jsdelivr.net/npm/katex@0.16.23/dist/katex.min.css",
-            integrity: "sha384-//SZkxyB7axjCAopkAL1E1rve+ZSPKapD89Lo/lLhcsXR+zOYl5z6zJZEFXil+q0",
-            rel: .stylesheet
+            .crossorigin(.anonymous),
+            .href("https://cdn.jsdelivr.net/npm/katex@0.16.23/dist/katex.min.css"),
+            .integrity("sha384-//SZkxyB7axjCAopkAL1E1rve+ZSPKapD89Lo/lLhcsXR+zOYl5z6zJZEFXil+q0"),
+            .rel(.stylesheet)
         )
         script(
-            src: "https://cdn.jsdelivr.net/npm/katex@0.16.23/dist/katex.min.js",
-            defer: true,
-            integrity: "sha384-cpAIxua0Xbyc+XrpHQpCtJzGSZ6U2kS/FeyoKjnS+BgAYNV6uVUetVs/LC9+l3rs",
-            crossorigin: .anonymous
-        )
+            .src("https://cdn.jsdelivr.net/npm/katex@0.16.23/dist/katex.min.js"),
+            .defer,
+            .integrity("sha384-cpAIxua0Xbyc+XrpHQpCtJzGSZ6U2kS/FeyoKjnS+BgAYNV6uVUetVs/LC9+l3rs"),
+            .crossorigin(.anonymous)
+        ) {}
         script(
-            src: "https://cdn.jsdelivr.net/npm/katex@0.16.23/dist/contrib/auto-render.min.js",
-            defer: true,
-            integrity: "sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh",
-            crossorigin: .anonymous
-        ).onload(js: autoRenderScript)
+            .src("https://cdn.jsdelivr.net/npm/katex@0.16.23/dist/contrib/auto-render.min.js"),
+            .defer,
+            .integrity("sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh"),
+            .crossorigin(.anonymous),
+            .onload(js: autoRenderScript)
+        ) {}
     }
 
     var autoRenderScript: String {

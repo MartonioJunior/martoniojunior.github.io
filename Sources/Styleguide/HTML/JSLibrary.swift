@@ -5,9 +5,9 @@
 //  Created by Martônio Júnior on 15/10/2025.
 //
 
-import HTML
+import Elementary
 
-public protocol JSLibrary: HTML.View {}
+public protocol JSLibrary: HTML {}
 
 // MARK: Default Implementation
 public extension JSLibrary {}

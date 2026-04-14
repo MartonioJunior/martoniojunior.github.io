@@ -5,17 +5,17 @@
 //  Created by Martônio Júnior on 15/10/2025.
 //
 
+import Elementary
 import Foundation
-import HTML
 
-public extension Script {
-    func onload(js source: String) -> some HTML.View {
-        attribute("onload", source)
+public extension HTMLElement where Tag == HTMLTag.script {
+    func onload(js source: String) -> some HTML {
+        self.attributes(.onload(js: source))
     }
 
-    static func inlineSource(from url: URL) throws -> some HTML.View {
+    static func inlineSource(from url: URL) throws -> Self where Content == HTMLText {
         let sourceCode = try String(contentsOf: url, encoding: .utf8)
 
-        return script { sourceCode }
+        return .init { sourceCode }
     }
 }

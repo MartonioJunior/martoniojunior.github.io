@@ -5,8 +5,7 @@
 //  Created by Martônio Júnior on 20/10/2025.
 //
 
-import CSS
-import HTML
+import Elementary
 
 public struct CSSTheme {
     // MARK: Variables
@@ -19,11 +18,11 @@ public extension CSSTheme {
         .init(folder: "/Resources/EnergyTheme")
     }
 
-    static func reference(relativePath: String) -> HTML.Link {
-        link(href: .init(value: relativePath), rel: .stylesheet, type: .css)
+    static func reference(relativePath: String) -> link {
+        .css(path: relativePath)
     }
     
-    func reference(subpath: String) -> HTML.Link {
+    func reference(subpath: String) -> link {
         Self.reference(relativePath: "\(folder)/\(subpath)")
     }
 }

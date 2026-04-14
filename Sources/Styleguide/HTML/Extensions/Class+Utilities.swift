@@ -5,8 +5,11 @@
 //  Created by Martônio Júnior on 20/10/2025.
 //
 
-import HTML
+public struct Class {
+    var value: String
+}
 
+// MARK: DotSyntax
 public extension Class {
     /// Represents a Card in the interface
     static var card: Self { "card" }
@@ -22,4 +25,11 @@ public extension Class {
     static var workInProgress: Self { "wip" }
     /// Flexible layout for application content
     static var wrapper: Self { "wrapper" }
+}
+
+// MARK: Self: ExpressibleByStringLiteral
+extension Class: ExpressibleByStringLiteral {
+    public init(stringLiteral value: String) {
+        self.value = value
+    }
 }
