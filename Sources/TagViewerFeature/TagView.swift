@@ -5,7 +5,7 @@
 //  Created by Martônio Júnior on 19/08/2025.
 //
 
-import HTML
+import Elementary
 import Models
 
 public struct TagView {
@@ -18,9 +18,9 @@ public struct TagView {
     }
 }
 
-// MARK: Self: HTML.View
-extension TagView: HTML.View {
-    public var body: some HTML.View {
-        a(href: .init(tag.url.relativePath)) { tag.name }
+// MARK: Self: HTML
+extension TagView: HTML {
+    public var body: some HTML {
+        a(.href(tag.url.relativePath)) { tag.name }
     }
 }

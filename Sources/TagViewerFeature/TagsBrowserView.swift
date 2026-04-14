@@ -5,9 +5,9 @@
 //  Created by Martônio Júnior on 20/08/2025.
 //
 
-import CSS
-import HTML
+import Elementary
 import Models
+import Styleguide
 
 // TODO: Transform Tag Browsing into it's own module
 public struct TagsBrowserView {
@@ -20,17 +20,17 @@ public struct TagsBrowserView {
     }
 }
 
-// MARK: Self: HTML.View
-extension TagsBrowserView: HTML.View {
-    public var body: some HTML.View {
+// MARK: Self: HTML
+extension TagsBrowserView: HTML {
+    public var body: some HTML {
         h1 { "Browse all tags" }
-        TagsListView(tags) { tag in
-            li {
-                TagView(tag)
+        div(.class(.tagBrowser)) {
+            TagsListView(tags) { tag in
+                li(.class(.tag)) {
+                    TagView(tag)
+                }
             }
-            .class(.tag)
         }
-        .class(.tagBrowser)
     }
 }
 

@@ -5,31 +5,30 @@
 //  Created by Martônio Júnior on 20/08/2025.
 //
 
-import CSS
-import HTML
+import Elementary
 import Models
 
-public struct TagsListView<Content: HTML.View> {
+public struct TagsListView<Content: HTML> {
     var tags: [Tag]
     var content: (Tag) -> Content
 
     // MARK: Initializers
     public init(
         _ tags: [Tag],
-        @HTML.Builder content: @escaping (Tag) -> Content = TagView.init
+        @HTMLBuilder content: @escaping (Tag) -> Content = TagView.init
     ) {
         self.tags = tags
         self.content = content
     }
 }
 
-// MARK: Self: HTML.View
-extension TagsListView: HTML.View {
-    public var body: some HTML.View {
-        ul {
-            HTMLForEach(tags) { tag in
+// MARK: Self: HTML
+extension TagsListView: HTML {
+    public var body: some HTML {
+        ul(.class(.tag)) {
+            for tag in tags {
                 li { content(tag) }
             }
-        }.class(.tag)
+        }
     }
 }
