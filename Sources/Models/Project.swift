@@ -5,8 +5,6 @@
 //  Created by Martônio Júnior on 23/10/2025.
 //
 
-import HTML
-
 public struct Project {}
 
 // MARK: Self.Metadata
@@ -22,4 +20,4 @@ extension Project: ExpressibleByMarkdownPage {
     }
 }
 
-extension Project.Metadata: Decodable {}
+extension Project.Metadata: Codable {}

@@ -5,11 +5,11 @@
 //  Created by Martônio Júnior on 14/08/2025.
 //
 
+import Elementary
 import Foundation
-import HTML
 
 public struct Post {
-    public typealias Content = AnyHTML
+    public typealias Content = any HTML
 
     // MARK: Variables
     public var content: Content
@@ -23,16 +23,16 @@ public struct Post {
     public var date: Date { lastModified ?? creationDate }
 
     // MARK: Initializers
-    public init<T: HTML.View>(
+    public init<T: HTML>(
         title: String,
         summary: String,
         created: Date,
         modified: Date? = nil,
         tags: [Tag] = [],
         url: URL,
-        @HTML.Builder content: () -> T
+        @HTMLBuilder content: () -> T
     ) {
-        self.content = AnyHTML(content)
+        self.content = content()
         self.creationDate = created
         self.lastModified = modified
         self.summary = summary
@@ -58,4 +58,4 @@ extension Post: ExpressibleByMarkdownPage {
     }
 }
 
-extension PostMetadata: Decodable {}
+extension PostMetadata: Codable {}

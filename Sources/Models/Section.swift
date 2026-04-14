@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import HTML
 
 public enum Section: String {
     // MARK: Cases
@@ -54,7 +53,7 @@ extension Section: ExpressibleByMarkdownPage {
     }
 }
 
-extension WebsiteAreaMetadata: Decodable {}
+extension WebsiteAreaMetadata: Codable {}
 
 // MARK: Self: Hashable
 extension Section: Hashable {}
