@@ -5,7 +5,7 @@
 //  Created by Martônio Júnior on 14/08/2025.
 //
 
-import HTML
+import Elementary
 import Models
 import Styleguide
 import TagViewerFeature
@@ -20,16 +20,18 @@ public struct PostCard {
     }
 }
 
-// MARK: Self: HTML.View
-extension PostCard: HTML.View {
-    public var body: some HTML.View {
+// MARK: Self: HTML
+extension PostCard: HTML {
+    public var body: some HTML {
         article {
-            h1 { a(href: .init(post.url.relativePath)) { post.title } }
+            h1 {
+                a(.href(post.url.relativePath)) { post.title }
+            }
             if !post.tags.isEmpty {
                 TagsListView(post.tags)
             }
-            Time.date(post.date)
-            p { post.summary }.class(.description)
+            time.date(post.date)
+            p(.class(.description)) { post.summary }
         }
     }
 }

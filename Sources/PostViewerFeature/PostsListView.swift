@@ -5,13 +5,12 @@
 //  Created by Martônio Júnior on 14/08/2025.
 //
 
-import CSS
+import Elementary
 import Foundation
-import HTML
 import Models
 import Styleguide
 
-public struct PostsListView<Content: HTML.View> {
+public struct PostsListView<Content: HTML> {
     // MARK: Variables
     var posts: [Post]
     var content: (Post) -> Content
@@ -21,7 +20,7 @@ public struct PostsListView<Content: HTML.View> {
     public init(
         _ posts: [Post],
         order sortOrder: SortOrder = .reverse,
-        @HTML.Builder content: @escaping (Post) -> Content = PostCard.init
+        @HTMLBuilder content: @escaping (Post) -> Content = PostCard.init
     ) {
         self.posts = posts
         self.content = content
@@ -29,18 +28,17 @@ public struct PostsListView<Content: HTML.View> {
     }
 }
 
-// MARK: Self: HTML.View
-extension PostsListView: HTML.View {
-    public var body: some HTML.View {
+// MARK: Self: HTML
+extension PostsListView: HTML {
+    public var body: some HTML {
         if posts.isEmpty {
             EmptyView()
         } else {
-            ul {
-                HTMLForEach(posts.allItems(sortedBy: \.date, order: .reverse)) { post in
+            ul(.class(.post)) {
+                for post in posts.allItems(sortedBy: \.date, order: .reverse) {
                     li { content(post) }
                 }
             }
-            .class(.post)
         }
     }
 }

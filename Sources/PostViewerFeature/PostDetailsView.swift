@@ -5,8 +5,7 @@
 //  Created by Martônio Júnior on 19/08/2025.
 //
 
-import CSS
-import HTML
+import Elementary
 import Models
 import Styleguide
 import TagViewerFeature
@@ -21,21 +20,23 @@ public struct PostDetailsView {
     }
 }
 
-// MARK: Self: HTML.View
-extension PostDetailsView: HTML.View {
-    public var body: some HTML.View {
+// MARK: Self: HTML
+extension PostDetailsView: HTML {
+    public var body: some HTML {
         article {
             h1 { post.title }
-            p { post.summary }.class(.description)
-            p {
+            p(.class(.description)) { post.summary }
+            p(.class(.timestamps)) {
                 "Posted "
-                Time.date(post.creationDate)
+                time.date(post.creationDate)
                 if let lastModified = post.lastModified {
                     ", Last Updated "
-                    Time.date(lastModified)
+                    time.date(lastModified)
                 }
-            }.class(.timestamps)
-            div { post.content }.class(.content)
+            }
+            div(.class(.content)) {
+                post.content.eraseToRawHTML()
+            }
             if !post.tags.isEmpty {
                 span { "Tagged with: " }
                 TagsListView(post.tags)
@@ -68,13 +69,14 @@ public extension Post {
     }
 }
 
-#Preview {
-    HTML.Document {
-        PostDetailsView(Post.preview)
-    } head: {
-        title { "Post Example" }
-        Meta(charset: .utf8)
-    }
-}
+// TODO: Fix this preview
+//#Preview {
+//    HTMLDocument {
+//        PostDetailsView(Post.preview)
+//    } head: {
+//        title { "Post Example" }
+//        meta(.charset(.utf8))
+//    }
+//}
 
 #endif

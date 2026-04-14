@@ -5,8 +5,7 @@
 //  Created by Martônio Júnior on 20/08/2025.
 //
 
-import CSS
-import HTML
+import Elementary
 import Models
 import Styleguide
 import TagViewerFeature
@@ -23,15 +22,15 @@ public struct TagPostsListView {
     }
 }
 
-// MARK: Self: HTML.View
-extension TagPostsListView: HTML.View {
-    public var body: some HTML.View {
+// MARK: Self: HTML
+extension TagPostsListView: HTML {
+    public var body: some HTML {
         h1 {
             "Tagged with "
-            span { tag.name }.class(.tag)
+            span(.class(.tag)) { tag.name }
         }
 
-        a(href: .init(tag.url.relativePath)) { "Browse all tags" }
+        a(.href(tag.url.relativePath)) { "Browse all tags" }
 
         PostsListView(posts)
     }
