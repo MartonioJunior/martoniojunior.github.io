@@ -5,16 +5,15 @@
 //  Created by Martônio Júnior on 19/08/2025.
 //
 
-import CSS
+import Elementary
 import Foundation
-import HTML
 import Models
 import NavigationFeature
 import Styleguide
 
-public struct PageDocument<Content: HTML.View> {
+public struct PageDocument<Content: HTML> {
     // MARK: Variables
-    var title: String
+    public var title: String
     var description: String
     var navigation: WebsiteSectionsListViewModel
     var content: () -> Content
@@ -24,7 +23,7 @@ public struct PageDocument<Content: HTML.View> {
         _ title: String,
         description: String,
         navigation: WebsiteSectionsListViewModel = .home,
-        @HTML.Builder content: @escaping () -> Content
+        @HTMLBuilder content: @escaping () -> Content
     ) {
         self.title = title
         self.description = description
@@ -33,25 +32,25 @@ public struct PageDocument<Content: HTML.View> {
     }
 }
 
-// MARK: Self: HTML.DocumentProtocol
-extension PageDocument: HTML.DocumentProtocol {
-    public var head: some HTML.View {
-        Title { title }
-        Meta(charset: .utf8)
+// MARK: Self: HTML.Document
+extension PageDocument: HTMLDocument {
+    public var head: some HTML {
+        Elementary.title { title }
+        meta(.charset(.utf8))
         CSSTheme.energyTheme.reference(subpath: "styles.css")
         CSSTheme.energyTheme.reference(subpath: "code.css")
         // lang(.americanEnglish)
     }
 
-    public var body: some HTML.View {
+    public var body: some HTML {
         HeaderView(
             title: title,
             description: description,
             model: navigation
         )
-        div {
+        div(.class(.wrapper)) {
             content()
-        }.class(.wrapper)
+        }
         FooterView()
         KaTeX()
         HighlightJS()
@@ -60,8 +59,8 @@ extension PageDocument: HTML.DocumentProtocol {
 
 // MARK: ArtsBlueprintsCodeWebsite (EX)
 public extension ArtsBlueprintsCodeWebsite {
-    func createPage<Content: HTML.View>(
-        @HTML.Builder content: @escaping () -> Content
+    func createPage<Content: HTML>(
+        @HTMLBuilder content: @escaping () -> Content
     ) -> PageDocument<Content> {
         .init(name, description: description, content: content)
     }

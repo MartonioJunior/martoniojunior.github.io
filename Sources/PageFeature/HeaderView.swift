@@ -5,8 +5,7 @@
 //  Created by Martônio Júnior on 24/06/25.
 //
 
-import CSS
-import HTML
+import Elementary
 import Models
 import NavigationFeature
 import Styleguide
@@ -29,21 +28,20 @@ public struct HeaderView {
     }
 }
 
-// MARK: Self: HTML.View
-extension HeaderView: HTML.View {
-    public var body: some HTML.View {
+// MARK: Self: HTML
+extension HeaderView: HTML {
+    public var body: some HTML {
         header {
-            div {
-                a(href: "/") { title }.class(.websiteTitle)
-                p { description }.class(.description)
-                p { "Website still in development..." }.class(.workInProgress)
+            div(.class(.wrapper)) {
+                a(.href("/"), .class(.websiteTitle)) { title }
+                p(.class(.description)) { description }
+                p(.class(.workInProgress)) { "Website still in development..." }
                 if sectionModel.numberOfSections > 1 {
                     nav {
                         WebsiteSectionsListView(sectionModel)
                     }
                 }
             }
-            .class(.wrapper)
         }
     }
 }
