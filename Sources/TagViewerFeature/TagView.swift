@@ -24,3 +24,15 @@ extension TagView: HTML {
         a(.href(tag.url.relativePath)) { tag.name }
     }
 }
+
+// MARK: Previews
+#if DEBUG && canImport(SwiftUI)
+import SwiftUI
+import Styleguide
+
+#Preview {
+    DebugHTML {
+        TagView(Tag("food", url: .init(string: "/food")!))
+    }
+}
+#endif

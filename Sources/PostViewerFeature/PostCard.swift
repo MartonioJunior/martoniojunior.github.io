@@ -35,3 +35,14 @@ extension PostCard: HTML {
         }
     }
 }
+
+#if DEBUG && canImport(SwiftUI)
+import SwiftUI
+
+#Preview {
+    DebugHTML {
+        PostCard(.preview)        
+    }
+}
+
+#endif

@@ -19,3 +19,14 @@ extension EmptyView: HTML {
         }
     }
 }
+
+// MARK: Previews
+#if DEBUG && canImport(SwiftUI)
+import SwiftUI
+
+#Preview {
+    DebugHTML {
+        EmptyView()
+    }
+}
+#endif

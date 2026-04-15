@@ -75,3 +75,17 @@ extension WebsiteSectionsListView: HTML {
         }
     }
 }
+
+// MARK: Previews
+#if DEBUG && canImport(SwiftUI)
+import SwiftUI
+
+#Preview {
+    DebugHTML {
+        WebsiteSectionsListView(.home) {
+            "Hello, \($0.title)!"
+        }
+    }
+}
+
+#endif

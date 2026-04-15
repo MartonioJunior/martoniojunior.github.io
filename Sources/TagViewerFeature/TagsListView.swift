@@ -32,3 +32,21 @@ extension TagsListView: HTML {
         }
     }
 }
+
+// MARK: Previews
+#if DEBUG && canImport(SwiftUI)
+import SwiftUI
+import Styleguide
+
+#Preview {
+    DebugHTML {
+        TagsListView([
+            Tag("science", url: .init(string: "/science")!),
+            Tag("gym", url: .init(string: "/gym")!),
+            Tag("pop", url: .init(string: "/pop")!)
+        ]) {
+            "Hello, \($0.name)!"
+        }
+    }
+}
+#endif

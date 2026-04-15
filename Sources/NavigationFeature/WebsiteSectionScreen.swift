@@ -34,3 +34,18 @@ extension WebsiteSectionScreen: HTML {
         }
     }
 }
+
+// MARK: Previews
+#if DEBUG && canImport(SwiftUI)
+import SwiftUI
+import Styleguide
+
+#Preview {
+    DebugHTML {
+        WebsiteSectionScreen {
+            "Hello, World!"
+        }
+    }
+}
+
+#endif

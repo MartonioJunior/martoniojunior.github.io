@@ -29,3 +29,15 @@ extension FooterView: HTML {
         }
     }
 }
+
+// MARK: Previews
+#if DEBUG && canImport(SwiftUI)
+import SwiftUI
+import Styleguide
+
+#Preview {
+    DebugHTML {
+        FooterView()
+    }
+}
+#endif

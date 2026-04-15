@@ -35,3 +35,13 @@ extension TagPostsListView: HTML {
         PostsListView(posts)
     }
 }
+
+#if DEBUG && canImport(SwiftUI)
+import SwiftUI
+
+#Preview {
+    DebugHTML {
+        TagPostsListView(tag: .init("Soccer", url: .init(string: "/soccer")!), posts: repeatElement(.preview, count: 6).map(\.self))
+    }
+}
+#endif

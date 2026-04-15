@@ -27,3 +27,15 @@ extension WebsiteSectionBadge: HTML {
         }
     }
 }
+
+// MARK: Previews
+#if DEBUG && canImport(SwiftUI)
+import SwiftUI
+
+#Preview {
+    DebugHTML {
+        WebsiteSectionBadge(.about)
+    }
+}
+
+#endif

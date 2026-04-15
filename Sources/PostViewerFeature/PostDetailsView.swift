@@ -70,13 +70,10 @@ public extension Post {
 }
 
 // TODO: Fix this preview
-//#Preview {
-//    HTMLDocument {
-//        PostDetailsView(Post.preview)
-//    } head: {
-//        title { "Post Example" }
-//        meta(.charset(.utf8))
-//    }
-//}
+#Preview {
+    DebugHTML {
+        PostDetailsView(Post.preview)
+    }
+}
 
 #endif

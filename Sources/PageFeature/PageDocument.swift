@@ -65,3 +65,17 @@ public extension ArtsBlueprintsCodeWebsite {
         .init(name, description: description, content: content)
     }
 }
+
+// MARK: Previews
+#if DEBUG && canImport(SwiftUI)
+import SwiftUI
+import Styleguide
+
+#Preview {
+    DebugHTML {
+        PageDocument("My Website", description: "A website with stuff about me") {
+            "Hello, world!"
+        }
+    }
+}
+#endif

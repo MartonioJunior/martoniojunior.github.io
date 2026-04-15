@@ -39,3 +39,20 @@ public extension Class {
     static var tag: Self { "tag" }
     internal static var tagBrowser: Self { "tag-browser" }
 }
+
+// MARK: Previews
+#if DEBUG && canImport(SwiftUI)
+import SwiftUI
+import Styleguide
+
+#Preview {
+    DebugHTML {
+        TagsBrowserView([
+            Tag("Goals", url: .init(string: "/goals")!),
+            Tag("Lifestyle", url: .init(string: "/lifestyle")!),
+            Tag("Soccer", url: .init(string: "/soccer")!),
+            Tag("Technology", url: .init(string: "/technology")!)
+        ])
+    }
+}
+#endif

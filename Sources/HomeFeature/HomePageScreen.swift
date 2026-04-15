@@ -32,3 +32,16 @@ extension HomePageScreen: HTML {
         }
     }
 }
+
+// MARK: Previews
+#if DEBUG && canImport(SwiftUI)
+import SwiftUI
+import Styleguide
+
+#Preview {
+    DebugHTML {
+        HomePageScreen(posts: repeatElement(.preview, count: 6).map(\.self))
+    }
+}
+
+#endif

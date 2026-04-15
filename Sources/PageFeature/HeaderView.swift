@@ -50,3 +50,21 @@ extension HeaderView: HTML {
 extension Class {
     static var websiteTitle: Self { "site-name" }
 }
+
+// MARK: Previews
+#if DEBUG && canImport(SwiftUI)
+import SwiftUI
+import Styleguide
+
+#Preview("Selected") {
+    DebugHTML {
+        HeaderView(title: "My Website", description: "A website for posting stuff to", model: .init(WebsiteSection.allCases, selected: .posts))
+    }
+}
+
+#Preview("Unselected") {
+    DebugHTML {
+        HeaderView(title: "My Website", description: "A website for posting stuff to", model: .init(WebsiteSection.allCases, selected: nil))
+    }
+}
+#endif
