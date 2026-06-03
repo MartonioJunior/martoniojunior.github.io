@@ -47,6 +47,7 @@ func targetDep(name: String, package: String) -> Target.Dependency {
 
 // MARK: Dependencies
 let elementary = targetDep(name: "Elementary", package: "Elementary")
+let elementaryFlow = targetDep(name: "ElementaryFlow", package: "elementary-flow")
 let feedKit = targetDep(name: "FeedKit", package: "FeedKit")
 let files = targetDep(name: "Files", package: "Files")
 let markdown = targetDep(name: "Markdown", package: "swift-markdown")
@@ -55,6 +56,7 @@ let saga = targetDep(name: "Saga", package: "Saga")
 
 let dependencies = [
     dep(url: "https://github.com/elementary-swift/elementary", .upToNextMajor(from: "0.7.1")),
+    .package(url: "https://github.com/elementary-swift/elementary-flow", .upToNextMajor(from: "0.1.0")),
     dep(url: "https://github.com/JohnSundell/Files", .upToNextMajor(from: "4.3.0")),
     dep(url: "https://github.com/loopwerk/Saga", .upToNextMajor(from: "3.3.2")),
     dep(url: "https://github.com/loopwerk/Parsley", .upToNextMajor(from: "1.2.0")),
@@ -63,7 +65,7 @@ let dependencies = [
 ]
 
 public extension Array where Element == Target.Dependency {
-    static let ui: [Target.Dependency] = ["Styleguide", elementary]
+    static let ui: [Target.Dependency] = ["Styleguide", elementary, elementaryFlow]
 }
 
 // MARK: Targets

@@ -1,5 +1,5 @@
 {
-  "originHash" : "5e5be829a03929a7650afb2c3527dd2b1663b13eb0edf54e81a304b812463367",
+  "originHash" : "0a16fa6978595798a5fc197cf7c03d0d292d25b6e361316a4bf5ef30c89295b6",
   "pins" : [
     {
       "identity" : "elementary",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "37b26923e73156f524b52e649855277bc7ead2c2",
         "version" : "0.7.1"
+      }
+    },
+    {
+      "identity" : "elementary-flow",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elementary-swift/elementary-flow",
+      "state" : {
+        "revision" : "19523310560b97dc3be9e3f7c0fb6ee5b0b18883",
+        "version" : "0.1.0"
       }
     },
     {
