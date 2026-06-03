@@ -8,21 +8,40 @@
 import Elementary
 import Foundation
 
+/// Post in the website.
+/// 
+/// Posts can range from a simple update to a full-fledged article.
 public struct Post {
+    /// Type that describes content authored for a post.
     public typealias Content = any HTML
-
     // MARK: Variables
+    /// Content associated with this post.
     public var content: Content
+    /// When was this post created?
     public var creationDate: Date
+    /// When was this post last modified?
     public var lastModified: Date?
+    /// Synopsis of what the post is about.
     public var summary: String
+    /// Tags associated with this post.
     public var tags: [Tag]
+    /// Display title for the post.
     public var title: String
+    /// Link to access this post.
     public var url: URL
-
+    /// Date representing the most recent update made for this post.
     public var date: Date { lastModified ?? creationDate }
-
     // MARK: Initializers
+    /// Creates a new post.
+    /// - Parameters:
+    ///   - title: Display title for this post.
+    ///   - summary: Description of the post.
+    ///   - created: When was this post created?
+    ///   - modified: When was this post last modified?
+    ///   - tags: Tags associated with this post.
+    ///   - url: Link to access this post
+    ///   - content: Content associated with this post.
+    ///
     public init<T: HTML>(
         title: String,
         summary: String,
@@ -46,7 +65,7 @@ public struct Post {
 public typealias PostMetadata = Post.Metadata
 
 extension Post: ExpressibleByMarkdownPage {
-    /// Data that can be processed from the original Markdown content
+    // swiftlint:disable:next missing_docs
     public struct Metadata {
         public var published: Bool
         public var title: String
