@@ -15,6 +15,8 @@ extension Project: ExpressibleByMarkdownPage {
         public var published: Bool
         public var title: String
         public var description: String?
+        public var projectStatus: String?
+        public var links: String?
 
         public var isPublic: Bool { published }
     }
