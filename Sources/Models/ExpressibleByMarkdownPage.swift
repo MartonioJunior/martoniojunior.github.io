@@ -6,5 +6,5 @@
 //
 
 public protocol ExpressibleByMarkdownPage {
-    associatedtype Metadata: Decodable
+    associatedtype Metadata: Codable
 }
