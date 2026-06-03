@@ -90,5 +90,8 @@ extension Post: Publishable {
     public var isPublic: Bool { true }
 }
 
+// MARK: Self: Summarizable
+extension Post: Summarizable {}
+
 // MARK: Self: Taggable
 extension Post: Taggable {}

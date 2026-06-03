@@ -66,5 +66,8 @@ extension Project: Publishable {
     public var isPublic: Bool { true }
 }
 
+// MARK: Self: Summarizable
+extension Project: Summarizable {}
+
 // MARK: Self: Taggable
 extension Project: Taggable {}
