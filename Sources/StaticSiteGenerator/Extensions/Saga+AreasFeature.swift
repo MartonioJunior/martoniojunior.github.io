@@ -26,8 +26,8 @@ public extension Saga {
     func registerAreas(
         _ website: ArtsBlueprintsCodeWebsite,
         content: @escaping (WebsiteSection) -> some HTML
-    ) throws -> Self {
-        let htmlWriter = parseHTML(WebsiteAreaMetadata.self) { context in
+    ) -> Self {
+        let htmlWriter = parseHTML(Section.Metadata.self) { context in
             let section = context.item.metadata.section
 
             return website.bake(selected: section) {
@@ -38,13 +38,13 @@ public extension Saga {
             }
         }
 
-        let rerouteToIndex: (Item<WebsiteAreaMetadata>) -> Void = {
+        let rerouteToIndex: @Sendable (Item<Section.Metadata>) -> Void = {
             var components = $0.relativeDestination.components
             components.removeFirst()
             $0.relativeDestination = .init(components: components)
         }
 
-        return try register(
+        return register(
             folder: "index",
             metadata: WebsiteSection.Metadata.self,
             readers: [.customMarkdownRenderer()],
@@ -54,4 +54,4 @@ public extension Saga {
     }
 }
 
-extension WebsiteAreaMetadata: Metadata {}
+extension Section.Metadata: Metadata {}
