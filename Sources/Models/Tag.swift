@@ -18,3 +18,10 @@ public struct Tag {
         self.url = url
     }
 }
+
+// MARK: Self: ExpressibleByStringLiteral
+extension Tag: ExpressibleByStringLiteral {
+    public init(stringLiteral value: String) {
+        self.init(value, url: .init(string: "/tags/\(value)")!)
+    }
+}
