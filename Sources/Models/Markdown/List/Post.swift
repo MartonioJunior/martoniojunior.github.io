@@ -62,8 +62,6 @@ public struct Post {
 }
 
 // MARK: Self: ExpressibleByMarkdownPage
-public typealias PostMetadata = Post.Metadata
-
 extension Post: ExpressibleByMarkdownPage {
     // swiftlint:disable:next missing_docs
     public struct Metadata {
@@ -73,9 +71,7 @@ extension Post: ExpressibleByMarkdownPage {
         public var created: String?
         public var modified: String?
         public var tags: String?
-
-        public var isPublic: Bool { published }
     }
 }
 
-extension PostMetadata: Codable {}
+extension Post.Metadata: Codable {}

@@ -21,8 +21,3 @@ public struct ArtsBlueprintsCodeWebsite {
     /// Creates an instance of the website.
     public init() {}
 }
-
-// MARK: Self.Section
-public extension ArtsBlueprintsCodeWebsite {
-    typealias Area = Section
-}

@@ -57,8 +57,6 @@ extension Section: Codable {}
 extension Section: Equatable {}
 
 // MARK: Self.ExpressibleByMarkdownPage
-public typealias WebsiteAreaMetadata = Section.Metadata
-
 extension Section: ExpressibleByMarkdownPage {
     /// Metadata information about the index page of a section in the website.
     public struct Metadata {

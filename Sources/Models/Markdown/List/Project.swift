@@ -9,8 +9,6 @@
 public struct Project {}
 
 // MARK: Self.Metadata
-public typealias ProjectMetadata = Project.Metadata
-
 extension Project: ExpressibleByMarkdownPage {
     // swiftlint:disable:next missing_docs
     public struct Metadata {
