@@ -45,7 +45,7 @@ public extension Post {
     }
 }
 
-extension PostMetadata: Metadata {}
+extension Post.Metadata: Metadata {}
 
 // MARK: Saga (EX)
 public extension Saga {

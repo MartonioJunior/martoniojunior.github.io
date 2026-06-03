@@ -17,12 +17,12 @@ public extension Project {
 
     @HTMLBuilder
     static func listWriter(_: ItemsRenderingContext<Metadata>) -> some HTML {
-        h1 { "Projects "}
+        h1 { "Projects " }
         EmptyView()
     }
 }
 
-extension ProjectMetadata: Metadata {}
+extension Project.Metadata: Metadata {}
 
 // MARK: Saga (EX)
 public extension Saga {
