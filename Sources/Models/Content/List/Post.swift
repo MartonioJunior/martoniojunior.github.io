@@ -89,3 +89,6 @@ extension Post: Publishable {
     // swiftlint:disable:next missing_docs
     public var isPublic: Bool { true }
 }
+
+// MARK: Self: Taggable
+extension Post: Taggable {}
