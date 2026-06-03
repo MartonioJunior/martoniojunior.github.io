@@ -30,7 +30,7 @@ extension PostCard: HTML {
             if !post.tags.isEmpty {
                 TagsListView(post.tags)
             }
-            time.date(post.date)
+            time.date(post.lastUpdate)
             p(.class(.description)) { post.summary }
         }
     }
@@ -41,7 +41,7 @@ import SwiftUI
 
 #Preview {
     DebugHTML {
-        PostCard(.preview)        
+        PostCard(.preview)
     }
 }
 

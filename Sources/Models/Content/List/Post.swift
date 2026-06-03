@@ -29,8 +29,6 @@ public struct Post {
     public var title: String
     /// Link to access this post.
     public var url: URL
-    /// Date representing the most recent update made for this post.
-    public var date: Date { lastModified ?? creationDate }
     // MARK: Initializers
     /// Creates a new post.
     /// - Parameters:
@@ -65,13 +63,29 @@ public struct Post {
 extension Post: ExpressibleByMarkdownPage {
     // swiftlint:disable:next missing_docs
     public struct Metadata {
+        /// Flag used to indicate publishing the page.
         public var published: Bool
+        /// Title of the post.
         public var title: String
+        /// Synopsis of the post.
         public var description: String?
+        /// Frozen date of creation for the post.
+        /// 
+        /// When `nil`, uses the metadata of the file itself.
         public var created: String?
+        /// Frozen date of last update for the post.
+        /// 
+        /// When `nil`, uses the metadata of the file itself.
         public var modified: String?
+        /// Description of tags associated with the post.
         public var tags: String?
     }
 }
 
 extension Post.Metadata: Codable {}
+
+// MARK: Self: Publishable
+extension Post: Publishable {
+    // swiftlint:disable:next missing_docs
+    public var isPublic: Bool { true }
+}

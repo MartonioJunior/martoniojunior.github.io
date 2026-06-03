@@ -35,7 +35,7 @@ extension PostsListView: HTML {
             EmptyView()
         } else {
             ul(.class(.post)) {
-                for post in posts.allItems(sortedBy: \.date, order: .reverse) {
+                for post in posts.allItems(sortedBy: \.lastUpdate, order: .reverse) {
                     li { content(post) }
                 }
             }

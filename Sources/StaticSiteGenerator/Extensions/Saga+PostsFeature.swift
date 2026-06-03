@@ -57,7 +57,7 @@ public extension Saga {
             metadata: Post.Metadata.self,
             readers: [.customMarkdownRenderer()],
             itemProcessor: Post.preprocessor,
-            filter: \.metadata.isPublic,
+            filter: \.metadata.published,
             writers: [
                 .itemWriter(parseHTML(Post.Metadata.self, website, Post.writer)),
                 .listWriter(htmlMany(Post.Metadata.self, website, selected: .posts, Post.listWriter)),
