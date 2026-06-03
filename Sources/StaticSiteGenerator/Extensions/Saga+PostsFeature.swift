@@ -41,7 +41,7 @@ public extension Post {
     }
 
     static func listWriter(_ context: ItemsRenderingContext<Metadata>) -> some HTML {
-        PostsListView(context.items.map(Post.init))
+        PostsListView(context.items.map(Self.init))
     }
 }
 
@@ -51,7 +51,7 @@ extension Post.Metadata: Metadata {}
 public extension Saga {
     func registerPosts(
         _ website: ArtsBlueprintsCodeWebsite
-    ) throws -> Self {
+    ) -> Self {
         register(
             folder: "posts",
             metadata: Post.Metadata.self,

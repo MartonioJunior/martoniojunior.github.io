@@ -75,7 +75,7 @@ public extension HTMLRaw {
 
 // MARK: Saga (EX)
 public extension Saga {
-    func blockPages(in folderPath: String) throws -> Self {
+    func blockPages(in folderPath: String) -> Self {
         register(
             folder: .init(folderPath),
             metadata: EmptyMetadata.self,
@@ -85,7 +85,7 @@ public extension Saga {
         )
     }
 
-    func registerStandalone(_ website: ArtsBlueprintsCodeWebsite) throws -> Self {
+    func registerStandalone(_ website: ArtsBlueprintsCodeWebsite) -> Self {
         register(
             metadata: EmptyMetadata.self,
             readers: [.customMarkdownRenderer()],

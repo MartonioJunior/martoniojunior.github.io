@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Structure containing information about this website.
 public struct ArtsBlueprintsCodeWebsite {
     // MARK: Variables
     /// Owner of this site.
