@@ -7,4 +7,5 @@
 
 import Foundation
 
+/// Bundle containing all assets for the Arts, Blueprints, Code! Website.
 public let artsBlueprintsCodeBundle = Bundle.module

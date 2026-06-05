@@ -7,33 +7,40 @@
 
 import Elementary
 
+/// Definition for KaTeX's auto-render plugin.
 public typealias KaTeX = Katex
-
-/// Definition for KaTeX's auto-render plugin
+/// Definition for KaTeX's auto-render plugin.
+/// 
+/// Used to render math expressions.
 /// Sources:
 ///   - https://katex.org/docs/api
 ///   - https://katex.org/docs/autorender
 public struct Katex {
+    /// Settings for the module.
     var options: Options = .init()
-
     // MARK: Initializers
+    /// Instances KaTeX for use.
     public init() {}
 }
 
 // MARK: Self.Delimiter
 public extension Katex {
+    /// Delimiter for an inline math expression.
     struct Delimiter {
+        /// Defines the left symbol expression for a math expression.
         var left: String
+        /// Defines the right symbol expression for a math expression.
         var right: String
         var display: Bool
     }
 }
 
 public extension Katex.Delimiter {
+    /// Basic "$" delimiter for an inline math expression.
     static var singleDelimiter: Self {
         .init(left: "$", right: "$", display: false)
     }
-
+    /// Basic "$$" delimiter for an inline math expression.
     static var doubleDelimiter: Self {
         .init(left: "$$", right: "$$", display: true)
     }
@@ -42,6 +49,7 @@ public extension Katex.Delimiter {
 extension Katex.Delimiter: Codable {}
 
 public extension Array where Element == Katex.Delimiter {
+    /// Default set of delimiters based on KaTeX.
     static var defaultDelimiters: Self {
         [
             .doubleDelimiter,
@@ -58,7 +66,9 @@ public extension Array where Element == Katex.Delimiter {
 
 // MARK: Self.Options
 public extension Katex {
+    /// List of options available for the KaTeX library.
     struct Options {
+        /// Delimiters detected by the library.
         var delimiters: [Delimiter] = .defaultDelimiters + [.singleDelimiter]
     }
 }
@@ -67,6 +77,7 @@ extension Katex.Options: Codable {}
 
 // MARK: Self: JSLibrary
 extension Katex: JSLibrary {
+    // swiftlint:disable:next missing_docs
     public var body: some HTML {
         link(
             .crossorigin(.anonymous),
@@ -88,11 +99,11 @@ extension Katex: JSLibrary {
             .onload(js: autoRenderScript)
         ) {}
     }
-
+    /// Defines the structure required to automatically render the math element.
     var autoRenderScript: String {
         var source = "renderMathInElement(document.body"
 
-        if let argument = try? options.encodeToJS() {
+        if let argument = try? options.encodeToJson() {
             source += ", " + argument
         }
 

@@ -9,17 +9,23 @@
 import Elementary
 import SwiftUI
 
+/// HTML wrapper for debugging purposes.
+@preconcurrency
 @MainActor
 public struct DebugHTML {
+    // MARK: Variables
+    /// Raw HTML that's already been rendered.
     var rawHTML: String
-    
-    public init<T: HTML>(content: @escaping () -> T) {
+    /// Create a new HTML debug instance.
+    /// - Parameter content: Content to be rendered.
+    public init<T: HTML>(content: () -> T) {
         self.rawHTML = content().renderFormatted()
     }
 }
 
 // MARK: Self: View
 extension DebugHTML: View {
+    // swiftlint:disable:next missing_docs
     public var body: some View {
         ScrollView([.horizontal, .vertical]) {
             Text(rawHTML)

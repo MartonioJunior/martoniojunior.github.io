@@ -8,14 +8,26 @@
 import Elementary
 import Models
 
+/// Typealias for a section in the website.
+/// 
+/// Used as a disambiguator from the <section> HTML component.
 public typealias WebsiteSection = Models.Section
 
+/// Landing page for a section of the website.
 public struct WebsiteSectionScreen<Content: HTML> {
     // MARK: Variables
+    /// Section of the website.
+    /// 
+    /// When `nil`, assumes the behaviour of the home page.
     var area: WebsiteSection?
-    @HTMLBuilder var content: () -> Content
-
+    /// HTML content of this page.
+    var content: () -> Content
     // MARK: Initializers
+    /// Creates the page for a section of the website.
+    /// - Parameters:
+    ///   - area: Section of the website.
+    ///   - content: HTML content of this page.
+    ///
     public init(
         _ area: WebsiteSection? = nil,
         @HTMLBuilder content: @escaping () -> Content
@@ -27,6 +39,7 @@ public struct WebsiteSectionScreen<Content: HTML> {
 
 // MARK: Self: HTML
 extension WebsiteSectionScreen: HTML {
+    // swiftlint:disable:next missing_docs
     public var body: some HTML {
         div {
             h1 { area?.title ?? "What's new?" }
@@ -37,8 +50,8 @@ extension WebsiteSectionScreen: HTML {
 
 // MARK: Previews
 #if DEBUG && canImport(SwiftUI)
-import SwiftUI
 import Styleguide
+import SwiftUI
 
 #Preview {
     DebugHTML {
@@ -47,5 +60,4 @@ import Styleguide
         }
     }
 }
-
 #endif

@@ -10,11 +10,14 @@ import Models
 import Styleguide
 import TagViewerFeature
 
+/// Component that displays a full post of the website.
 public struct PostDetailsView {
     // MARK: Variables
+    /// Post to be displayed.
     var post: Post
-
     // MARK: Initializers
+    /// Creates a detailed view for a post.
+    /// - Parameter post: Post to be displayed.
     public init(_ post: Post) {
         self.post = post
     }
@@ -22,6 +25,7 @@ public struct PostDetailsView {
 
 // MARK: Self: HTML
 extension PostDetailsView: HTML {
+    // swiftlint:disable:next missing_docs
     public var body: some HTML {
         article {
             h1 { post.title }
@@ -37,17 +41,23 @@ extension PostDetailsView: HTML {
             div(.class(.content)) {
                 post.content.eraseToRawHTML()
             }
-            if !post.tags.isEmpty {
-                span { "Tagged with: " }
-                TagsListView(post.tags)
-            }
+            displayTags()
+        }
+    }
+    /// Displays the tags associated with a post.
+    @HTMLBuilder
+    func displayTags() -> some HTML {
+        if !post.tags.isEmpty {
+            span { "Tagged with: " }
+            TagsListView(post.tags)
         }
     }
 }
 
 // MARK: Class (EX)
 public extension Class {
-    static var timestamps: Self { "timestamps" }
+    /// Class to apply styling for timestamps.
+    static var timestamps: Self { #function }
 }
 
 // MARK: Preview
@@ -55,6 +65,7 @@ public extension Class {
 import SwiftUI
 
 public extension Post {
+    /// Preview of what a post looks like.
     static var preview: Self {
         .init(
             title: "Something about Apples",
@@ -69,11 +80,9 @@ public extension Post {
     }
 }
 
-// TODO: Fix this preview
 #Preview {
     DebugHTML {
-        PostDetailsView(Post.preview)
+        PostDetailsView(.preview)
     }
 }
-
 #endif

@@ -9,6 +9,13 @@ import Elementary
 import Foundation
 
 public extension HTMLElement where Tag == HTMLTag.time {
+    /// Creates a <time> from a `Date`.
+    /// - Parameters:
+    ///   - date: Date used as the base.
+    ///   - dateFormat: Date format.
+    ///   - timeFormat: Time format.
+    ///
+    /// - Returns: A new <time> element with the formatted `date`.
     static func date(
         _ date: Date,
         dateFormat: Date.FormatStyle.DateStyle = .abbreviated,

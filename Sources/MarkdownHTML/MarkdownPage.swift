@@ -9,15 +9,20 @@ import Elementary
 import Markdown
 import Parsley
 
+/// Data structure representing a pre-processed Markdown page.
 public struct MarkdownPage {
+    /// Type of content associated with this page.
     public typealias Content = String
-    
     // MARK: Variables
+    /// Content of this page.
     public var content: Content
+    /// Display title for this page.
     public var title: String
+    /// Metadata associated with this page.
     public var metadata: MarkdownMetadata?
-
     // MARK: Initializers
+    /// Creates a new instance by pre-processing a Markdown Document.
+    /// - Parameter document: Markdown document to be pre-processed.
     public init(_ document: Markdown.Document) {
         let parsed = try? Parsley.parse(document.format())
         metadata = MarkdownMetadata(parameters: parsed?.metadata ?? document.metadataDictionary)

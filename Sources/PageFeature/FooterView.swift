@@ -7,13 +7,16 @@
 
 import Elementary
 
+/// Component that describes a common footer for the Website.
 public struct FooterView {
     // MARK: Initializers
+    /// Creates a new footer instance.
     public init() {}
 }
 
 // MARK: Self: HTML
 extension FooterView: HTML {
+    // swiftlint:disable:next missing_docs
     public var body: some HTML {
         footer {
             p { "© 2025 Martônio Júnior" }
@@ -32,8 +35,8 @@ extension FooterView: HTML {
 
 // MARK: Previews
 #if DEBUG && canImport(SwiftUI)
-import SwiftUI
 import Styleguide
+import SwiftUI
 
 #Preview {
     DebugHTML {

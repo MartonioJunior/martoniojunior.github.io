@@ -6,6 +6,9 @@
 //
 
 /// Element that can summed up by a set of 2-3 sentences.
+/// 
+/// Used to create a more compressed representation of the contents
+/// for display in certain contexts of the website.
 public protocol Summarizable {
     /// Synopsis of what the element is about.
     var summary: String { get }

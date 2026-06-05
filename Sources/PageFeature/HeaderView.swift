@@ -10,13 +10,26 @@ import Models
 import NavigationFeature
 import Styleguide
 
+/// Component that describes a common header for the website.
 public struct HeaderView {
     // MARK: Variables
+    /// Title of the header.
+    /// 
+    /// Generally, this is the website's name.
     var title: String
+    /// Description of the header.
+    /// 
+    /// Generally, this is the website's slogan.
     var description: String
+    /// Current state of the navigation bar.
     var sectionModel: WebsiteSectionsListViewModel
-
     // MARK: Initializers
+    /// Creates a new header.
+    /// - Parameters:
+    ///   - title: Title of the header.
+    ///   - description: Description of the header.
+    ///   - model: Current state of the navigation bar.
+    ///
     public init(
         title: String,
         description: String,
@@ -30,6 +43,7 @@ public struct HeaderView {
 
 // MARK: Self: HTML
 extension HeaderView: HTML {
+    // swiftlint:disable:next missing_docs
     public var body: some HTML {
         header {
             div(.class(.wrapper)) {
@@ -53,18 +67,26 @@ extension Class {
 
 // MARK: Previews
 #if DEBUG && canImport(SwiftUI)
-import SwiftUI
 import Styleguide
+import SwiftUI
 
 #Preview("Selected") {
     DebugHTML {
-        HeaderView(title: "My Website", description: "A website for posting stuff to", model: .init(WebsiteSection.allCases, selected: .posts))
+        HeaderView(
+            title: "My Website",
+            description: "A website for posting stuff to",
+            model: .init(WebsiteSection.allCases, selected: .posts)
+        )
     }
 }
 
 #Preview("Unselected") {
     DebugHTML {
-        HeaderView(title: "My Website", description: "A website for posting stuff to", model: .init(WebsiteSection.allCases, selected: nil))
+        HeaderView(
+            title: "My Website",
+            description: "A website for posting stuff to",
+            model: .init(WebsiteSection.allCases, selected: nil)
+        )
     }
 }
 #endif

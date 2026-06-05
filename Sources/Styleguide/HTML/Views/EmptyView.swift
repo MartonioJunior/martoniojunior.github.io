@@ -7,12 +7,15 @@
 
 import Elementary
 
+/// Describes a HTML container with no items available.
 public struct EmptyView {
+    /// Creates a new empty container.
     public init() {}
 }
 
 // MARK: Self: HTML.View
 extension EmptyView: HTML {
+    // swiftlint:disable:next missing_docs
     public var body: some HTML {
         div {
             p { "There's nothing here yet..." }

@@ -8,11 +8,14 @@
 import Elementary
 import Models
 
+/// Component that display a tag as a link.
 public struct TagView {
     // MARK: Variables
+    /// Tag to be displayed.
     var tag: Tag
-
     // MARK: Initializers
+    /// Creates a new tag display.
+    /// - Parameter tag: Tag to be displayed.
     public init(_ tag: Tag) {
         self.tag = tag
     }
@@ -20,6 +23,7 @@ public struct TagView {
 
 // MARK: Self: HTML
 extension TagView: HTML {
+    // swiftlint:disable:next missing_docs
     public var body: some HTML {
         a(.href(tag.url.relativePath)) { tag.name }
     }
@@ -27,8 +31,8 @@ extension TagView: HTML {
 
 // MARK: Previews
 #if DEBUG && canImport(SwiftUI)
-import SwiftUI
 import Styleguide
+import SwiftUI
 
 #Preview {
     DebugHTML {

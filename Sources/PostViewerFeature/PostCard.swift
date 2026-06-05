@@ -10,11 +10,14 @@ import Models
 import Styleguide
 import TagViewerFeature
 
+/// Card that shows basic information about a post.
 public struct PostCard {
     // MARK: Variables
+    /// Post to be displayed.
     var post: Post
-
     // MARK: Initializers
+    /// Creates a new card for a post.
+    /// - Parameter post: Post to be displayed.
     public init(_ post: Post) {
         self.post = post
     }
@@ -22,6 +25,7 @@ public struct PostCard {
 
 // MARK: Self: HTML
 extension PostCard: HTML {
+    // swiftlint:disable:next missing_docs
     public var body: some HTML {
         article {
             h1 {
@@ -44,5 +48,4 @@ import SwiftUI
         PostCard(.preview)
     }
 }
-
 #endif
