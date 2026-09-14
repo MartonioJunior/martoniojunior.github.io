@@ -81,12 +81,12 @@ public extension Sequence {
 }
 
 // MARK: Previews
-#if DEBUG && canImport(SwiftUI)
-import SwiftUI
+// #if DEBUG && canImport(SwiftUI)
+// import SwiftUI
 
-#Preview {
-    DebugHTML {
-        PostsListView(repeatElement(.preview, count: 6).map(\.self))
-    }
-}
-#endif
+// #Preview {
+//     DebugHTML {
+//         PostsListView(repeatElement(.preview, count: 6).map(\.self))
+//     }
+// }
+// #endif
