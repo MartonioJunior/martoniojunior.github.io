@@ -12,14 +12,56 @@ import Models
 import PostViewerFeature
 import Saga
 
+// MARK: ArtsBlueprintsCodeWebsite (EX)
+fileprivate extension ArtsBlueprintsCodeWebsite {
+    var allPosts: Writer<Post.Metadata> {
+        .listHTML { context in
+            createPage(section: .posts) {
+                PostsListView(context.items.map(Post.init))
+            }
+        }
+    }
+
+    var homePage: Writer<Post.Metadata> {
+        .listWriter({ context in
+            createPage {
+                HomePageScreen(posts: context.items.map(Post.init))
+            }.renderFormatted()
+        }, output: "../index.html")
+    }
+
+    var postDetails: Writer<Post.Metadata> {
+        .itemHTML { context in
+            createPage {
+                PostDetailsView(Post(context.item))
+            }
+        }
+    }
+
+    var rssFeed: Writer<Post.Metadata> {
+        .listWriter(
+            Saga.atomFeed(
+                title: name,
+                author: author,
+                baseURL: url,
+                summary: \.metadata.description,
+                dateKeyPath: \.lastUpdateDate
+            ),
+            output: "../feed.rss"
+        )
+    }
+}
+
 // MARK: Item (EX)
 public extension Item where M == Post.Metadata {
-    var publishDate: Date { Date.websiteParse(metadata.created ?? "") ?? created }
-    var lastUpdateDate: Date { Date.websiteParse(metadata.modified ?? "") ?? lastModified }
+    var publishDate: Date { .websiteParse(metadata.created ?? "") ?? created }
+    var lastUpdateDate: Date { .websiteParse(metadata.modified ?? "") ?? lastModified }
 }
 
 // MARK: Post (EX)
 public extension Post {
+    /// Creates a post from the metadata.
+    /// - Parameter item: Metadata obtained.
     init(_ item: Item<Metadata>) {
         self.init(
             title: item.title,
@@ -34,14 +76,6 @@ public extension Post {
 
     static func preprocessor(for item: Item<Metadata>) {
         item.title = item.metadata.title.isEmpty ? item.title : item.metadata.title
-    }
-
-    static func writer(_ context: ItemRenderingContext<Metadata>) -> PostDetailsView {
-        PostDetailsView(Post(context.item))
-    }
-
-    static func listWriter(_ context: ItemsRenderingContext<Metadata>) -> some HTML {
-        PostsListView(context.items.map(Self.init))
     }
 }
 
@@ -59,17 +93,9 @@ public extension Saga {
             itemProcessor: Post.preprocessor,
             filter: \.metadata.published,
             writers: [
-                .itemHTML(Post.writer),
-                .listHTML { context in
-                    website.createPage(section: .posts) {
-                        Post.listWriter(context)
-                    }
-                },
-                .listWriter({ context in
-                    website.createPage {
-                        HomePageScreen(posts: context.items.map(Post.init))
-                    }.renderFormatted()
-                }, output: "../index.html"),
+                website.postDetails,
+                website.allPosts,
+                website.homePage,
                 .listWriter(
                     Self.atomFeed(
                         title: website.name,
