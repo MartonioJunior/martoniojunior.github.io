@@ -22,7 +22,7 @@ public extension ArtsBlueprintsCodeWebsite {
 
     func writeIndex(to destination: String, posts: [Post]) throws {
         try write([
-            "index.html": bake(HomePageScreen(posts: posts))
+            "index.html": createPage { HomePageScreen(posts: posts) }
         ], to: .current.createSubfolderIfNeeded(withName: destination))
     }
 }
