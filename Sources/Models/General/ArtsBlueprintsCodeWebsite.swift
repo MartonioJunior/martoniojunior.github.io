@@ -22,3 +22,6 @@ public struct ArtsBlueprintsCodeWebsite {
     /// Creates an instance of the website.
     public init() {}
 }
+
+// MARK: Self: Sendable
+extension ArtsBlueprintsCodeWebsite: Sendable {}
