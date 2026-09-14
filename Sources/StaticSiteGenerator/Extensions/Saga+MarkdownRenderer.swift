@@ -11,11 +11,11 @@ import Saga
 
 public extension Reader {
     static func customMarkdownRenderer() -> Self {
-        .init(supportedExtensions: ["markdown", "md"], convert: { absoluteSource in
+        .init(supportedExtensions: ["markdown", "md"]) { absoluteSource in
             let rawContent: String = try absoluteSource.read()
             let document = Document(parsing: rawContent)
             let page = MarkdownPage(document)
             return (page.title, page.content, page.metadata?.parameters)
-        })
+        }
     }
 }

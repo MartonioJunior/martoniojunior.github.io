@@ -11,10 +11,10 @@ import Models
 public enum ArtsBlueprintsCodeRoute {
     /// Route for accessing the home page.
     case home
-    /// Route for accessing a project.
-    case project(Project)
     /// Route for accessing a post.
     case post(Post)
+    /// Route for accessing a project.
+    case project(Project)
     /// Route for accessing a section of the website.
     case section(Section)
 }
