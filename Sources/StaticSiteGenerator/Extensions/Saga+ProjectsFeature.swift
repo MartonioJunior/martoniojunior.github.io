@@ -36,8 +36,16 @@ public extension Saga {
             // itemProcessor: Project.preprocessor,
             filter: \.metadata.published,
             writers: [
-                .itemWriter(parseHTML(Project.Metadata.self, website, Project.writer)),
-                .listWriter(htmlMany(Project.Metadata.self, website, selected: .projects, Project.listWriter))
+                .itemHTML { context in
+                    website.createPage {
+                        Project.writer(context)
+                    }
+                },
+                .listHTML { context in
+                    website.createPage(section: .projects) {
+                        Project.listWriter(context)
+                    }
+                }
             ]
         )
     }

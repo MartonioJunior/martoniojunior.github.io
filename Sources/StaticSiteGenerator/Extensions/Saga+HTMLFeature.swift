@@ -11,63 +11,23 @@ import Models
 import PageFeature
 import Saga
 
-// MARK: html
-public func parseHTML<T>(
-    _: T.Type = T.self,
-    _ builder: @escaping (ItemRenderingContext<T>) throws -> some HTMLDocument
-) -> (ItemRenderingContext<T>) throws -> String {
-    { renderContext in
-        try builder(renderContext).renderFormatted()
+public extension Writer {
+    static func itemHTML<Output: HTML & SendableMetatype>(
+        _ builder: @escaping @Sendable (ItemRenderingContext<M>) throws -> Output
+    ) -> Self {
+        .itemWriter { try builder($0).renderFormatted() }
     }
-}
 
-public func parseHTML<T>(
-    _: T.Type = T.self,
-    _ website: ArtsBlueprintsCodeWebsite,
-    _ builder: @escaping (ItemRenderingContext<T>) throws -> some HTML
-) -> (ItemRenderingContext<T>) throws -> String {
-    parseHTML { context in
-        let page = try builder(context)
-        return website.bake(page)
-    }
-}
-
-// MARK: htmlRaw
-public func htmlRaw<T>(
-    _ metadata: T.Type = T.self,
-    _ website: ArtsBlueprintsCodeWebsite,
-    _ builder: @escaping (ItemRenderingContext<T>) throws -> String
-) -> (ItemRenderingContext<T>) throws -> String {
-    parseHTML(metadata, website) {
-        HTMLRaw(try builder($0))
-    }
-}
-
-// MARK: htmlMany
-public func htmlMany<T>(
-    _: T.Type = T.self,
-    _ builder: @escaping (ItemsRenderingContext<T>) throws -> some HTMLDocument
-) -> (ItemsRenderingContext<T>) throws -> String {
-    { renderContext in
-        try builder(renderContext).renderFormatted()
-    }
-}
-
-public func htmlMany<T>(
-    _: T.Type = T.self,
-    _ website: ArtsBlueprintsCodeWebsite,
-    selected: Models.Section? = nil,
-    _ builder: @escaping (ItemsRenderingContext<T>) throws -> some HTML
-) -> (ItemsRenderingContext<T>) throws -> String {
-    htmlMany { context in
-        let page = try builder(context)
-        return website.bake(selected: selected) { page }
+    static func listHTML<Output: HTML & SendableMetatype>(
+        _ builder: @escaping @Sendable (ItemsRenderingContext<M>) throws -> Output
+    ) -> Self {
+        .listWriter { try builder($0).renderFormatted() }
     }
 }
 
 // MARK: HTMLRaw (EX)
 public extension HTMLRaw {
-    static func itemWriter(_ context: ItemRenderingContext<EmptyMetadata>) throws -> String {
+    static func itemWriter(_ context: ItemRenderingContext<EmptyMetadata>) -> String {
         h1 { context.item.title }.render() +
         context.item.body
     }

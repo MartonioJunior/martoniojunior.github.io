@@ -36,7 +36,7 @@ public extension Post {
         item.title = item.metadata.title.isEmpty ? item.title : item.metadata.title
     }
 
-    static func writer(_ context: ItemRenderingContext<Metadata>) -> some HTML {
+    static func writer(_ context: ItemRenderingContext<Metadata>) -> PostDetailsView {
         PostDetailsView(Post(context.item))
     }
 
@@ -59,10 +59,16 @@ public extension Saga {
             itemProcessor: Post.preprocessor,
             filter: \.metadata.published,
             writers: [
-                .itemWriter(parseHTML(Post.Metadata.self, website, Post.writer)),
-                .listWriter(htmlMany(Post.Metadata.self, website, selected: .posts, Post.listWriter)),
-                .listWriter(htmlMany(Post.Metadata.self, website) {
-                    HomePageScreen(posts: $0.items.map(Post.init))
+                .itemHTML(Post.writer),
+                .listHTML { context in
+                    website.createPage(section: .posts) {
+                        Post.listWriter(context)
+                    }
+                },
+                .listWriter({ context in
+                    website.createPage {
+                        HomePageScreen(posts: context.items.map(Post.init))
+                    }.renderFormatted()
                 }, output: "../index.html"),
                 .listWriter(
                     Self.atomFeed(

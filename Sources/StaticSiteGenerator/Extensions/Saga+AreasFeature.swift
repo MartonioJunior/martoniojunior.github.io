@@ -12,45 +12,52 @@ import Saga
 import Styleguide
 
 public extension Saga {
-    func registerAreas(_ website: ArtsBlueprintsCodeWebsite) throws -> Self {
-        try registerAreas(website) {
-            return switch $0 {
-                case .about, .contact, .posts:
-                    EmptyView()
-                default:
-                    EmptyView()
-            }
-        }
+    func registerAreas(_ website: ArtsBlueprintsCodeWebsite) -> Self {
+        registerAreas(of: website, content: \.indexHTML)
     }
 
     func registerAreas(
-        _ website: ArtsBlueprintsCodeWebsite,
-        content: @escaping (WebsiteSection) -> some HTML
+        of website: ArtsBlueprintsCodeWebsite,
+        content: @escaping @Sendable (WebsiteSection) -> some HTML
     ) -> Self {
-        let htmlWriter = parseHTML(Section.Metadata.self) { context in
-            let section = context.item.metadata.section
-
-            return website.bake(selected: section) {
-                WebsiteSectionScreen(section) {
-                    HTMLRaw(context.item.body)
-                    content(section)
-                }
-            }
-        }
-
-        let rerouteToIndex: @Sendable (Item<Section.Metadata>) -> Void = {
-            var components = $0.relativeDestination.components
-            components.removeFirst()
-            $0.relativeDestination = .init(components: components)
-        }
-
-        return register(
+        register(
             folder: "index",
             metadata: WebsiteSection.Metadata.self,
             readers: [.customMarkdownRenderer()],
-            itemProcessor: rerouteToIndex,
-            writers: [.itemWriter(htmlWriter)]
+            itemProcessor: { $0.rerouteToIndex() },
+            writers: [
+                .itemHTML { context in
+                    let section = context.item.metadata.section
+
+                    return website.createPage(section: section) {
+                        WebsiteSectionScreen(section) {
+                            HTMLRaw(context.item.body)
+                            content(section)
+                        }
+                    }
+                }
+            ]
         )
+    }
+}
+
+extension Item where M == Section.Metadata {
+    func rerouteToIndex() {
+        var components = relativeDestination.components
+        components.removeFirst()
+        relativeDestination = .init(components: components)
+    }
+}
+
+extension Section {
+    /// HTML applied to each section's index page.
+    var indexHTML: some HTML {
+        switch self {
+            case .about, .contact, .posts:
+                EmptyView()
+            default:
+                EmptyView()
+        }
     }
 }
 
