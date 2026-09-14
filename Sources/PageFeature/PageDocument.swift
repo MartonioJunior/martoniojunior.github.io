@@ -79,12 +79,20 @@ extension PageDocument: HTMLDocument {
 // MARK: ArtsBlueprintsCodeWebsite (EX)
 public extension ArtsBlueprintsCodeWebsite {
     /// Wraps base HTML content into a properly defined page document.
-    /// - Parameter content: HTML content of a website page.
+    /// - Parameters:
+    ///   - section: Currently selected section for the page.
+    ///   - content: HTML content of a website page.
     /// - Returns: `PageDocument` instance with the associated `content`.
     func createPage<Content: HTML>(
+        section: WebsiteSection? = nil,
         @HTMLBuilder content: @escaping () -> Content
     ) -> PageDocument<Content> {
-        .init(name, description: description, content: content)
+        .init(
+            name,
+            description: description,
+            navigation: .home.selecting(section),
+            content: content
+        )
     }
 }
 
