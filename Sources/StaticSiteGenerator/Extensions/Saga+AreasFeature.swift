@@ -11,6 +11,25 @@ import NavigationFeature
 import Saga
 import Styleguide
 
+// MARK: ArtsBlueprintsCodeWebsite (EX)
+fileprivate extension ArtsBlueprintsCodeWebsite {
+    func sectionPages(
+        _ content: @escaping @Sendable (WebsiteSection) -> some HTML
+    ) -> Writer<WebsiteSection.Metadata> {
+        .itemHTML { context in
+            let section = context.item.metadata.section
+
+            return createPage(section: section) {
+                WebsiteSectionScreen(section) {
+                    HTMLRaw(context.item.body)
+                    content(section)
+                }
+            }
+        }
+    }
+}
+
+// MARK: Saga (EX)
 public extension Saga {
     func registerAreas(_ website: ArtsBlueprintsCodeWebsite) -> Self {
         registerAreas(of: website, content: \.indexHTML)
@@ -26,16 +45,7 @@ public extension Saga {
             readers: [.customMarkdownRenderer()],
             itemProcessor: { $0.rerouteToIndex() },
             writers: [
-                .itemHTML { context in
-                    let section = context.item.metadata.section
-
-                    return website.createPage(section: section) {
-                        WebsiteSectionScreen(section) {
-                            HTMLRaw(context.item.body)
-                            content(section)
-                        }
-                    }
-                }
+                website.sectionPages(content)
             ]
         )
     }
