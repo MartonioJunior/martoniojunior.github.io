@@ -1,13 +1,13 @@
 {
-  "originHash" : "0a16fa6978595798a5fc197cf7c03d0d292d25b6e361316a4bf5ef30c89295b6",
+  "originHash" : "bffa54585b1fb35e64ab9f4b1465eddfe0e93f0b89bd6eb1817d0b5b4c0c602d",
   "pins" : [
     {
       "identity" : "elementary",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/elementary-swift/elementary",
       "state" : {
-        "revision" : "37b26923e73156f524b52e649855277bc7ead2c2",
-        "version" : "0.7.1"
+        "revision" : "f0141ba98c0f3ec9eeaee40fb4bffd1427482a1d",
+        "version" : "0.8.1"
       }
     },
     {
@@ -92,12 +92,30 @@
       }
     },
     {
+      "identity" : "swift-custom-dump",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-custom-dump",
+      "state" : {
+        "revision" : "4fb9e7cbb4b8f5a7354005db39447f570d6b3e19",
+        "version" : "1.7.3"
+      }
+    },
+    {
       "identity" : "swift-markdown",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swiftlang/swift-markdown",
       "state" : {
         "revision" : "7d9a5ce307528578dfa777d505496bd5f544ad94",
         "version" : "0.7.3"
+      }
+    },
+    {
+      "identity" : "xctest-dynamic-overlay",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
+      "state" : {
+        "revision" : "d9308ad679143c26a30dec52daefe82f54af2b82",
+        "version" : "1.13.1"
       }
     }
   ],

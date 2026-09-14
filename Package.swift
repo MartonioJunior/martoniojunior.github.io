@@ -46,6 +46,7 @@ func targetDep(name: String, package: String) -> Target.Dependency {
 }
 
 // MARK: Dependencies
+let customDump = targetDep(name: "CustomDump", package: "swift-custom-dump")
 let elementary = targetDep(name: "Elementary", package: "Elementary")
 let elementaryFlow = targetDep(name: "ElementaryFlow", package: "elementary-flow")
 let feedKit = targetDep(name: "FeedKit", package: "FeedKit")
@@ -55,6 +56,7 @@ let parsley = targetDep(name: "Parsley", package: "Parsley")
 let saga = targetDep(name: "Saga", package: "Saga")
 
 let dependencies = [
+    .package(url: "https://github.com/pointfreeco/swift-custom-dump", .upToNextMajor(from: "1.7.3")),
     dep(url: "https://github.com/elementary-swift/elementary", .upToNextMajor(from: "0.7.1")),
     .package(url: "https://github.com/elementary-swift/elementary-flow", .upToNextMajor(from: "0.1.0")),
     dep(url: "https://github.com/JohnSundell/Files", .upToNextMajor(from: "4.3.0")),
@@ -135,7 +137,13 @@ var targets: [Target] = [
 ]
 
 let testTargets: [Target] = targets.map {
-    .testTarget(name: "\($0.name)Tests", dependencies: [Target.Dependency(stringLiteral: $0.name)] + $0.dependencies)
+    .testTarget(
+        name: "\($0.name)Tests",
+        dependencies: [
+            Target.Dependency(stringLiteral: $0.name),
+            customDump
+        ] + $0.dependencies
+    )
 }
 
 targets.append(
@@ -172,6 +180,6 @@ let package = Package(
     ],
     products: products,
     dependencies: dependencies,
-    targets: targets,
+    targets: targets + testTargets,
     swiftLanguageModes: [.v6]
 )
