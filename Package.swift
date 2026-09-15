@@ -53,6 +53,7 @@ let feedKit = targetDep(name: "FeedKit", package: "FeedKit")
 let files = targetDep(name: "Files", package: "Files")
 let markdown = targetDep(name: "Markdown", package: "swift-markdown")
 let parsley = targetDep(name: "Parsley", package: "Parsley")
+let parsleySaga = targetDep(name: "SagaParsleyMarkdownReader", package: "SagaParsleyMarkdownReader")
 let saga = targetDep(name: "Saga", package: "Saga")
 
 let dependencies = [
@@ -62,6 +63,7 @@ let dependencies = [
     dep(url: "https://github.com/JohnSundell/Files", .upToNextMajor(from: "4.3.0")),
     dep(url: "https://github.com/loopwerk/Saga", .upToNextMajor(from: "3.3.2")),
     dep(url: "https://github.com/loopwerk/Parsley", .upToNextMajor(from: "1.2.0")),
+    .package(url: "https://github.com/loopwerk/SagaParsleyMarkdownReader", .upToNextMajor(from: "1.3.0")),
     dep(url: "https://github.com/nmdias/FeedKit", .upToNextMajor(from: "10.1.3")),
     dep(url: "https://github.com/swiftlang/swift-markdown", .upToNextMajor(from: "0.7.0"))
 ]
@@ -119,7 +121,7 @@ var targets: [Target] = [
         name: "StaticSiteGenerator",
         dependencies: [
             "Assets", "FileClient", "Styleguide", "HomeFeature", "MarkdownHTML", "Models",
-            "PageFeature", "PostViewerFeature", "RSS", "Settings", "TagViewerFeature", saga
+            "PageFeature", "PostViewerFeature", "RSS", "Settings", "TagViewerFeature", saga, parsleySaga
         ],
         resources: [.process("Resources/")]
     ),

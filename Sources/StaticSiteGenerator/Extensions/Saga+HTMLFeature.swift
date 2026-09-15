@@ -10,6 +10,7 @@ import HomeFeature
 import Models
 import PageFeature
 import Saga
+import SagaParsleyMarkdownReader
 
 public extension Writer {
     static func itemHTML<Output: HTML & SendableMetatype>(
@@ -39,7 +40,7 @@ public extension Saga {
         register(
             folder: .init(folderPath),
             metadata: EmptyMetadata.self,
-            readers: [.customMarkdownRenderer()],
+            readers: [.parsleyMarkdownReader],
             filter: { _ in false },
             writers: [.itemWriter(HTMLRaw.itemWriter)]
         )
@@ -48,7 +49,7 @@ public extension Saga {
     func registerStandalone(_ website: ArtsBlueprintsCodeWebsite) -> Self {
         register(
             metadata: EmptyMetadata.self,
-            readers: [.customMarkdownRenderer()],
+            readers: [.parsleyMarkdownReader],
             writers: [.itemWriter(HTMLRaw.itemWriter)]
         )
     }
