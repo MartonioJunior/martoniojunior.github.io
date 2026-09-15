@@ -24,8 +24,14 @@ public struct MarkdownPage {
     /// Creates a new instance by pre-processing a Markdown Document.
     /// - Parameter document: Markdown document to be pre-processed.
     public init(_ document: Markdown.Document) {
-        let parsed = try? Parsley.parse(document.format())
-        metadata = MarkdownMetadata(parameters: parsed?.metadata ?? document.metadataDictionary)
+        let parsed = try? Parsley.parse(document.format() ?? "")
+
+        if let parsedMetadata = parsed?.metadata {
+            metadata = .init(parsedMetadata)
+        } else {
+            metadata = document.metadata
+        }
+
         content = parsed?.body ?? ""
         title = parsed?.title ?? document.title ?? "Untitled"
     }
