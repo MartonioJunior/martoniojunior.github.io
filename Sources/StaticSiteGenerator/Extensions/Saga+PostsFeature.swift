@@ -54,7 +54,9 @@ fileprivate extension ArtsBlueprintsCodeWebsite {
 
 // MARK: Item (EX)
 public extension Item where M == Post.Metadata {
+    /// Date when the article was first published.
     var publishDate: Date { .fromString(metadata.created ?? "") ?? created }
+    /// Date when the article was last updated
     var lastUpdateDate: Date { .fromString(metadata.modified ?? "") ?? lastModified }
 }
 
