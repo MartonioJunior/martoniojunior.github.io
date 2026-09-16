@@ -20,10 +20,10 @@ public extension ArtsBlueprintsCodeWebsite {
                 try $0.deployFolder("Sources/Assets/Resources", to: "Resources/EnergyTheme")
                 try $0.deployFolder(source + "/assets", to: "assets")
                 try $0.deployFolder("Sources/SagaIntegration/Resources", to: "")
-                try $0.deleteFolder(at: ".obsidian/", destructive: true)
-                try $0.deleteFolder(at: "about/bases", destructive: true)
-                try $0.deleteFolder(at: "about/templates", destructive: true)
-                try $0.deleteFolder(at: "about/test", destructive: true)
+                try $0.deleteFolder(at: ".obsidian/")
+                try $0.deleteFolder(at: "about/bases")
+                try $0.deleteFolder(at: "about/templates")
+                try $0.deleteFolder(at: "about/test")
             }
             .run()
     }
@@ -48,16 +48,36 @@ public extension Saga {
             into: root.subfolder(at: relativeOutputPath).createSubfolderIfNeeded(at: outputSubpath)
         )
     }
-
-    func deleteFolder(at outputSubpath: String, root: Folder = .current, destructive: Bool = false) throws {
+    /// Deletes the contents of a folder.
+    /// - Parameters:
+    ///   - outputSubpath: Relative path of the folder that will be removed from build.
+    ///   - root: Root used as the reference for the operation.
+    ///   - dryRun: Should the folder be printed instead of deleted?
+    /// - Throws: Error when any file operation fails.
+    /// 
+    /// Note: This method has a protection against accidental folder deletions during development.
+    /// To avoid having a folder deleted, first test the method as-is:
+    /// ```swift
+    /// $0.deleteFolder(at: path)
+    /// ````
+    /// 
+    /// This will output the folder that will be deleted. After checking everything is correct,
+    /// test by temporarily setting `dryRun = false`
+    ///  ```swift
+    /// $0.deleteFolder(at: path, dryRun: false)
+    /// ````
+    /// 
+    /// After confirming everything works as intended, remove the `dryRun` parameter.
+    func deleteFolder(at outputSubpath: String, root: Folder = .current, dryRun: Bool = true) throws {
         guard let relativeOutputPath else { return }
 
         let targetFolder = try root.subfolder(at: relativeOutputPath).subfolder(at: outputSubpath)
 
-        if destructive {
-            try targetFolder.delete()
+        if dryRun, Self.isDev {
+            print("Deleting folder on build: \(targetFolder.path)")
         } else {
-            print("Dry run of deletion: \(targetFolder)")
+            try targetFolder.delete()
+            print("Deleted Output: \(targetFolder.path)")
         }
     }
 }
