@@ -15,12 +15,15 @@ public extension ArtsBlueprintsCodeWebsite {
             .registerAreas(self)
             .registerPosts(self)
             .registerProjects(self)
-            .blockPages(in: "about/")
             .registerStandalone(self)
             .afterWrite {
                 try $0.deployFolder("Sources/Assets/Resources", to: "Resources/EnergyTheme")
                 try $0.deployFolder(source + "/assets", to: "assets")
                 try $0.deployFolder("Sources/SagaIntegration/Resources", to: "")
+                try $0.deleteFolder(at: ".obsidian/", destructive: true)
+                try $0.deleteFolder(at: "about/bases", destructive: true)
+                try $0.deleteFolder(at: "about/templates", destructive: true)
+                try $0.deleteFolder(at: "about/test", destructive: true)
             }
             .run()
     }
@@ -28,6 +31,9 @@ public extension ArtsBlueprintsCodeWebsite {
 
 // MARK: Saga (EX)
 public extension Saga {
+    var relativeOutputPath: String? {
+        try? outputPath.relativePath(from: rootPath).string
+    }
     /// Copies the contents of a folder into the deployment folder
     /// - Parameters:
     ///   - path: Relative path of what folder will be copied.
@@ -36,10 +42,22 @@ public extension Saga {
     ///
     /// - Throws: Error when any file operation fails
     func deployFolder(_ path: String, to outputSubpath: String, root: Folder = .current) throws {
-        let relativeOutputPath = try outputPath.relativePath(from: rootPath)
+        guard let relativeOutputPath else { return }
 
         try root.createSubfolderIfNeeded(at: path).copyFiles(
-            into: root.subfolder(at: relativeOutputPath.string).createSubfolderIfNeeded(at: outputSubpath)
+            into: root.subfolder(at: relativeOutputPath).createSubfolderIfNeeded(at: outputSubpath)
         )
+    }
+
+    func deleteFolder(at outputSubpath: String, root: Folder = .current, destructive: Bool = false) throws {
+        guard let relativeOutputPath else { return }
+
+        let targetFolder = try root.subfolder(at: relativeOutputPath).subfolder(at: outputSubpath)
+
+        if destructive {
+            try targetFolder.delete()
+        } else {
+            print("Dry run of deletion: \(targetFolder)")
+        }
     }
 }
