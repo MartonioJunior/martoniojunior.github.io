@@ -65,9 +65,9 @@ extension Section {
     var indexHTML: some HTML {
         switch self {
             case .about, .contact, .posts:
-                EmptyView()
+                EmptyHTML().eraseToRawHTML()
             default:
-                EmptyView()
+                EmptyView().eraseToRawHTML()
         }
     }
 }
