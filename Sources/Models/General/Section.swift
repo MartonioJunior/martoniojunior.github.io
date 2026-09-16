@@ -17,7 +17,7 @@ public enum Section: String {
     /// Section containing arts and crafts works.
     case artsCrafts = "artsCrafts"
     /// Contact information.
-    case contact = "contacts"
+    case contact = "contact"
     /// Posts and Articles of the website.
     case posts = "posts"
     /// Projects and digital software works.
