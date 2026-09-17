@@ -10,6 +10,10 @@ import Models
 import Saga
 
 public extension ArtsBlueprintsCodeWebsite {
+    func deploy(_ source: String) async throws {
+        try await deploy(source, to: deployPath())
+    }
+
     func deploy(_ source: String, to destination: String) async throws {
         try await Saga(input: .init(source), output: .init(destination))
             .registerAreas(self)
@@ -26,6 +30,10 @@ public extension ArtsBlueprintsCodeWebsite {
                 try $0.deleteFolder(at: "about/test")
             }
             .run()
+    }
+
+    func deployPath(devMode: Bool = Saga.isDev) -> String {
+        devMode ? "Preview" : "Deploy"
     }
 }
 

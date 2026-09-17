@@ -15,9 +15,6 @@ public enum App {
     /// 
     /// This destination folder must be later on pushed in order to deploy the website online.
     static func main() async throws {
-        try await ArtsBlueprintsCodeWebsite().deploy(
-            "ArtsBlueprintsCode",
-            to: "Deploy"
-        )
+        try await ArtsBlueprintsCodeWebsite().deploy("ArtsBlueprintsCode")
     }
 }
