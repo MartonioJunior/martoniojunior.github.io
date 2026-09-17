@@ -59,6 +59,20 @@ public extension Item where M == Post.Metadata {
     var publishDate: Date { .fromString(metadata.created ?? "") ?? created }
     /// Date when the article was last updated
     var lastUpdateDate: Date { .fromString(metadata.modified ?? "") ?? lastModified }
+    /// Checks whether an item can be deployed to the build.
+    /// - Parameters:
+    ///   - referenceDate: Date of reference. By default, uses `Date.now`.
+    ///   - override: Set this to `true` to override any validation.
+    ///
+    func canDeploy(onDate referenceDate: Date = .now, override: Bool = Saga.isDev) -> Bool {
+        override || isPublic(onDate: referenceDate)
+    }
+    /// Checks whether an item is public by a certain date.
+    /// - Parameter referenceDate: Date of reference. By default, uses `Date.now`.
+    /// - Returns: `true` when the post should be public, `false` otherwise
+    func isPublic(onDate referenceDate: Date = .now) -> Bool {
+        metadata.published && publishDate <= referenceDate
+    }
 }
 
 // MARK: Post (EX)
@@ -79,6 +93,8 @@ public extension Post {
 
     static func preprocessor(for item: Item<Metadata>) {
         item.title = item.metadata.title.isEmpty ? item.title : item.metadata.title
+
+        if !item.metadata.published { item.title = "📝 WIP: \(item.title)" }
     }
 }
 
@@ -94,21 +110,12 @@ public extension Saga {
             metadata: Post.Metadata.self,
             readers: [.parsleyMarkdownReader],
             itemProcessor: Post.preprocessor,
-            filter: \.metadata.published,
+            filter: { $0.canDeploy() },
             writers: [
                 website.postDetails,
                 website.allPosts,
                 website.homePage,
-                .listWriter(
-                    Self.atomFeed(
-                        title: website.name,
-                        author: website.author,
-                        baseURL: website.url,
-                        summary: \.metadata.description,
-                        dateKeyPath: \.lastUpdateDate
-                    ),
-                    output: "../feed.rss"
-                )
+                website.rssFeed
             ]
         )
     }
