@@ -9,7 +9,6 @@ import Elementary
 import Models
 import NavigationFeature
 import Saga
-import SagaParsleyMarkdownReader
 import Styleguide
 
 // MARK: ArtsBlueprintsCodeWebsite (EX)
@@ -43,7 +42,7 @@ public extension Saga {
         register(
             folder: "index",
             metadata: WebsiteSection.Metadata.self,
-            readers: [.parsleyMarkdownReader],
+            readers: [.websiteDefault],
             itemProcessor: { $0.rerouteToIndex() },
             writers: [
                 website.sectionPages(content)

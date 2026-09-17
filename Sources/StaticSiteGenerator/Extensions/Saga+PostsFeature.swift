@@ -11,7 +11,6 @@ import HomeFeature
 import Models
 import PostViewerFeature
 import Saga
-import SagaParsleyMarkdownReader
 
 // MARK: ArtsBlueprintsCodeWebsite (EX)
 fileprivate extension ArtsBlueprintsCodeWebsite {
@@ -108,7 +107,7 @@ public extension Saga {
         register(
             folder: "posts",
             metadata: Post.Metadata.self,
-            readers: [.parsleyMarkdownReader],
+            readers: [.websiteDefault],
             itemProcessor: Post.preprocessor,
             filter: { $0.canDeploy() },
             writers: [

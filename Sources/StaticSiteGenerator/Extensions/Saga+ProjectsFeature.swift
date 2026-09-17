@@ -8,7 +8,6 @@
 import Elementary
 import Models
 import Saga
-import SagaParsleyMarkdownReader
 import Styleguide
 
 public extension Project {
@@ -33,7 +32,7 @@ public extension Saga {
         register(
             folder: "projects",
             metadata: Project.Metadata.self,
-            readers: [.parsleyMarkdownReader],
+            readers: [.websiteDefault],
             // itemProcessor: Project.preprocessor,
             filter: \.metadata.published,
             writers: [
