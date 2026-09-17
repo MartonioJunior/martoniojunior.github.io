@@ -15,13 +15,13 @@ public extension Writer {
     static func itemHTML<Output: HTML & SendableMetatype>(
         _ builder: @escaping @Sendable (ItemRenderingContext<M>) throws -> Output
     ) -> Self {
-        .itemWriter { try builder($0).renderFormatted() }
+        .itemWriter { try builder($0).render() }
     }
 
     static func listHTML<Output: HTML & SendableMetatype>(
         _ builder: @escaping @Sendable (ItemsRenderingContext<M>) throws -> Output
     ) -> Self {
-        .listWriter { try builder($0).renderFormatted() }
+        .listWriter { try builder($0).render() }
     }
 }
 
