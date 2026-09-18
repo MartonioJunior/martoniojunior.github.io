@@ -12,7 +12,7 @@ import Elementary
 /// Used to add code syntax highlighting to snippets in the website.
 public struct HighlightJS {
     /// Version of the library to import.
-    var version: String = "11.11.1"
+    var version: String = "11.12.0"
     /// Languages to be imported.
     var languages: [String] = ["csharp", "swift"]
     /// Should the module import the default CSS for highlight.js?
