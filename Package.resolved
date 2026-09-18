@@ -1,5 +1,5 @@
 {
-  "originHash" : "1c7de125a6f874855093601209f63b870a312be9eccd6e5921552770d1c6b6c5",
+  "originHash" : "3911d544dd3f70d30ae057e14f0db1c36fd8ed088b8d5602656b10c399b3cbe9",
   "pins" : [
     {
       "identity" : "elementary",
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/loopwerk/Parsley",
       "state" : {
-        "revision" : "1384f65054372000ded7dbf1f4b4e27c8fac2198",
-        "version" : "1.2.0"
+        "revision" : "7e1f9ec8e4d4de566ad59fc5751afb92526821c4",
+        "version" : "1.2.1"
       }
     },
     {
