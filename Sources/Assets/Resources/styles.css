@@ -2,31 +2,21 @@
 MARK: Imports
 */
 @font-face {
-    font-family: "Berylium";
-    src: url("Fonts/Berylium/berylium_rg.otf");
+    font-family: "Charm";
+    src: url("Fonts/Charm/Charm-Regular.ttf");
     font-weight: normal;
-    font-style: normal;
 }
 
 @font-face {
-    font-family: "Berylium";
-    src: url("Fonts/Berylium/berylium_rg_it.otf");
-    font-weight: normal;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: "Berylium";
-    src: url("Fonts/Berylium/berylium_bd.otf");
+    font-family: "Charm";
+    src: url("Fonts/Charm/Charm-Bold.ttf");
     font-weight: bold;
-    font-style: normal;
 }
 
 @font-face {
-    font-family: "Berylium";
-    src: url("Fonts/Berylium/berylium_bd_it.otf");
-    font-weight: bold;
-    font-style: italic;
+    font-family: "Dosis";
+    font-variation-settings: normal;
+    src: url("Fonts/Dosis/Dosis-VariableFont_wght.ttf");
 }
 
 @font-face {
@@ -35,15 +25,87 @@ MARK: Imports
 }
 
 @font-face {
-    font-family: "Primer";
-    src: url("Fonts/Primer/primer_print.otf");
-    font-weight: normal;
+    font-family: "SF Mono";
+    src: url("Fonts/SF Mono/SF-Mono-Bold.otf");
+    font-weight: bold;
+    font-style: normal;
 }
 
 @font-face {
-    font-family: "Primer";
-    src: url("Fonts/Primer/primer_print_bold.otf");
+    font-family: "SF Mono";
+    src: url("Fonts/SF Mono/SF-Mono-BoldItalic.otf");
     font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "SF Mono";
+    src: url("Fonts/SF Mono/SF-Mono-Heavy.otf");
+    font-weight: bolder;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SF Mono";
+    src: url("Fonts/SF Mono/SF-Mono-HeavyItalic.otf");
+    font-weight: bolder;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "SF Mono";
+    src: url("Fonts/SF Mono/SF-Mono-Light.otf");
+    font-weight: light;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SF Mono";
+    src: url("Fonts/SF Mono/SF-Mono-LightItalic.otf");
+    font-weight: light;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "SF Mono";
+    src: url("Fonts/SF Mono/SF-Mono-Medium.otf");
+    font-weight: medium;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SF Mono";
+    src: url("Fonts/SF Mono/SF-Mono-MediumItalic.otf");
+    font-weight: medium;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "SF Mono";
+    src: url("Fonts/SF Mono/SF-Mono-Regular.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SF Mono";
+    src: url("Fonts/SF Mono/SF-Mono-RegularItalic.otf");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "SF Mono";
+    src: url("Fonts/SF Mono/SF-Mono-Semibold.otf");
+    font-weight: semibold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SF Mono";
+    src: url("Fonts/SF Mono/SF-Mono-SemiboldItalic.otf");
+    font-weight: semibold;
+    font-style: italic;
 }
 
 /* 
@@ -82,16 +144,17 @@ MARK: Variables
     --pure-black: #000000;
 
     /* Fonts */
-    --primary-font: "Optima", "Poetsen One", "Trebuchet MS", sans-serif;
-    --secondary-font: "Berylium", "Garamond", serif;
-    --cursive-font: "Primer", "MV Boli", "Verdana", sans-serif;
-    --monospace-font: "American Typewriter", "SF Mono", monospace;
-    --document-font: "Arial", sans-serif;
+    --primary-font: "Poetsen One", "Trebuchet MS", sans-serif;
+    --secondary-font: "Dosis", serif;
+    --cursive-font: "Charm", cursive;
+    --monospace-font: "SF Mono", ui-monospace, monospace;
+    --document-font: "Arial", system-ui;
 
     /* Font Sizes */
     --reading-text-size: 1.2em;
     --tag-text-size: 1.5em;
     --headline-text-size: 4em;
+    --timestamp-text-size: 1em;
 
     /* Other Constants */
     --element-spacing: 12px;
@@ -141,9 +204,18 @@ MARK: <article>
 */
 article {
     & .description {
+        background-color: var(--light-blue);
+        color: var(--mono0);
+        border-radius: var(--card-radius);
         font-size: var(--tag-text-size);
         margin-top: 8px;
+        padding: 4px 0;
         text-align: center;
+
+        @media(prefers-color-scheme: dark) {
+            background-color: var(--dark-blue);
+            color: var(--mono100)
+        }
     }
 }
 /*
@@ -151,13 +223,13 @@ MARK: <body>
 */
 body {
     background-color: var(--mono100);
-    color: var(--mono0);
+    color: var(--mono25);
     font-family: var(--document-font);
     text-align: center;
 
     @media(prefers-color-scheme: dark) {
         background-color: var(--mono0);
-        color: var(--mono100);
+        color: var(--mono75);
     }
 }
 /*
@@ -180,7 +252,7 @@ blockquote {
         margin-bottom: 0;
 
         & strong {
-            font-weight: bolder;
+            color: unset;
         }
     }
 }
@@ -220,9 +292,13 @@ footer {
     padding-top: 16px;
     padding-bottom: 16px;
 
+    & a {
+        color: var(--dark-pink);
+    }
+
     & p {
         color: var(--mono0);
-        font-family: var(--monospace-font);
+        font-family: var(--primary-font);
         font-size: 1em;
     }
 }
@@ -230,7 +306,12 @@ footer {
 MARK: <h?>
 */
 h1, h2, h3, h4, h5, h6 {
+    color: var(--mono0);
     font-family: var(--primary-font);
+
+    @media(prefers-color-scheme: dark) {
+        color: var(--mono100)
+    }
 }
 
 h1 {
@@ -250,10 +331,18 @@ h2 {
 h3 {
     margin: var(--element-spacing) 0;
     padding: 0.5em 0;
+
+    &:before {
+        content: "# ";
+    }
 }
 
 h4 {
     margin: calc(var(--element-spacing) * 0.75) 0;
+}
+
+h5, h6 {
+    font-style: italic;
 }
 
 h5 {
@@ -262,6 +351,7 @@ h5 {
 
 h6 {
     margin: calc(var(--element-spacing) * 0.25) 0;
+    color: unset;
 }
 /*
 MARK: <header>
@@ -278,9 +368,14 @@ header {
     }
 
     & .description {
+        /* color: var(--mono75); */
         font-size: var(--reading-text-size);
-        font-weight: bold;
+        font-weight: normal;
         margin: 0 auto 8px;
+
+        @media(prefers-color-scheme: dark) {
+            /* color: var(--mono25) */
+        }
     }
 
     & .site-name {
@@ -298,6 +393,19 @@ header {
         padding-bottom: 30px;
         padding-top: 30px;
     }
+}
+/*
+MARK: <img>
+*/
+img {
+    max-width: 100%;
+}
+/*
+MARK: <iframe>
+*/
+iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
 }
 /* 
 MARK: <li>
@@ -416,13 +524,13 @@ ol, ul {
 MARK: <p>
 */
 p {
-    color: var(--mono0);
+    color: var(--mono25);
     font-family: var(--secondary-font);
     font-size: var(--reading-text-size);
     margin-bottom: 10px;
 
     @media(prefers-color-scheme: dark) {
-        color: var(--mono100)
+        color: var(--mono75)
     }
 }
 /*
@@ -432,10 +540,22 @@ summary {
     font-size: var(--reading-text-size);
 }
 /*
+MARK: <strong>
+*/
+strong {
+    color: var(--aegis);
+    font-weight: bolder;
+
+    @media(prefers-color-scheme: dark) {
+        color: var(--lime)
+    }
+}
+/*
 MARK: <time>
 */
 time {
     font-family: var(--monospace-font);
+    padding: 2px;
 
     &:before {
         content: "📅 ";
@@ -491,10 +611,17 @@ MARK: .tag
 MARK: .tag-browser
 */
 /*
+MARK: .timestamps
+*/
+.timestamps {
+    font-family: var(--monospace-font);
+    font-size: var(--timestamp-text-size);
+}
+/*
 MARK: .wip
 */
 .wip {
-    font-family: var(--monospace-font);
+    font-family: var(--cursive-font);
 
     &::before {
         prefix: "🚧 ";
