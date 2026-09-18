@@ -15,7 +15,7 @@ public struct ArtsBlueprintsCodeWebsite {
     /// Display name for the website.
     public let name: String = "Arts, Blueprints, Code!"
     /// Description for the website's content.
-    public let description: String = "Talking the ABC of Programming, Game Dev, Design and more by Martônio Jr."
+    public let description: String = "ABC of Programming, Game Dev and Design."
     /// Home page of the website.
     public let url: URL = .init(string: "https://martoniojunior.github.io")!
     // MARK: Initializers
