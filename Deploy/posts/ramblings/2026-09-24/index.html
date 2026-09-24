@@ -1,0 +1,103 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Arts, Blueprints, Code!</title><title>Arts, Blueprints, Code!</title><meta charset="UTF-8"><link href="/Resources/EnergyTheme/styles.css" rel="stylesheet" type="text/css"><link href="/Resources/EnergyTheme/code.css" rel="stylesheet" type="text/css"></head><body><header><div class="wrapper"><a href="/" class="site-name">Arts, Blueprints, Code!</a><p class="description">ABC of Programming, Game Dev and Design.</p><p class="wip">Website still in development...</p><nav><ul><li><a href="/posts">Posts</a></li><li><a href="/projects">Projects</a></li><li><a href="/artsCrafts">Arts and Crafts</a></li><li><a href="/web">Surfing the Web</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li></ul></nav></div></header><div class="wrapper"><article><h1>How this website was made...</h1><p class="description">And what it means to make a website your own...</p><p class="timestamps">Posted <time datetime="24/09/2026, 11:18">24 de set. de 2026, 11:18</time>, Last Updated <time datetime="24/09/2026, 15:38">24 de set. de 2026, 15:38</time></p><div class="content"><p>So it’s been <em>checks notes</em> 9 months since the last post from this website.</p>
+<p>A lot has happened in the world of development since the last post (Swift 6.4 is out, Godot is now at 4.7 with 4.8 right around the corner and Unity 6.6 has released) and, while I’m very detached to the life of constant posting (aka I post when I actually have something to say and share that’s meaningful, fun or insightful that isn’t a repeat of what’s out there online), I did not expect to have such a long break between posts.</p>
+<p>It wasn’t a lack of things to talk about, but other projects and IRL took over in terms of priority where I was only able to work on this site occasionally on my free time…</p>
+<p>What I didn’t plan for is that, after one year of existence, this site has passed through 3 versions in order to reach a state that I’m comfortable with that allows for the maintenance requirements I need to post.</p>
+<h2>Prelude: What I wanted from this Website</h2>
+<p>The idea for this site originally began after I decided to start <a href="https://martoniojunior.github.io/posts/ramblings/2025-09-18/">using RSS readers as my main daily feed for news and updates</a>: while others like Social Media as their way to keep up to date with stuff, build a brand, become influencers and all that stuff, I never really liked it: a public space where everyone’s talking as loud as they can to get others attention to buy into their ideas is not really great for discussion and articulation of ideas.</p>
+<p>While filling my RSS with blogs about development, I stumbled upon multiple of them posting about leaving Social Media and making a website for themselves as a way to not only have a better platform for discussing their thoughts, they wanted to make something for themselves.</p>
+<p>That inspired me about something I never done before, even though I’ve first learned programming more than 10 years ago and worked on apps and games with other developers for many target audiences:</p>
+<blockquote>
+<p>“Make an app for myself”</p>
+</blockquote>
+<p>At this point, the challenge was set and I was excited to try my hand in it, all I needed was to set the parameters to make it more interesting (and more like me):</p>
+<ul>
+<li>For starters, I wanted to use Swift as the main driver for the site, due to being such a comfortable and ergonomic language to use: it’s safe, flexible, expressive, concise and can be expanded to be used in a variety of environments. I wanted to make it easier to scale it up in the future (e.g. adding a server, building it as an iOS/macOS/Linux/Windows app, WebAssembly support, etc.) and making Web development with a Swift twist:
+<ul>
+<li>HTML templates using Swift’s Result Builders, with support for CSS.</li>
+<li>Compile-time type safety for the web.</li>
+<li>Creating a Swift “App as a Package”.</li>
+<li>Make the website easier to test, with both exhaustive and non-exhaustive testing.</li>
+<li>Support for JavaScript frameworks and resources as plugins</li>
+<li>Taking advance of the Swift package ecosystem in the development process.</li>
+<li>Demonstrating the frameworks I made directly into the site itself (either as interactive demos or as part of building the pages themselves).</li>
+<li>Using new features of Swift as they’re released (since the app was for myself, I didn’t risk any issues of it being unusable to people on older versions of the OS).</li>
+</ul>
+</li>
+<li>I also wanted the website to support RSS, as it was the reason the website is being made.</li>
+<li>Another important feature was to make the site’s content all be an Obsidian Folder, that is then processed and served as webpages
+<ul>
+<li>The goal was to start with Static Site Generation (SSG), but leave the door open in the future for server-side rendering and building the website as a Desktop/Mobile app.</li>
+<li>While it’s source code should be available to view, the content should stay private until it’s actually published.</li>
+<li>As a long time PKM user, I also wanted my website pages to not be just generic pages, but contextual ones based on schemas (projects, posts, products, etc.)</li>
+</ul>
+</li>
+<li>Last, but not least, it should be a digital window into my works, my recommendations and anything else I want to highlight that can be useful to others.
+<ul>
+<li>The idea is to bring my <a href="https://github.com/martoniojunior">Github Portfolio</a> into here, with more detailed developer notes, as well as making dev logs.</li>
+</ul>
+</li>
+</ul>
+<p>The requirements seemed simple at first, but little did I know that it’d take 4 iterations for me to get the website in a place that fulfilled most of the goals above.</p>
+<h2>Iteration #1: Publish</h2>
+<p>When first making the app, I searched for many different Static Site Generators for Swift to decide which one I wanted to use. Given the criteria, I already knew that whichever one I chose, it’d have to convert Markdown into usable Swift code and then publish it via Github pages.</p>
+<p>So, I decided to base my work on <a href="https://www.swiftbysundell.com/questions/my-workflow-for-writing-articles/">John Sundell’s workflow for Swift by Sundell</a> and use <a href="https://github.com/johnsundell/publish">Publish</a> to make my website: this seemed like a good idea at first, as the workflow was already battle-tested. The website at this point was split into two repositories: one for the source code, one for the deployed pages.</p>
+<p>The initial version was organized as a Swift package as follows:</p>
+<ul>
+<li><code>Resources</code>: Contains the CSS files used by the website</li>
+<li><code>Sources</code>
+<ul>
+<li><code>AreasFeature</code> containing the sections of the website</li>
+<li><code>CSS</code> to define CSS tags to apply to HTML</li>
+<li><code>HTML</code> to define common reusable HTML snippets</li>
+<li><code>HomeFeature</code> to define the landing page of the Website</li>
+<li><code>PageFeature</code> to define the HTML document itself</li>
+<li><code>PostsFeature</code> to handle the schema and views for posts</li>
+<li><code>PublishIntegration</code> to make the actual integration with Publish</li>
+<li><code>Settings</code> to define some website metadata</li>
+<li><code>TagsFeature</code> to provide tags for the posts</li>
+<li><code>Website</code> as the executable that actually generates the website when <code>publish deploy</code> is called</li>
+</ul>
+</li>
+</ul>
+<p>As I was already using a SwiftUI approach to create the HTML templates, I also decided to apply similar SwiftUI nomenclature and suffix types with “Screen” or “View” based on their function.</p>
+<p>As is, the website was already good to go and the first version was already usable. It’s when I started to add more that the caveats started to pile up:<br />
+- A pretty opinionated approach that clashed with the schema-based approach I intended in the long-term meant that I would need a lot of boilerplate<br />
+- Publish was made on Swift 5.5, while we were already on 6.1, amidst the headaches of the Strict Concurrency model and before the approachable concurrency that’d come soon after: at that point, the package failed to work with Swift 6</p>
+<p>However, these caveats only become a problem when considering the fact that the package stopped receiving updates and I had no free time, meaning a fork to fix these issues would take too much time, so I had to find another SSG.</p>
+<h2>Iteration #2: swift-html + Saga</h2>
+<p>This is when the website actually got interesting as a project, as I decided to go with Saga and used <a href="https://github.com/swift-compositions/swift-html">Coenttb’s fork of PointFree’s swift-html</a>, which provided an API that’s very close to the actual HTML specification (and a cost that would bite me in the back later).</p>
+<p>With this, I also decided it was finally time to unify both repositories into one, with Github Actions deploying only a specific subset of the website on push to it’s folder, changing to a Continuous Delivery workflow when the code is pushed to the <code>main</code> branch.</p>
+<p>I also reworked the architecture to better fit some things to the development process:</p>
+<ul>
+<li><code>Sources</code>
+<ul>
+<li><code>Assets</code> now encapsulates all resources used by the website, with them now living in the package as a module, allowing access through the <code>artsBlueprintsCodeBundle</code>.</li>
+<li><code>CSS</code> was adjusted to import the theme, with class tags being now handled by <code>swift-html</code></li>
+<li><code>FileClient</code> as a reexport of <a href="https://github.com/JohnSundell/Files">John Sundell’s Files</a> package with extra utilities relevant only to the website. I chose to do a Reexport as means to keep the API surface, even if I end up changing the backend powering the module in the future</li>
+<li><code>HTML</code> now provides a solution to embed JS frameworks into a page for more functionality</li>
+<li><code>Models</code> now has all the schemas for the Website, instead of separating them per-feature: this allows better business rules integration without making too many workarounds or importing multiple packages for just one type</li>
+<li><code>NavigationFeature</code> replaces <code>AreasFeature</code>, providing the views for the sections of the website</li>
+<li><code>PostViewerFeature</code> is the new name of <code>PostsFeature</code>, which still handles the views of a post</li>
+<li><code>RSS</code> reexports <a href="https://github.com/nmdias/FeedKit">FeedKit</a> and provides a solution for RSS manipulation: while Saga provides a writer for creating RSS feeds automatically and is what is being used right now, a more domain-specific model will make it easier to work with RSS in the long-term. For now, it’s a placeholder of what’s to come…</li>
+<li><code>SagaIntegration</code> now replaces <code>PublishIntegration</code>, defining all the pipeline for the website’s deployment</li>
+<li><code>Settings</code> continues to exist, but now is a placeholder module. In the future, this will be where settings for the website will live.</li>
+<li><code>TagViewerFeature</code> is the new name of <code>TagsFeature</code>, containing all views for tags</li>
+</ul>
+</li>
+</ul>
+<h2>Iteration #3: Saga + Elementary (we’re here)</h2>
+<p>In the meantime since then, Saga also got a new major version that made it easier to develop and iterate over the website to the point many of the original bottlenecks in earlier iterations are basically almost gone, opening the door for quicker improvements and feature additions:</p>
+<ul>
+<li>Actual support for programmatic items to be included in the pipeline (allows me to remove some workarounds to add missing entries)</li>
+<li>Build hooks (replaces a certain instability that existed of trying to hook into Saga’s pipeline to add and remove files that should be local, development-only or are irrelevant to the website’s content)</li>
+<li>CLI for development with hot reloading (while I was serving it before using <code>npx</code> prior to this, the setup I was using always had a caveat regarding refreshing the page or tracking the pages, which is now all addressed)</li>
+</ul>
+<p>As the codebase itself also grew more mature in the time since, the integration into Saga’s pipeline also became easier, making it easier to maintain and update the site while still time-constrained by other projects.</p>
+<h2>What the Future Holds</h2>
+<p>The website is still far from done, but here’s some of what I’m planning for it right now (subject to change, of course):</p>
+<ul>
+<li>Dedicated Markdown Parser: currently I have an initial implementation in <code>MarkdownHTML</code> based on <a href="https://github.com/swiftlang/swift-markdown">swift-markdown</a> that I could turn into a Saga <code>Reader</code>, but it still requires lots of work. Currently, the website uses <a href="https://github.com/loopwerk/SagaParsleyMarkdownReader">Parsley</a> to provide conversion from Github-flavored Markdown, but, in the long-term, I want control over how the Markdown is parsed to HTML to make it easier to add features to webpages, as well as transform the content based on feature requests.</li>
+<li>Making interactive demos of my projects using WebAssembly, which would fulfill one of the goals of using Swift to make the website and being able to use my frameworks directly in posts to explain subjects.</li>
+<li>Showcase of projects, arts and crafts and fun articles/videos I find online worth a read/watch: most of the skeleton is already prepared, it just needs a style and for me to aggregate more development materiais to display.</li>
+<li>Growing from a Static Site: this is more into the future, but a dynamic site would allow me to offer more independence and control over my content.</li>
+</ul></div></article></div><footer><p>© 2025 Martônio Júnior</p><p>Website built in Swift using <a href="https://github.com/loopwerk/Saga">Saga</a></p><p><a href="/feed.rss">RSS</a> | <a href="https://github.com/martoniojunior">Github</a></p></footer><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/katex@0.16.23/dist/katex.min.css" integrity="sha384-//SZkxyB7axjCAopkAL1E1rve+ZSPKapD89Lo/lLhcsXR+zOYl5z6zJZEFXil+q0" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/katex@0.16.23/dist/katex.min.js" defer integrity="sha384-cpAIxua0Xbyc+XrpHQpCtJzGSZ6U2kS/FeyoKjnS+BgAYNV6uVUetVs/LC9+l3rs" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.23/dist/contrib/auto-render.min.js" defer integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous" onload="renderMathInElement(document.body, {&quot;delimiters&quot;:[{&quot;right&quot;:&quot;$$&quot;,&quot;left&quot;:&quot;$$&quot;,&quot;display&quot;:true},{&quot;left&quot;:&quot;\\(&quot;,&quot;right&quot;:&quot;\\)&quot;,&quot;display&quot;:true},{&quot;right&quot;:&quot;\\end{equation}&quot;,&quot;left&quot;:&quot;\\begin{equation}&quot;,&quot;display&quot;:true},{&quot;left&quot;:&quot;\\begin{align}&quot;,&quot;right&quot;:&quot;\\end{align}&quot;,&quot;display&quot;:true},{&quot;right&quot;:&quot;\\end{alignat}&quot;,&quot;left&quot;:&quot;\\begin{alignat}&quot;,&quot;display&quot;:true},{&quot;left&quot;:&quot;\\begin{gather}&quot;,&quot;right&quot;:&quot;\\end{gather}&quot;,&quot;display&quot;:true},{&quot;left&quot;:&quot;\\begin{CD}&quot;,&quot;right&quot;:&quot;\\end{CD}&quot;,&quot;display&quot;:true},{&quot;left&quot;:&quot;\\[&quot;,&quot;right&quot;:&quot;\\]&quot;,&quot;display&quot;:true},{&quot;left&quot;:&quot;$&quot;,&quot;right&quot;:&quot;$&quot;,&quot;display&quot;:false}]});"></script><script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.12.0/build/highlight.min.js"></script><script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.12.0/build/languages/csharp.min.js"></script><script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.12.0/build/languages/swift.min.js"></script><script>hljs.highlightAll();</script></body></html>

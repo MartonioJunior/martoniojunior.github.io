@@ -1,26 +1,164 @@
 
-<feed xmlns="http://www.w3.org/2005/Atom">
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
     <id>https://martoniojunior.github.io/feed.rss</id>
     <title>Arts, Blueprints, Code!</title>
     <author>
         <name>Martônio Júnior</name>
     </author>
-    <link href="https://martoniojunior.github.io" rel="self"></link>
-    <updated>2026-01-20T21:44:57Z</updated>
+    <link rel="self" href="https://martoniojunior.github.io"></link>
+    <updated>2026-09-24T18:41:04Z</updated>
+    <entry>
+        <id>https://martoniojunior.github.io/posts/ramblings/2026-09-24/</id>
+        <title>How this website was made...</title>
+        <updated>2026-09-24T18:38:48Z</updated>
+        <summary>And what it means to make a website your own...</summary>
+        <content type="html">&lt;p&gt;So it’s been &lt;em&gt;checks notes&lt;/em&gt; 9 months since the last post from this website.&lt;/p&gt;
+&lt;p&gt;A lot has happened in the world of development since the last post (Swift 6.4 is out, Godot is now at 4.7 with 4.8 right around the corner and Unity 6.6 has released) and, while I’m very detached to the life of constant posting (aka I post when I actually have something to say and share that’s meaningful, fun or insightful that isn’t a repeat of what’s out there online), I did not expect to have such a long break between posts.&lt;/p&gt;
+&lt;p&gt;It wasn’t a lack of things to talk about, but other projects and IRL took over in terms of priority where I was only able to work on this site occasionally on my free time…&lt;/p&gt;
+&lt;p&gt;What I didn’t plan for is that, after one year of existence, this site has passed through 3 versions in order to reach a state that I’m comfortable with that allows for the maintenance requirements I need to post.&lt;/p&gt;
+&lt;h2&gt;Prelude: What I wanted from this Website&lt;/h2&gt;
+&lt;p&gt;The idea for this site originally began after I decided to start &lt;a href="https://martoniojunior.github.io/posts/ramblings/2025-09-18/"&gt;using RSS readers as my main daily feed for news and updates&lt;/a&gt;: while others like Social Media as their way to keep up to date with stuff, build a brand, become influencers and all that stuff, I never really liked it: a public space where everyone’s talking as loud as they can to get others attention to buy into their ideas is not really great for discussion and articulation of ideas.&lt;/p&gt;
+&lt;p&gt;While filling my RSS with blogs about development, I stumbled upon multiple of them posting about leaving Social Media and making a website for themselves as a way to not only have a better platform for discussing their thoughts, they wanted to make something for themselves.&lt;/p&gt;
+&lt;p&gt;That inspired me about something I never done before, even though I’ve first learned programming more than 10 years ago and worked on apps and games with other developers for many target audiences:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“Make an app for myself”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;At this point, the challenge was set and I was excited to try my hand in it, all I needed was to set the parameters to make it more interesting (and more like me):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;For starters, I wanted to use Swift as the main driver for the site, due to being such a comfortable and ergonomic language to use: it’s safe, flexible, expressive, concise and can be expanded to be used in a variety of environments. I wanted to make it easier to scale it up in the future (e.g. adding a server, building it as an iOS/macOS/Linux/Windows app, WebAssembly support, etc.) and making Web development with a Swift twist:
+&lt;ul&gt;
+&lt;li&gt;HTML templates using Swift’s Result Builders, with support for CSS.&lt;/li&gt;
+&lt;li&gt;Compile-time type safety for the web.&lt;/li&gt;
+&lt;li&gt;Creating a Swift “App as a Package”.&lt;/li&gt;
+&lt;li&gt;Make the website easier to test, with both exhaustive and non-exhaustive testing.&lt;/li&gt;
+&lt;li&gt;Support for JavaScript frameworks and resources as plugins&lt;/li&gt;
+&lt;li&gt;Taking advance of the Swift package ecosystem in the development process.&lt;/li&gt;
+&lt;li&gt;Demonstrating the frameworks I made directly into the site itself (either as interactive demos or as part of building the pages themselves).&lt;/li&gt;
+&lt;li&gt;Using new features of Swift as they’re released (since the app was for myself, I didn’t risk any issues of it being unusable to people on older versions of the OS).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;I also wanted the website to support RSS, as it was the reason the website is being made.&lt;/li&gt;
+&lt;li&gt;Another important feature was to make the site’s content all be an Obsidian Folder, that is then processed and served as webpages
+&lt;ul&gt;
+&lt;li&gt;The goal was to start with Static Site Generation (SSG), but leave the door open in the future for server-side rendering and building the website as a Desktop/Mobile app.&lt;/li&gt;
+&lt;li&gt;While it’s source code should be available to view, the content should stay private until it’s actually published.&lt;/li&gt;
+&lt;li&gt;As a long time PKM user, I also wanted my website pages to not be just generic pages, but contextual ones based on schemas (projects, posts, products, etc.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Last, but not least, it should be a digital window into my works, my recommendations and anything else I want to highlight that can be useful to others.
+&lt;ul&gt;
+&lt;li&gt;The idea is to bring my &lt;a href="https://github.com/martoniojunior"&gt;Github Portfolio&lt;/a&gt; into here, with more detailed developer notes, as well as making dev logs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The requirements seemed simple at first, but little did I know that it’d take 4 iterations for me to get the website in a place that fulfilled most of the goals above.&lt;/p&gt;
+&lt;h2&gt;Iteration #1: Publish&lt;/h2&gt;
+&lt;p&gt;When first making the app, I searched for many different Static Site Generators for Swift to decide which one I wanted to use. Given the criteria, I already knew that whichever one I chose, it’d have to convert Markdown into usable Swift code and then publish it via Github pages.&lt;/p&gt;
+&lt;p&gt;So, I decided to base my work on &lt;a href="https://www.swiftbysundell.com/questions/my-workflow-for-writing-articles/"&gt;John Sundell’s workflow for Swift by Sundell&lt;/a&gt; and use &lt;a href="https://github.com/johnsundell/publish"&gt;Publish&lt;/a&gt; to make my website: this seemed like a good idea at first, as the workflow was already battle-tested. The website at this point was split into two repositories: one for the source code, one for the deployed pages.&lt;/p&gt;
+&lt;p&gt;The initial version was organized as a Swift package as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Resources&lt;/code&gt;: Contains the CSS files used by the website&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Sources&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;AreasFeature&lt;/code&gt; containing the sections of the website&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CSS&lt;/code&gt; to define CSS tags to apply to HTML&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HTML&lt;/code&gt; to define common reusable HTML snippets&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HomeFeature&lt;/code&gt; to define the landing page of the Website&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PageFeature&lt;/code&gt; to define the HTML document itself&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PostsFeature&lt;/code&gt; to handle the schema and views for posts&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PublishIntegration&lt;/code&gt; to make the actual integration with Publish&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Settings&lt;/code&gt; to define some website metadata&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;TagsFeature&lt;/code&gt; to provide tags for the posts&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Website&lt;/code&gt; as the executable that actually generates the website when &lt;code&gt;publish deploy&lt;/code&gt; is called&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As I was already using a SwiftUI approach to create the HTML templates, I also decided to apply similar SwiftUI nomenclature and suffix types with “Screen” or “View” based on their function.&lt;/p&gt;
+&lt;p&gt;As is, the website was already good to go and the first version was already usable. It’s when I started to add more that the caveats started to pile up:&lt;br /&gt;
+- A pretty opinionated approach that clashed with the schema-based approach I intended in the long-term meant that I would need a lot of boilerplate&lt;br /&gt;
+- Publish was made on Swift 5.5, while we were already on 6.1, amidst the headaches of the Strict Concurrency model and before the approachable concurrency that’d come soon after: at that point, the package failed to work with Swift 6&lt;/p&gt;
+&lt;p&gt;However, these caveats only become a problem when considering the fact that the package stopped receiving updates and I had no free time, meaning a fork to fix these issues would take too much time, so I had to find another SSG.&lt;/p&gt;
+&lt;h2&gt;Iteration #2: swift-html + Saga&lt;/h2&gt;
+&lt;p&gt;This is when the website actually got interesting as a project, as I decided to go with Saga and used &lt;a href="https://github.com/swift-compositions/swift-html"&gt;Coenttb’s fork of PointFree’s swift-html&lt;/a&gt;, which provided an API that’s very close to the actual HTML specification (and a cost that would bite me in the back later).&lt;/p&gt;
+&lt;p&gt;With this, I also decided it was finally time to unify both repositories into one, with Github Actions deploying only a specific subset of the website on push to it’s folder, changing to a Continuous Delivery workflow when the code is pushed to the &lt;code&gt;main&lt;/code&gt; branch.&lt;/p&gt;
+&lt;p&gt;I also reworked the architecture to better fit some things to the development process:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Sources&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Assets&lt;/code&gt; now encapsulates all resources used by the website, with them now living in the package as a module, allowing access through the &lt;code&gt;artsBlueprintsCodeBundle&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CSS&lt;/code&gt; was adjusted to import the theme, with class tags being now handled by &lt;code&gt;swift-html&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FileClient&lt;/code&gt; as a reexport of &lt;a href="https://github.com/JohnSundell/Files"&gt;John Sundell’s Files&lt;/a&gt; package with extra utilities relevant only to the website. I chose to do a Reexport as means to keep the API surface, even if I end up changing the backend powering the module in the future&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HTML&lt;/code&gt; now provides a solution to embed JS frameworks into a page for more functionality&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Models&lt;/code&gt; now has all the schemas for the Website, instead of separating them per-feature: this allows better business rules integration without making too many workarounds or importing multiple packages for just one type&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NavigationFeature&lt;/code&gt; replaces &lt;code&gt;AreasFeature&lt;/code&gt;, providing the views for the sections of the website&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PostViewerFeature&lt;/code&gt; is the new name of &lt;code&gt;PostsFeature&lt;/code&gt;, which still handles the views of a post&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RSS&lt;/code&gt; reexports &lt;a href="https://github.com/nmdias/FeedKit"&gt;FeedKit&lt;/a&gt; and provides a solution for RSS manipulation: while Saga provides a writer for creating RSS feeds automatically and is what is being used right now, a more domain-specific model will make it easier to work with RSS in the long-term. For now, it’s a placeholder of what’s to come…&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SagaIntegration&lt;/code&gt; now replaces &lt;code&gt;PublishIntegration&lt;/code&gt;, defining all the pipeline for the website’s deployment&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Settings&lt;/code&gt; continues to exist, but now is a placeholder module. In the future, this will be where settings for the website will live.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;TagViewerFeature&lt;/code&gt; is the new name of &lt;code&gt;TagsFeature&lt;/code&gt;, containing all views for tags&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Iteration #3: Saga + Elementary (we’re here)&lt;/h2&gt;
+&lt;p&gt;In the meantime since then, Saga also got a new major version that made it easier to develop and iterate over the website to the point many of the original bottlenecks in earlier iterations are basically almost gone, opening the door for quicker improvements and feature additions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Actual support for programmatic items to be included in the pipeline (allows me to remove some workarounds to add missing entries)&lt;/li&gt;
+&lt;li&gt;Build hooks (replaces a certain instability that existed of trying to hook into Saga’s pipeline to add and remove files that should be local, development-only or are irrelevant to the website’s content)&lt;/li&gt;
+&lt;li&gt;CLI for development with hot reloading (while I was serving it before using &lt;code&gt;npx&lt;/code&gt; prior to this, the setup I was using always had a caveat regarding refreshing the page or tracking the pages, which is now all addressed)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As the codebase itself also grew more mature in the time since, the integration into Saga’s pipeline also became easier, making it easier to maintain and update the site while still time-constrained by other projects.&lt;/p&gt;
+&lt;h2&gt;What the Future Holds&lt;/h2&gt;
+&lt;p&gt;The website is still far from done, but here’s some of what I’m planning for it right now (subject to change, of course):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Dedicated Markdown Parser: currently I have an initial implementation in &lt;code&gt;MarkdownHTML&lt;/code&gt; based on &lt;a href="https://github.com/swiftlang/swift-markdown"&gt;swift-markdown&lt;/a&gt; that I could turn into a Saga &lt;code&gt;Reader&lt;/code&gt;, but it still requires lots of work. Currently, the website uses &lt;a href="https://github.com/loopwerk/SagaParsleyMarkdownReader"&gt;Parsley&lt;/a&gt; to provide conversion from Github-flavored Markdown, but, in the long-term, I want control over how the Markdown is parsed to HTML to make it easier to add features to webpages, as well as transform the content based on feature requests.&lt;/li&gt;
+&lt;li&gt;Making interactive demos of my projects using WebAssembly, which would fulfill one of the goals of using Swift to make the website and being able to use my frameworks directly in posts to explain subjects.&lt;/li&gt;
+&lt;li&gt;Showcase of projects, arts and crafts and fun articles/videos I find online worth a read/watch: most of the skeleton is already prepared, it just needs a style and for me to aggregate more development materiais to display.&lt;/li&gt;
+&lt;li&gt;Growing from a Static Site: this is more into the future, but a dynamic site would allow me to offer more independence and control over my content.&lt;/li&gt;
+&lt;/ul&gt;</content>
+        <link rel="alternate" href="https://martoniojunior.github.io/posts/ramblings/2026-09-24/"></link>
+    </entry>
     <entry>
         <id>https://martoniojunior.github.io/posts/ramblings/2025-12-09/</id>
-        <title>“Gameplay: The most underrated storyteller”</title>
+        <title>Gameplay - The most underrated storyteller</title>
         <updated>2025-12-09T17:00:00Z</updated>
         <summary>The unique narrative power of games and the small moments that matter</summary>
-        <content type="html">&lt;div class="display-0"&gt;&lt;div class="row-gap-1 max-width-2 flex-direction-3 display-4 align-items-5"&gt;&lt;p&gt;Nothing beats a good story: be it in a game, movie or book, anytime you’re entrenched in a good narrative is a great time.&lt;/p&gt;&lt;p&gt;But, as someone who designs games, I think many underrate the power that gameplay has to create stories that are as powerful and lasting as traditional narrative approaches mentioned above do, just by the virtue of what the game enables.&lt;/p&gt;&lt;p&gt;I may sometimes don’t remember the narrative of a game, but I sure will never forget…&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;Hitting that insane, 60-chain combo on a fighting game after hours of practice and figuring out it’s mechanics (and then even more to execute them on a match)&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Figuring out the roles of everyone you’re playing with in a social deduction game and being able to use that to snatch victory on a game that was basically lost&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Fighting a Bokoblin and launching it next to your horse, launching it into the stratosphere, defeating an enemy just to have it’s drops fall off a cliff and you desperately racing to get them before it’s too late…&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Exploring the fantastical world you just entered in, only to bonk into a Lv. 90 end-game boss and start desperately running away to safety once you realize there’s boss music playing&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;The adventures of my pirate crew in Sea of Thieves, trying our hardest to not get our ship sunk for the 11th time (when we’re not jumping off and being left behind by it because we jumped at the wrong spot)&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Making a perfect chain on a rhythm game&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Getting your first victory in a Battle Royale&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;The A-ha! that comes from figuring out a difficult puzzle after being stuck hours on it&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Defeating a Super Boss after thousands of attempts, only to find out that was only their first phase and be completely wiped out in seconds by the second one&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Breaking the rules of the game in unexpected ways (that never gets old…)&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Making the perfect strategy, only to see it fall apart (and wonder how you survived as well as you did when you somehow still win)&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;The list goes on and on…&lt;/p&gt;&lt;p&gt;Sometimes the designer had that experience in mind when making it, maybe it’s unexpected and just enabled by the game’s rules, could be just about who you’re playing it with, the state of mind you are on it…&lt;/p&gt;&lt;p&gt;These experiences can leave us happy, sad, angry, frustated, relieved, stressed, pensative… No matter what emotion it drives, they shape us: just like a story written by an author, with all it’s wrinkles, twists and caveats.&lt;/p&gt;&lt;p&gt;In gameplay, we’re the protagonist and the writer: they’re our stories to tell.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</content>
+        <content type="html">&lt;p&gt;Nothing beats a good story: be it in a game, movie or book, anytime you’re entrenched in a good narrative is a great time.&lt;/p&gt;
+&lt;p&gt;But, as someone who designs games, I think many underrate the power that gameplay has to create stories that are as powerful and lasting as traditional narrative approaches mentioned above do, just by the virtue of what the game enables.&lt;/p&gt;
+&lt;p&gt;I may sometimes don’t remember the narrative of a game, but I sure will never forget…&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Hitting that insane, 60-chain combo on a fighting game after hours of practice and figuring out it’s mechanics (and then even more to execute them on a match)&lt;/li&gt;
+&lt;li&gt;Figuring out the roles of everyone you’re playing with in a social deduction game and being able to use that to snatch victory on a game that was basically lost&lt;/li&gt;
+&lt;li&gt;Fighting a Bokoblin and launching it next to your horse, launching it into the stratosphere, defeating an enemy just to have it’s drops fall off a cliff and you desperately racing to get them before it’s too late…&lt;/li&gt;
+&lt;li&gt;Exploring the fantastical world you just entered in, only to bonk into a Lv. 90 end-game boss and start desperately running away to safety once you realize there’s boss music playing&lt;/li&gt;
+&lt;li&gt;The adventures of my pirate crew in Sea of Thieves, trying our hardest to not get our ship sunk for the 11th time (when we’re not jumping off and being left behind by it because we jumped at the wrong spot)&lt;/li&gt;
+&lt;li&gt;Making a perfect chain on a rhythm game&lt;/li&gt;
+&lt;li&gt;Getting your first victory in a Battle Royale&lt;/li&gt;
+&lt;li&gt;The A-ha! that comes from figuring out a difficult puzzle after being stuck hours on it&lt;/li&gt;
+&lt;li&gt;Defeating a Super Boss after thousands of attempts, only to find out that was only their first phase and be completely wiped out in seconds by the second one&lt;/li&gt;
+&lt;li&gt;Breaking the rules of the game in unexpected ways (that never gets old…)&lt;/li&gt;
+&lt;li&gt;Making the perfect strategy, only to see it fall apart (and wonder how you survived as well as you did when you somehow still win)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The list goes on and on…&lt;/p&gt;
+&lt;p&gt;Sometimes the designer had that experience in mind when making it, maybe it’s unexpected and just enabled by the game’s rules, could be just about who you’re playing it with, the state of mind you are on it…&lt;/p&gt;
+&lt;p&gt;These experiences can leave us happy, sad, angry, frustated, relieved, stressed, pensative… No matter what emotion it drives, they shape us: just like a story written by an author, with all it’s wrinkles, twists and caveats.&lt;/p&gt;
+&lt;p&gt;In gameplay, we’re the protagonist and the writer: they’re our stories to tell.&lt;/p&gt;</content>
         <link rel="alternate" href="https://martoniojunior.github.io/posts/ramblings/2025-12-09/"></link>
     </entry>
     <entry>
         <id>https://martoniojunior.github.io/posts/ramblings/2025-10-03/</id>
-        <title>“Windows 10: An oldie, but a goodie”</title>
+        <title>Windows 10 - An oldie, but a goodie</title>
         <updated>2025-10-03T16:53:00Z</updated>
-        <summary>“A farewell to Windows 10: did it really need to die now?”</summary>
-        <content type="html">&lt;div class="display-0"&gt;&lt;div class="row-gap-1 max-width-2 flex-direction-3 display-4 align-items-5"&gt;&lt;p&gt;As of Oct 14, 2025, Windows 10 reaches it’s end of life support, leaving millions of computers with one of three choices:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;Update to Windows 11, if your computer meets the criteria, which leaves users to deal with ads, spyware and Copilot monitoring&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Stay on Windows 10 and pay Microsoft to keep receiving updates for a little while longer&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Replace your Operational System with a better alternative (at the cost of software compatibility)&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Does it really need to wither like this? While it’s not with it’s flaws, it’s still a perfectly usable OS, with a decent enough adoption rate and that it wasn’t meant to be replaced if you believed the promises of 10 years ago.&lt;/p&gt;&lt;blockquote&gt;&lt;p&gt;keeping options available with people still using them is important. Does tech really need to take choice away for the sake of infinite growth now when it can just be, I dunno, sustainable long-term with users in mind?&lt;/p&gt;&lt;/blockquote&gt;&lt;/div&gt;&lt;/div&gt;</content>
+        <summary>"A farewell to Windows 10: did it really need to die now?"</summary>
+        <content type="html">&lt;p&gt;As of Oct 14, 2025, Windows 10 reaches it’s end of life support, leaving millions of computers with one of three choices:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Update to Windows 11, if your computer meets the criteria, which leaves users to deal with ads, spyware and Copilot monitoring&lt;/li&gt;
+&lt;li&gt;Stay on Windows 10 and pay Microsoft to keep receiving updates for a little while longer&lt;/li&gt;
+&lt;li&gt;Replace your Operational System with a better alternative (at the cost of software compatibility)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Does it really need to wither like this? While it’s not with it’s flaws, it’s still a perfectly usable OS, with a decent enough adoption rate and that it wasn’t meant to be replaced if you believed the promises of 10 years ago.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;💭 Change is good, but not every change is for the better: keeping options available with people still using them is important. Does tech really need to take choice away for the sake of infinite growth now when it can just be, I dunno, sustainable long-term with users in mind?&lt;/p&gt;
+&lt;/blockquote&gt;</content>
         <link rel="alternate" href="https://martoniojunior.github.io/posts/ramblings/2025-10-03/"></link>
     </entry>
     <entry>
@@ -28,12 +166,44 @@
         <title>Swizzling SIMD in Modern Swift</title>
         <updated>2025-12-03T21:22:00Z</updated>
         <summary>Combining `KeyPath` and `InlineArray` to improve `SIMD` types and applying the concept beyond</summary>
-        <content type="html">&lt;div class="display-0"&gt;&lt;div class="row-gap-1 max-width-2 flex-direction-3 display-4 align-items-5"&gt;&lt;div&gt;&lt;h2&gt;Introduction&lt;/h2&gt;&lt;/div&gt;&lt;p&gt;Swizzling is the act of transforming vectors by rearranging it’s components to create new vectors with components swapped around or even projected into another dimensionality. It’s most commonly used in computer graphics and games to quickly form new data structures using it’s components, with a less verbose approach for initialization.&lt;/p&gt;&lt;pre&gt;&lt;code&gt;// Example of Vector Swizzling using C#
+        <content type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Swizzling is the act of transforming vectors by rearranging it’s components to create new vectors with components swapped around or even projected into another dimensionality. It’s most commonly used in computer graphics and games to quickly form new data structures using it’s components, with a less verbose approach for initialization.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;// Example of Vector Swizzling using C#
 Vector3 a = Vector3(8, 3, 4)
 Vector3 b = a.yzx // (3, 4, 8)
 Vector2 c = a.xz // (8, 4)
 Vector3 d = a.xoy // (8, 0, 4)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Usually, to implement swizzling of a type, such as a vector or a matrix, usually requires implementing all of the possible cases as methods or properties in the type itself to allow the syntax you see above. However, it can be a pretty tedious and time-consuming process to implement them if the type you’re using doesn’t already support it.&lt;/p&gt;&lt;blockquote&gt;&lt;p&gt;🔮 Always check if someone hasn’t already made the hard work already! If not, you really only need to implement this once and reuse in whenever project you require.&lt;/p&gt;&lt;/blockquote&gt;&lt;p&gt;To give you an idea of how consuming this can be, implementing a Swizzling operation manually for a non-descriptive &lt;code&gt;Vector&lt;/code&gt; type of size $n$ converting to a target &lt;code&gt;Vector&lt;/code&gt; of size $t$ can be defined by the following function: $$f(n, t) = (n+1)^t$$ where $n+1$ describes every component of a vector, plus the definition of $0$ used to erase a component’s value in certain operations that require it (e.g. moving a 3D character in a 2D plane).&lt;/p&gt;&lt;p&gt;This means that, to implement swizzling from a type to create a &lt;code&gt;Vector2&lt;/code&gt;, &lt;code&gt;Vector3&lt;/code&gt; and &lt;code&gt;Vector4&lt;/code&gt;, it’d require:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;$3^2 + 3^3 + 3^4 = 9 + 27 + 81 = 117$ members in &lt;code&gt;Vector2&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;$4^2 + 4^3 + 4^4 = 16 + 64 + 256 = 336$ members in &lt;code&gt;Vector3&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;$5^2 + 5^3 + 5^4 = 25 + 125 + 625 = 775$ members in &lt;code&gt;Vector4&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;That’s a lot! And it doesn’t even factor in:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;How many lines of code you have to maintain: if we count each member as a line of code as a generous guideline, we’d have &lt;em&gt;&lt;strong&gt;1228 members&lt;/strong&gt;&lt;/em&gt; in total!&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;Even separating each type to a single file dedicated to Swizzling, some linters’ default rules like swift-lint would mark an error for the &lt;code&gt;SIMD3&lt;/code&gt; and &lt;code&gt;SIMD4&lt;/code&gt; extensions&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;The number of test methods required to check each property: even if you bulk them all in a single test method, it’d still be 1228 parameters to maintain.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Adding support to Vectors with other dimensions, which would add the members of itself and new members to all vectors that already implemented swizzling.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Matrices! Yeah, we forgot about those…&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;div&gt;&lt;h2&gt;SIMD Swizzling in Swift&lt;/h2&gt;&lt;/div&gt;&lt;blockquote&gt;&lt;p&gt;ℹ️ Not to be confused with another definition of “Swizzling” commonly used in the Swift language, which is about replacing methods from Objective-C with a Swift version.&lt;/p&gt;&lt;/blockquote&gt;&lt;p&gt;A lot of the work described above comes from the fact we need to define every arrangement of a component to the size of every target vector. So we just implement a method or subscript that receives the components and returns the swizzled vector, right? That’s what &lt;code&gt;SIMD&lt;/code&gt; does!&lt;/p&gt;&lt;pre&gt;&lt;code&gt;// Snippet of SIMD's implementation in Swift
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Usually, to implement swizzling of a type, such as a vector or a matrix, usually requires implementing all of the possible cases as methods or properties in the type itself to allow the syntax you see above. However, it can be a pretty tedious and time-consuming process to implement them if the type you’re using doesn’t already support it.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;🔮 Always check if someone hasn’t already made the hard work already! If not, you really only need to implement this once and reuse in whenever project you require.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To give you an idea of how consuming this can be, implementing a Swizzling operation manually for a non-descriptive &lt;code&gt;Vector&lt;/code&gt; type of size $n$ converting to a target &lt;code&gt;Vector&lt;/code&gt; of size $t$ can be defined by the following function:&lt;br /&gt;
+$$f(n, t) = (n+1)^t$$&lt;br /&gt;
+where $n+1$ describes every component of a vector, plus the definition of $0$ used to erase a component’s value in certain operations that require it (e.g. moving a 3D character in a 2D plane).&lt;/p&gt;
+&lt;p&gt;This means that, to implement swizzling from a type to create a &lt;code&gt;Vector2&lt;/code&gt;, &lt;code&gt;Vector3&lt;/code&gt; and &lt;code&gt;Vector4&lt;/code&gt;, it’d require:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$3^2 + 3^3 + 3^4 = 9 + 27 + 81 = 117$ members in &lt;code&gt;Vector2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;$4^2 + 4^3 + 4^4 = 16 + 64 + 256 = 336$ members in &lt;code&gt;Vector3&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;$5^2 + 5^3 + 5^4 = 25 + 125 + 625 = 775$ members in &lt;code&gt;Vector4&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;That’s a lot! And it doesn’t even factor in:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;How many lines of code you have to maintain: if we count each member as a line of code as a generous guideline, we’d have &lt;em&gt;&lt;strong&gt;1228 members&lt;/strong&gt;&lt;/em&gt; in total!
+&lt;ul&gt;
+&lt;li&gt;Even separating each type to a single file dedicated to Swizzling, some linters’ default rules like swift-lint would mark an error for the &lt;code&gt;SIMD3&lt;/code&gt; and &lt;code&gt;SIMD4&lt;/code&gt; extensions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The number of test methods required to check each property: even if you bulk them all in a single test method, it’d still be 1228 parameters to maintain.&lt;/li&gt;
+&lt;li&gt;Adding support to Vectors with other dimensions, which would add the members of itself and new members to all vectors that already implemented swizzling.&lt;/li&gt;
+&lt;li&gt;Matrices! Yeah, we forgot about those…&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;SIMD Swizzling in Swift&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ℹ️ Not to be confused with another definition of “Swizzling” commonly used in the Swift language, which is about replacing methods from Objective-C with a Swift version.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A lot of the work described above comes from the fact we need to define every arrangement of a component to the size of every target vector. So we just implement a method or subscript that receives the components and returns the swizzled vector, right? That’s what &lt;code&gt;SIMD&lt;/code&gt; does!&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;// Snippet of SIMD's implementation in Swift
 // Source: https://github.com/swiftlang/swift/blob/main/stdlib/public/core/SIMDVector.swift
 
 @_alwaysEmitIntoClient
@@ -44,7 +214,21 @@ public subscript&amp;lt;Index&amp;gt;(index: SIMD2&amp;lt;Index&amp;gt;) -&amp;g
 	}
 	return result
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That looks a lot better than creating all members by hand since you only have one method per type and since this is implemented as a &lt;code&gt;SIMD&lt;/code&gt; extension, it can be used by all types conforming to the protocol. Yet we lost a few things along the way:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;Access to the components now happen through indices, which now need to be validated before usage (and in &lt;code&gt;SIMD&lt;/code&gt;‘s case, it doesn’t protect against negative values unless &lt;code&gt;Index&lt;/code&gt; is an unsigned integer)&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;It describes components as integers, reducing the role-expressiveness that once came from accessing the swizzled vector by typing it’s components: you still have knowledge of the role of each index, but that now requires an extra cognitive step of associating it with the component it represents.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;There’s no way to reference a default value (e.g. $0$, $1$) while swizzling, meaning that &lt;code&gt;Index&lt;/code&gt; does not encapsulate all possible swizzling&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Beyond the above, every implementation repeats the exact same code as above, only replacing the data structures for &lt;code&gt;Index&lt;/code&gt; and the return type. But what if I told you we can fix all of the issues above and define it all with a single implementation?&lt;/p&gt;&lt;div&gt;&lt;h2&gt;&lt;code&gt;KeyPath&lt;/code&gt; to the Rescue!&lt;/h2&gt;&lt;/div&gt;&lt;blockquote&gt;&lt;p&gt;💬 Due to performance reasons or limitations in a language or a dev stack environment, implementing swizzling via methods and properties may still be the most effective approach. The approach I’m about to show is focused on flexibility and ease of use first and foremost.&lt;/p&gt;&lt;/blockquote&gt;&lt;p&gt;With &lt;code&gt;[KeyPath]&lt;/code&gt;, we can now create back a swizzled &lt;code&gt;[Scalar]&lt;/code&gt; with any size that, while still a bit more verbose  than a member-based approach, it’s safer and maintains the same role-expressiveness as the standard approach:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;public extension SIMD {
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That looks a lot better than creating all members by hand since you only have one method per type and since this is implemented as a &lt;code&gt;SIMD&lt;/code&gt; extension, it can be used by all types conforming to the protocol. Yet we lost a few things along the way:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Access to the components now happen through indices, which now need to be validated before usage (and in &lt;code&gt;SIMD&lt;/code&gt;‘s case, it doesn’t protect against negative values unless &lt;code&gt;Index&lt;/code&gt; is an unsigned integer)&lt;/li&gt;
+&lt;li&gt;It describes components as integers, reducing the role-expressiveness that once came from accessing the swizzled vector by typing it’s components: you still have knowledge of the role of each index, but that now requires an extra cognitive step of associating it with the component it represents.&lt;/li&gt;
+&lt;li&gt;There’s no way to reference a default value (e.g. $0$, $1$) while swizzling, meaning that &lt;code&gt;Index&lt;/code&gt; does not encapsulate all possible swizzling&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Beyond the above, every implementation repeats the exact same code as above, only replacing the data structures for &lt;code&gt;Index&lt;/code&gt; and the return type.&lt;br /&gt;
+But what if I told you we can fix all of the issues above and define it all with a single implementation?&lt;/p&gt;
+&lt;h2&gt;&lt;code&gt;KeyPath&lt;/code&gt; to the Rescue!&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;💬 Due to performance reasons or limitations in a language or a dev stack environment, implementing swizzling via methods and properties may still be the most effective approach. The approach I’m about to show is focused on flexibility and ease of use first and foremost.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;With &lt;code&gt;[KeyPath]&lt;/code&gt;, we can now create back a swizzled &lt;code&gt;[Scalar]&lt;/code&gt; with any size that, while still a bit more verbose  than a member-based approach, it’s safer and maintains the same role-expressiveness as the standard approach:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;public extension SIMD {
 	subscript(swizzle swizzle: KeyPath&amp;lt;Self, Scalar&amp;gt;...) -&amp;gt; [Scalar] {
 		swizzle.map { self[keyPath: $0] }
 	}
@@ -53,7 +237,16 @@ public subscript&amp;lt;Index&amp;gt;(index: SIMD2&amp;lt;Index&amp;gt;) -&amp;g
 // Performing a Swizzle with KeyPath
 var vector = SIMD3(x: 3, y: 2, z: 5)
 var swizzled: SIMD3&amp;lt;Int&amp;gt; = .init(vector[swizzle: \.x, \.y, \.x]) // [3, 2, 3]
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;“But wait, &lt;code&gt;@dynamicMemberLookup&lt;/code&gt; would allow the swizzling syntax to be the standard one, no?”&lt;/em&gt; In theory, yes, but that comes with some implications:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;You are in control of the type, marked &lt;code&gt;@dynamicMemberLookup&lt;/code&gt; and declared &lt;code&gt;subscript(dynamicMember:)&lt;/code&gt; on it’s original module, which is not possible with &lt;code&gt;SIMD&lt;/code&gt; given it’s part of the standard library and you cannot add &lt;code&gt;@dynamicMemberLookup&lt;/code&gt; support from an extension.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;The storage of a data structure allowing constant-time access to it’s components, else you need to parse the &lt;code&gt;String&lt;/code&gt; into separate characters, then mapping each to it’s respective component (when you can even map to it).&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Working with &lt;code&gt;String&lt;/code&gt; brings back the problem of invalid indices, which would require fallback checks using &lt;code&gt;precondition&lt;/code&gt; or return of an &lt;code&gt;Optional&lt;/code&gt; type for the component vs a compile-time guarantee for the swizzled result&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;While &lt;code&gt;SIMD&lt;/code&gt; does not have a valid key path to a $0$, you can add one via an extension. However, there is a better approach as we can use &lt;code&gt;KeyPath&lt;/code&gt; in functions since Swift 5.2. Therefore, we can reimplement it as follows, without changing how it is used:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;public extension SIMD {
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;“But wait, &lt;code&gt;@dynamicMemberLookup&lt;/code&gt; would allow the swizzling syntax to be the standard one, no?”&lt;/em&gt;&lt;br /&gt;
+In theory, yes, but that comes with some implications:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You are in control of the type, marked &lt;code&gt;@dynamicMemberLookup&lt;/code&gt; and declared &lt;code&gt;subscript(dynamicMember:)&lt;/code&gt; on it’s original module, which is not possible with &lt;code&gt;SIMD&lt;/code&gt; given it’s part of the standard library and you cannot add &lt;code&gt;@dynamicMemberLookup&lt;/code&gt; support from an extension.&lt;/li&gt;
+&lt;li&gt;The storage of a data structure allowing constant-time access to it’s components, else you need to parse the &lt;code&gt;String&lt;/code&gt; into separate characters, then mapping each to it’s respective component (when you can even map to it).&lt;/li&gt;
+&lt;li&gt;Working with &lt;code&gt;String&lt;/code&gt; brings back the problem of invalid indices, which would require fallback checks using &lt;code&gt;precondition&lt;/code&gt; or return of an &lt;code&gt;Optional&lt;/code&gt; type for the component vs a compile-time guarantee for the swizzled result&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;While &lt;code&gt;SIMD&lt;/code&gt; does not have a valid key path to a $0$, you can add one via an extension. However, there is a better approach as we can use &lt;code&gt;KeyPath&lt;/code&gt; in functions since Swift 5.2. Therefore, we can reimplement it as follows, without changing how it is used:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;public extension SIMD {
 	subscript(swizzle swizzle: (Self) -&amp;gt; Scalar...) -&amp;gt; [Scalar] {
 		swizzle.map { $0(self) }
 	}
@@ -62,14 +255,25 @@ var swizzled: SIMD3&amp;lt;Int&amp;gt; = .init(vector[swizzle: \.x, \.y, \.x]) /
 // Performing a Swizzle with KeyPath and Functions
 var vector = SIMD3(x: 3, y: 2, z: 5)
 var swizzled: SIMD3&amp;lt;Int&amp;gt; = .init(vector[\.x, \.y, { _ in .zero}]) // [3, 2, 0]
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;&lt;p&gt;&lt;/p&gt;&lt;/blockquote&gt;&lt;pre&gt;&lt;code&gt;public func always&amp;lt;each T, U&amp;gt;(_ value: @autoclosure @escaping () -&amp;gt; U) -&amp;gt; (repeat each T) -&amp;gt; U {
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;🔮 You can also create a global function to simplify the process of writing in these closures:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;public func always&amp;lt;each T, U&amp;gt;(_ value: @autoclosure @escaping () -&amp;gt; U) -&amp;gt; (repeat each T) -&amp;gt; U {
 	{ (_: repeat each T) in value() }
 }
 
 // Performing a Swizzle with KeyPath, Functions and always(_:)
 var vector = SIMD3(x: 3, y: 2, z: 5)
 var swizzled: SIMD3&amp;lt;Int&amp;gt; = .init(vector[always(1), \.z, always(.zero)]) // [1, 5, 0]
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We finally are able to swizzle around of components, but we still have some issues: we have no way of guaranteeing that the size of &lt;code&gt;[Scalar]&lt;/code&gt; actually corresponds to the &lt;code&gt;SIMD&lt;/code&gt; we’re planning to initialize, as it does not warn at compile-time about a size-mismatch and invokes a precondition failure at runtime.&lt;/p&gt;&lt;p&gt;For that, we’d need to have a guarantee that the data structure we’re returning always has the same size as the &lt;code&gt;SIMD&lt;/code&gt; we’d want to output or directly return the &lt;code&gt;SIMD&lt;/code&gt; that we want, which would both require us to go back to having a method per type, with  &lt;code&gt;swizzle&lt;/code&gt;  having a different definition for each one while mostly repeating the same implementation.&lt;/p&gt;&lt;p&gt;If you’re using Swift 6.1 or earlier, this is where we stop in implementing swizzling, but thanks to &lt;code&gt;InlineArray&lt;/code&gt; and Integer Generic Parameters in Swift 6.2, we can actually not only fix this, but even build an approach greater than the current &lt;code&gt;SIMD&lt;/code&gt; types we have available.&lt;/p&gt;&lt;div&gt;&lt;h2&gt;Adding in &lt;code&gt;InlineArray&lt;/code&gt;&lt;/h2&gt;&lt;/div&gt;&lt;p&gt;New to Swift, &lt;code&gt;InlineArray&lt;/code&gt; is a collection (though it does not conform to &lt;code&gt;Collection&lt;/code&gt; yet) of non-copyable types that you can use to define inline fixed-size arrays, with the size defined as part of the generic type declaration. This means that we can have compile-time guarantees about the size of the array we use on &lt;code&gt;SIMD&lt;/code&gt; and that initialization will always be successful.&lt;/p&gt;&lt;p&gt;Unfortunately, that will require us to still write some boilerplate to allow this to happen, as each &lt;code&gt;SIMD&lt;/code&gt; concrete type will need an initializer to accept an inline array with the same size as itself:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;public extension SIMD3 {
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We finally are able to swizzle around of components, but we still have some issues: we have no way of guaranteeing that the size of &lt;code&gt;[Scalar]&lt;/code&gt; actually corresponds to the &lt;code&gt;SIMD&lt;/code&gt; we’re planning to initialize, as it does not warn at compile-time about a size-mismatch and invokes a precondition failure at runtime.&lt;/p&gt;
+&lt;p&gt;For that, we’d need to have a guarantee that the data structure we’re returning always has the same size as the &lt;code&gt;SIMD&lt;/code&gt; we’d want to output or directly return the &lt;code&gt;SIMD&lt;/code&gt; that we want, which would both require us to go back to having a method per type, with  &lt;code&gt;swizzle&lt;/code&gt;  having a different definition for each one while mostly repeating the same implementation.&lt;/p&gt;
+&lt;p&gt;If you’re using Swift 6.1 or earlier, this is where we stop in implementing swizzling, but thanks to &lt;code&gt;InlineArray&lt;/code&gt; and Integer Generic Parameters in Swift 6.2, we can actually not only fix this, but even build an approach greater than the current &lt;code&gt;SIMD&lt;/code&gt; types we have available.&lt;/p&gt;
+&lt;h2&gt;Adding in &lt;code&gt;InlineArray&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;New to Swift, &lt;code&gt;InlineArray&lt;/code&gt; is a collection (though it does not conform to &lt;code&gt;Collection&lt;/code&gt; yet) of non-copyable types that you can use to define inline fixed-size arrays, with the size defined as part of the generic type declaration. This means that we can have compile-time guarantees about the size of the array we use on &lt;code&gt;SIMD&lt;/code&gt; and that initialization will always be successful.&lt;/p&gt;
+&lt;p&gt;Unfortunately, that will require us to still write some boilerplate to allow this to happen, as each &lt;code&gt;SIMD&lt;/code&gt; concrete type will need an initializer to accept an inline array with the same size as itself:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;public extension SIMD3 {
 	init(_ inline: [3 of Scalar]) {
 		self.init(x: inline[0], y: inline[1], z: inline[2])
 	}
@@ -79,7 +283,9 @@ var swizzled: SIMD3&amp;lt;Int&amp;gt; = .init(vector[always(1), \.z, always(.ze
 var simdA = SIMD3&amp;lt;Int&amp;gt;([1, 2, 3]) // ✅
 var simdB = SIMD3&amp;lt;Int&amp;gt;([1, 2, 3, 5, 6]) // 🛑 Cannot convert value of type '[5 of Int]' to expected argument type '[3 of Int]'
 var simdC = SIMD3&amp;lt;Int&amp;gt;([1]) // 🛑 Cannot convert value of type '[1 of Int]' to expected argument type '[3 of Int]'
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then, we can change the implementation of &lt;code&gt;subscript(swizzle:)&lt;/code&gt; to the following:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;public extension SIMD {
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then, we can change the implementation of &lt;code&gt;subscript(swizzle:)&lt;/code&gt; to the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;public extension SIMD {
 	subscript&amp;lt;let N: Int&amp;gt;(_ swizzle: [N of (Self) -&amp;gt; Scalar]) -&amp;gt; [N of Scalar] {
 		.init { swizzle[$0](self) }
 	}
@@ -89,7 +295,12 @@ var simdC = SIMD3&amp;lt;Int&amp;gt;([1]) // 🛑 Cannot convert value of type '
 var vector = SIMD3(x: 3, y: 2, z: 5)
 var swizzled = vector[[\.x, always(6), \.x]] // [3, 6, 3]
 var newSimd = SIMD3(swizzled) // SIMD3(x: 3, y: 6, z: 3)
-&lt;/code&gt;&lt;/pre&gt;&lt;div&gt;&lt;h2&gt;“Swizzling” everything…&lt;/h2&gt;&lt;/div&gt;&lt;p&gt;However, we can still go further with swizzling using the ideas shown above:&lt;/p&gt;&lt;div&gt;&lt;h3&gt;Custom &lt;code&gt;SIMD&lt;/code&gt; + Integer Generic Parameters = &lt;code&gt;Vector&lt;/code&gt;&lt;/h3&gt;&lt;/div&gt;&lt;p&gt;As the &lt;code&gt;SIMD&lt;/code&gt; implementations in the standard library are all concrete types with no generic integer parameters, we need to implement initializers for each type in order to transform the inline array back into a SIMD type. However, by creating a custom structure that conforms to &lt;code&gt;SIMD&lt;/code&gt; protocol, you can create a custom type that takes advantage of &lt;code&gt;InlineArray&lt;/code&gt; and &lt;code&gt;SIMD&lt;/code&gt;:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;@available(macOS 26.0, *)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;“Swizzling” everything…&lt;/h2&gt;
+&lt;p&gt;However, we can still go further with swizzling using the ideas shown above:&lt;/p&gt;
+&lt;h3&gt;Custom &lt;code&gt;SIMD&lt;/code&gt; + Integer Generic Parameters = &lt;code&gt;Vector&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;As the &lt;code&gt;SIMD&lt;/code&gt; implementations in the standard library are all concrete types with no generic integer parameters, we need to implement initializers for each type in order to transform the inline array back into a SIMD type. However, by creating a custom structure that conforms to &lt;code&gt;SIMD&lt;/code&gt; protocol, you can create a custom type that takes advantage of &lt;code&gt;InlineArray&lt;/code&gt; and &lt;code&gt;SIMD&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;@available(macOS 26.0, *)
 public struct Vector&amp;lt;let N: Int, Scalar&amp;gt; {
 	var elements: [N of Scalar]
 
@@ -116,7 +327,9 @@ extension Vector: SIMDStorage where Scalar: AdditiveArithmetic &amp;amp; Codable
 		self.init(.init(repeating: .zero))
 	}
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now we can return the swizzled type created directly instead of just an &lt;code&gt;InlineArray&lt;/code&gt;:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;@available(macOS 26.0, *)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we can return the swizzled type created directly instead of just an &lt;code&gt;InlineArray&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;@available(macOS 26.0, *)
 public extension Vector {
 	subscript&amp;lt;let A: Int&amp;gt;(_ swizzle: [A of (Self) -&amp;gt; Scalar]) -&amp;gt; Vector&amp;lt;A, Scalar&amp;gt; {
 		.init(InlineArray { swizzle[$0](self) })
@@ -126,21 +339,51 @@ public extension Vector {
 // Creating a new Vector out of a swizzle
 var vector = Vector([3, 2, 5]) // Vector&amp;lt;3, Int&amp;gt;
 var swizzled = vector[[\.x, always(6), \.x]] // Vector&amp;lt;3, Int&amp;gt;([3, 6, 3])
-&lt;/code&gt;&lt;/pre&gt;&lt;div&gt;&lt;h3&gt;Feature Extraction (&lt;code&gt;extract(_:features:)&lt;/code&gt;)&lt;/h3&gt;&lt;/div&gt;&lt;p&gt;Another road one can take is to forego the traditional ideas of &lt;code&gt;SIMD&lt;/code&gt; and use &lt;code&gt;KeyPath&lt;/code&gt; and &lt;code&gt;InlineArray&lt;/code&gt; to extract property values out of a type directly and return it in a structured manner:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;@available(macOS 26.0, *)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Feature Extraction (&lt;code&gt;extract(_:features:)&lt;/code&gt;)&lt;/h3&gt;
+&lt;p&gt;Another road one can take is to forego the traditional ideas of &lt;code&gt;SIMD&lt;/code&gt; and use &lt;code&gt;KeyPath&lt;/code&gt; and &lt;code&gt;InlineArray&lt;/code&gt; to extract property values out of a type directly and return it in a structured manner:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;@available(macOS 26.0, *)
 public func extract&amp;lt;Element, let A: Int, T&amp;gt;(_ element: Element, features: [A of (Element) -&amp;gt; T]) -&amp;gt; [A of T] {
 	features.map { $0(element) }
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Combine this with a &lt;code&gt;Sequence&lt;/code&gt; or &lt;code&gt;Collection&lt;/code&gt; type and you have a flexible method to extract values directly, although it is limited to all items belonging to the same type&lt;/p&gt;&lt;pre&gt;&lt;code&gt;var vector = ["goal", "apple", "bananas"]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Combine this with a &lt;code&gt;Sequence&lt;/code&gt; or &lt;code&gt;Collection&lt;/code&gt; type and you have a flexible method to extract values directly, although it is limited to all items belonging to the same type&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;var vector = [&amp;quot;goal&amp;quot;, &amp;quot;apple&amp;quot;, &amp;quot;bananas&amp;quot;]
 var elements = extract(vector, features: [\.[0], \.[2]])
-&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;&lt;p&gt;🔮 While the ideal approach for the method would be to use variadic generics, this is not possible here due to the lack of a fixed-size heterogeneous data structure that is able to maintain the type-safety of it’s properties (&lt;s&gt;sounds like a future post idea if I’ve ever seen one&lt;/s&gt;).&lt;/p&gt;&lt;/blockquote&gt;&lt;div&gt;&lt;h2&gt;Conclusion&lt;/h2&gt;&lt;/div&gt;&lt;p&gt;While swizzling can be pretty easy to grasp as a concept, implementing it can be a pretty challenging experience for developers, as we need to take into account performance, ease of use and flexibility when choosing them. By using clever abstractions and some modern language features, we can take features that already exist in Swift and combine them into more powerful and efficient types that can be used even in situations outside of it’s intended purpose to make code that feels good to write while maintaining important guarantees to strengthen our codebase.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</content>
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;🔮 While the ideal approach for the method would be to use variadic generics, this is not possible here due to the lack of a fixed-size heterogeneous data structure that is able to maintain the type-safety of it’s properties (&lt;del&gt;sounds like a future post idea if I’ve ever seen one&lt;/del&gt;).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;While swizzling can be pretty easy to grasp as a concept, implementing it can be a pretty challenging experience for developers, as we need to take into account performance, ease of use and flexibility when choosing them. By using clever abstractions and some modern language features, we can take features that already exist in Swift and combine them into more powerful and efficient types that can be used even in situations outside of it’s intended purpose to make code that feels good to write while maintaining important guarantees to strengthen our codebase.&lt;/p&gt;</content>
         <link rel="alternate" href="https://martoniojunior.github.io/posts/swift/standard-library/swizzling/"></link>
     </entry>
     <entry>
         <id>https://martoniojunior.github.io/posts/ramblings/2025-09-18/</id>
-        <title>RSS is so Cool…</title>
+        <title>RSS is so Cool...</title>
         <updated>2025-09-18T17:51:00Z</updated>
-        <summary>…and why this website exists.</summary>
-        <content type="html">&lt;div class="display-0"&gt;&lt;div class="row-gap-1 max-width-2 flex-direction-3 display-4 align-items-5"&gt;&lt;p&gt;I sometimes wish I had known more about RSS sooner… Before, I used to check a select few websites a day and always get lost in what I’ve already seen or not. If I wanted to keep up-to-date on something, I’d either subscribe to a newsletter they require me to put my email on, an app that just crammed ads and unrelated content or I had to store URLs of relevant tools in a note system of some kind.&lt;/p&gt;&lt;p&gt;I’m also someone who doesn’t really care about Social Media, even long before things went south: it’s a stressful place where you’re just fed more and more content to engage, react with very little time to think or reflect and it may not even be stuff you were looking for in the first place or want to see, pushed by recommendation algorithms that one may not be in control of.&lt;/p&gt;&lt;p&gt;It’s also a bad place to make meaningful content: it’s a global square where everyone is shouting over each other, either through a never-ending pressure for more likes, more views and more engagement to be relevant, all with context collapse, constant judgement and social pressures in conversations that maybe shouldn’t be public to begin with.&lt;/p&gt;&lt;p&gt;You don’t even have ownership over your account, your feed and what you write on it. Plus, if you try to leave due to a deteriorating service or due to exploitation from the company managing it, you have to start from scratch if you move to another place (unless you’re already on a Federated Social Media).&lt;/p&gt;&lt;p&gt;I decided to check RSS out after discovering the specification a while back and ever since then I…&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;Read any source I want, whenever I decide, with zero hurry to read them.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Follow more places than ever in whatever topics I’m interested in, even on Social Media like Bluesky and Mastodon!&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Look for RSS feeds whenever I see a well-crafted and interesting blog post, even if the topic is adjacent to something I care.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Deal with less and less ads, clickbait, reactive posts and content I’m not interested in reading or watching.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Reduce the number of distractions I have to deal with while reading.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Know there’s an end to the content and I can do other stuff.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Feel safe knowing that I’m not locked to any reader and that I can transfer the feeds I follow somewhere else or even share with others.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Most important of all: I’m the one who chooses when and how all of above happens: it’s not like I don’t engage with recommendation algorithms, but whether I want to engage on it or not, it’s an intentional decision that has a purpose and an intent.&lt;/p&gt;&lt;blockquote&gt;&lt;p&gt;Did you know that this website has an RSS feed as well? Subscribe to it and get more ramblings like this one… 😉&lt;/p&gt;&lt;/blockquote&gt;&lt;p&gt;I was considering writing technical content in a platform like Medium to share knowledge, but as I read more and more people I followed talk explicitly about the advantages of making your own website, I decided to give it a try.&lt;/p&gt;&lt;p&gt;“But doesn’t it feel like you’re sometimes shouting at a void writing here instead of &lt;em&gt;insert random Social Media platform here&lt;/em&gt; since you don’t know how many people read and/or liked it?” Yes! But that’s precisely what caused me to make one: free from the obligation of time tables (this post is out 2 weeks after the last one), I only reach the ones who actually wants to read my stuff, I own my content, there’s no noise to deal with, I choose when and how I post and there’s less pressure for me to write, making it easier for me to enjoy doing it (which, in turn, leads to better content overall).&lt;/p&gt;&lt;p&gt;Overall, RSS is an old-school approach that requires curation and a different mind as how you approach using it as both a reader and a writer, but one that has aged like fine wine and is well worth checking out in 2025.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</content>
+        <summary>...and why this website exists.</summary>
+        <content type="html">&lt;p&gt;I sometimes wish I had known more about RSS sooner… Before, I used to check a select few websites a day and always get lost in what I’ve already seen or not. If I wanted to keep up-to-date on something, I’d either subscribe to a newsletter they require me to put my email on, an app that just crammed ads and unrelated content or I had to store URLs of relevant tools in a note system of some kind.&lt;/p&gt;
+&lt;p&gt;I’m also someone who doesn’t really care about Social Media, even long before things went south: it’s a stressful place where you’re just fed more and more content to engage, react with very little time to think or reflect and it may not even be stuff you were looking for in the first place or want to see, pushed by recommendation algorithms that one may not be in control of.&lt;/p&gt;
+&lt;p&gt;It’s also a bad place to make meaningful content: it’s a global square where everyone is shouting over each other, either through a never-ending pressure for more likes, more views and more engagement to be relevant, all with context collapse, constant judgement and social pressures in conversations that maybe shouldn’t be public to begin with.&lt;/p&gt;
+&lt;p&gt;You don’t even have ownership over your account, your feed and what you write on it. Plus, if you try to leave due to a deteriorating service or due to exploitation from the company managing it, you have to start from scratch if you move to another place (unless you’re already on a Federated Social Media).&lt;/p&gt;
+&lt;p&gt;I decided to check RSS out after discovering the specification a while back and ever since then I…&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Read any source I want, whenever I decide, with zero hurry to read them.&lt;/li&gt;
+&lt;li&gt;Follow more places than ever in whatever topics I’m interested in, even on Social Media like Bluesky and Mastodon!&lt;/li&gt;
+&lt;li&gt;Look for RSS feeds whenever I see a well-crafted and interesting blog post, even if the topic is adjacent to something I care.&lt;/li&gt;
+&lt;li&gt;Deal with less and less ads, clickbait, reactive posts and content I’m not interested in reading or watching.&lt;/li&gt;
+&lt;li&gt;Reduce the number of distractions I have to deal with while reading.&lt;/li&gt;
+&lt;li&gt;Know there’s an end to the content and I can do other stuff.&lt;/li&gt;
+&lt;li&gt;Feel safe knowing that I’m not locked to any reader and that I can transfer the feeds I follow somewhere else or even share with others.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Most important of all: I’m the one who chooses when and how all of above happens: it’s not like I don’t engage with recommendation algorithms, but whether I want to engage on it or not, it’s an intentional decision that has a purpose and an intent.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Did you know that this website has an RSS feed as well? Subscribe to it and get more ramblings like this one… 😉&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I was considering writing technical content in a platform like Medium to share knowledge, but as I read more and more people I followed talk explicitly about the advantages of making your own website, I decided to give it a try.&lt;/p&gt;
+&lt;p&gt;“But doesn’t it feel like you’re sometimes shouting at a void writing here instead of &lt;em&gt;insert random Social Media platform here&lt;/em&gt; since you don’t know how many people read and/or liked it?” Yes! But that’s precisely what caused me to make one: free from the obligation of time tables (this post is out 2 weeks after the last one), I only reach the ones who actually wants to read my stuff, I own my content, there’s no noise to deal with, I choose when and how I post and there’s less pressure for me to write, making it easier for me to enjoy doing it (which, in turn, leads to better content overall).&lt;/p&gt;
+&lt;p&gt;Overall, RSS is an old-school approach that requires curation and a different mind as how you approach using it as both a reader and a writer, but one that has aged like fine wine and is well worth checking out in 2025.&lt;/p&gt;</content>
         <link rel="alternate" href="https://martoniojunior.github.io/posts/ramblings/2025-09-18/"></link>
     </entry>
     <entry>
@@ -148,74 +391,162 @@ var elements = extract(vector, features: [\.[0], \.[2]])
         <title>Welcome!</title>
         <updated>2025-09-04T16:00:00Z</updated>
         <summary>An introduction to the Arts, Blueprints, Code! website.</summary>
-        <content type="html">&lt;div class="display-0"&gt;&lt;div class="row-gap-1 max-width-2 flex-direction-3 display-4 align-items-5"&gt;&lt;p&gt;Hello! This is my first post &lt;s&gt;testing if RSS is working correctly&lt;/s&gt; welcoming you to the Arts, Blueprints, Code! website. This is my little big planet here on this vast world: a place for all the ideas, ramblings, thoughts, essays and whatever else the spark of creativity drives me to write, code, craft or experiment with.&lt;/p&gt;&lt;blockquote&gt;&lt;p&gt;If you want to know more, check the &lt;a href="/about/"&gt;About&lt;/a&gt; page.&lt;/p&gt;&lt;/blockquote&gt;&lt;p&gt;I’m still working on some edges over time, but the content is already coming in, starting with my first post on &lt;a href="/posts/swift/foundation/units-and-measurements"&gt;Units and Measurements in Swift Foundation today and how modern Swift could improve them&lt;/a&gt;. While the first post is pretty meaty, I plan to have posts of many different sizes, covering a wide length of subjects.&lt;/p&gt;&lt;p&gt;If you want to follow along, subscribe to this website’s &lt;a href="/feed.rss"&gt;RSS Feed&lt;/a&gt; to receive new posts as they are published and hope you enjoy them!&lt;/p&gt;&lt;p&gt;Junior&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</content>
+        <content type="html">&lt;p&gt;Hello! This is my first post &lt;del&gt;testing if RSS is working correctly&lt;/del&gt; welcoming you to the Arts, Blueprints, Code! website. This is my little big planet here on this vast world: a place for all the ideas, ramblings, thoughts, essays and whatever else the spark of creativity drives me to write, code, craft or experiment with.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If you want to know more, check the &lt;a href="/about/"&gt;About&lt;/a&gt; page.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I’m still working on some edges over time, but the content is already coming in, starting with my first post on &lt;a href="/posts/swift/foundation/units-and-measurements"&gt;Units and Measurements in Swift Foundation today and how modern Swift could improve them&lt;/a&gt;. While the first post is pretty meaty, I plan to have posts of many different sizes, covering a wide length of subjects.&lt;/p&gt;
+&lt;p&gt;If you want to follow along, subscribe to this website’s &lt;a href="/feed.rss"&gt;RSS Feed&lt;/a&gt; to receive new posts as they are published and hope you enjoy them!&lt;/p&gt;
+&lt;p&gt;Junior&lt;/p&gt;</content>
         <link rel="alternate" href="https://martoniojunior.github.io/posts/welcome/"></link>
     </entry>
     <entry>
         <id>https://martoniojunior.github.io/posts/swift/foundation/units-and-measurements/</id>
-        <title>Swift Foundation’s Units and Measurements</title>
+        <title>Swift Foundation's Units and Measurements</title>
         <updated>2025-09-04T17:00:00Z</updated>
         <summary>A deep-dive in some advantages and limitations of the Measurement API as it currently exists</summary>
-        <content type="html">&lt;div class="display-0"&gt;&lt;div class="row-gap-1 max-width-2 flex-direction-3 display-4 align-items-5"&gt;&lt;div&gt;&lt;h2&gt;Introduction&lt;/h2&gt;&lt;/div&gt;&lt;p&gt;When developing in Swift for Apple platforms, &lt;a href="https://developer.apple.com/documentation/foundation"&gt;Foundation&lt;/a&gt; provides an out-of-the-box implementation for units and measurements, defining a set of physical dimensions that allows for conversion between units and offers formatting for measurements based on precision and rounding of numbers, level of detail, locale, and usage.&lt;/p&gt;&lt;p&gt;The &lt;a href="https://developer.apple.com/documentation/foundation/units-and-measurement"&gt;Measurement API&lt;/a&gt; has already been covered at length in many different places on the Internet, so I recommend the following links if you want an introduction on how to use Units and Measurements as they exist today:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;&lt;a href="https://fatbobman.com/en/posts/a-complete-guide-to-swift-measurement/"&gt;Fatbobman’s article&lt;/a&gt; presents a really great overview on the API and all of it’s features with great code snippets, as well as an example of how to format measurements for use in SwiftUI.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=tXbYO5MGjYU"&gt;Stewart Lynch’s video&lt;/a&gt; provides a more step-by-step tutorial on how to use the Measurement API and it’s features if you’re looking for a more code-along approach.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;a href="https://troz.net/post/2025/swift-measurements/"&gt;TrozWare’s article&lt;/a&gt; focuses more on the &lt;code&gt;MeasurementFormatter&lt;/code&gt; type to customize the display of a &lt;code&gt;Measurement&lt;/code&gt; on Apple Watch.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;You can also check out this &lt;a href="https://goshdarnformatstyle.com/measurement-style/"&gt;guide&lt;/a&gt; documenting the formatting options available for Measurements.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;This post focuses on the advantages and limitations of the current approach available in Foundation and how some architectural tweaks and modern Swift features could make it more flexible, stable and easier to use.&lt;/p&gt;&lt;p&gt;As of this post’s writing, it’s code does not have a pure Swift implementation yet, being exclusive to Apple platforms and &lt;a href="https://github.com/swiftlang/swift-foundation"&gt;swift-foundation&lt;/a&gt; only offering stubs to allow Swift code using it to compile in other platforms. Discussion on the implementation is already underway on &lt;a href="https://forums.swift.org/t/measurement-dimension-and-unit/64649"&gt;Swift forums&lt;/a&gt;, but since it’s been stagnant since July 2023, so I hope this post can help anyone who’s either looking to contribute in the discussion or looking to make their own Measurement package.&lt;/p&gt;&lt;div&gt;&lt;h2&gt;What already works well?&lt;/h2&gt;&lt;/div&gt;&lt;p&gt;As a built-in structure of Swift Foundation, the Measurement API already reduces a lot of the work you’re required to do in order to start using measures in your apps.&lt;/p&gt;&lt;div&gt;&lt;h3&gt;Type-safe Unit Definition and Conversion&lt;/h3&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;Measurement&amp;lt;UnitType&amp;gt;&lt;/code&gt; is a struct that associates a numeric value with an unit that represents the quantity measured, indicating the domain it belongs to.&lt;/p&gt;&lt;p&gt;This offers a type-safe approach for assigning values that is enforced by the compiler as shown in the example below, which requires that the measurement uses a unit of length.&lt;/p&gt;&lt;pre&gt;&lt;code&gt;var distance: Measurement&amp;lt;UnitLength&amp;gt;
+        <content type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;When developing in Swift for Apple platforms, &lt;a href="https://developer.apple.com/documentation/foundation"&gt;Foundation&lt;/a&gt; provides an out-of-the-box implementation for units and measurements, defining a set of physical dimensions that allows for conversion between units and offers formatting for measurements based on precision and rounding of numbers, level of detail, locale, and usage.&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://developer.apple.com/documentation/foundation/units-and-measurement"&gt;Measurement API&lt;/a&gt; has already been covered at length in many different places on the Internet, so I recommend the following links if you want an introduction on how to use Units and Measurements as they exist today:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://fatbobman.com/en/posts/a-complete-guide-to-swift-measurement/"&gt;Fatbobman’s article&lt;/a&gt; presents a really great overview on the API and all of it’s features with great code snippets, as well as an example of how to format measurements for use in SwiftUI.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=tXbYO5MGjYU"&gt;Stewart Lynch’s video&lt;/a&gt; provides a more step-by-step tutorial on how to use the Measurement API and it’s features if you’re looking for a more code-along approach.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://troz.net/post/2025/swift-measurements/"&gt;TrozWare’s article&lt;/a&gt; focuses more on the &lt;code&gt;MeasurementFormatter&lt;/code&gt; type to customize the display of a &lt;code&gt;Measurement&lt;/code&gt; on Apple Watch.
+&lt;ul&gt;
+&lt;li&gt;You can also check out this &lt;a href="https://goshdarnformatstyle.com/measurement-style/"&gt;guide&lt;/a&gt; documenting the formatting options available for Measurements.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This post focuses on the advantages and limitations of the current approach available in Foundation and how some architectural tweaks and modern Swift features could make it more flexible, stable and easier to use.&lt;/p&gt;
+&lt;p&gt;As of this post’s writing, it’s code does not have a pure Swift implementation yet, being exclusive to Apple platforms and &lt;a href="https://github.com/swiftlang/swift-foundation"&gt;swift-foundation&lt;/a&gt; only offering stubs to allow Swift code using it to compile in other platforms. Discussion on the implementation is already underway on &lt;a href="https://forums.swift.org/t/measurement-dimension-and-unit/64649"&gt;Swift forums&lt;/a&gt;, but since it’s been stagnant since July 2023, so I hope this post can help anyone who’s either looking to contribute in the discussion or looking to make their own Measurement package.&lt;/p&gt;
+&lt;h2&gt;What already works well?&lt;/h2&gt;
+&lt;p&gt;As a built-in structure of Swift Foundation, the Measurement API already reduces a lot of the work you’re required to do in order to start using measures in your apps.&lt;/p&gt;
+&lt;h3&gt;Type-safe Unit Definition and Conversion&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;Measurement&amp;lt;UnitType&amp;gt;&lt;/code&gt; is a struct that associates a numeric value with an unit that represents the quantity measured, indicating the domain it belongs to.&lt;/p&gt;
+&lt;p&gt;This offers a type-safe approach for assigning values that is enforced by the compiler as shown in the example below, which requires that the measurement uses a unit of length.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;var distance: Measurement&amp;lt;UnitLength&amp;gt;
 
 distance = Measurement(22, UnitLength.meters) // ✅
 distance = Measurement(31, UnitMass.grams) // 🛑 Cannot convert value of type 'UnitMass' to expected argument type 'UnitLength'
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The same applies for unit conversions, in which units conforming to the &lt;code&gt;Dimension&lt;/code&gt; type can only convert to units in the same domain.&lt;/p&gt;&lt;pre&gt;&lt;code&gt;var weight = Measurement(value: 52, unit: UnitMass.kilograms)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The same applies for unit conversions, in which units conforming to the &lt;code&gt;Dimension&lt;/code&gt; type can only convert to units in the same domain.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;var weight = Measurement(value: 52, unit: UnitMass.kilograms)
 weight.converted(to: .grams) // ✅ 52_000 g
 weight.converted(to: .liters) // 🛑 Type 'UnitMass' has no member 'liters'
-&lt;/code&gt;&lt;/pre&gt;&lt;div&gt;&lt;h3&gt;Easy Extensibility&lt;/h3&gt;&lt;/div&gt;&lt;p&gt;Given their origins as Objective-C types, &lt;code&gt;Unit&lt;/code&gt; and &lt;code&gt;Dimension&lt;/code&gt; are abstract classes used as the base for the unit systems, implementing new unit types or dimensions via subclassing.&lt;/p&gt;&lt;pre&gt;&lt;code&gt;class Amount: Dimension, @unchecked Sendable {
-    static var units: Self { .init(symbol: "u") }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Easy Extensibility&lt;/h3&gt;
+&lt;p&gt;Given their origins as Objective-C types, &lt;code&gt;Unit&lt;/code&gt; and &lt;code&gt;Dimension&lt;/code&gt; are abstract classes used as the base for the unit systems, implementing new unit types or dimensions via subclassing.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;class Amount: Dimension, @unchecked Sendable {
+    static var units: Self { .init(symbol: &amp;quot;u&amp;quot;) }
 }
 
 class Force: Dimension, @unchecked Sendable {
-    static var newtons: Self { .init(symbol: "N") }
+    static var newtons: Self { .init(symbol: &amp;quot;N&amp;quot;) }
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And, through the use of extensions, you can also add brand new units like shown above, but also create entirely new units, being specifically useful when your app or game has a custom set of context-relevant units to measure it’s information.&lt;/p&gt;&lt;pre&gt;&lt;code&gt;public extension UnitLength {
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And, through the use of extensions, you can also add brand new units like shown above, but also create entirely new units, being specifically useful when your app or game has a custom set of context-relevant units to measure it’s information.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;public extension UnitLength {
     static var gizaPyramids: Self {
-		.init(symbol: "◢◣", converter: UnitConverterLinear(coefficient: 146.6, constant: 0))
+		.init(symbol: &amp;quot;◢◣&amp;quot;, converter: UnitConverterLinear(coefficient: 146.6, constant: 0))
 	}
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;div&gt;&lt;h3&gt;Formatting and Display&lt;/h3&gt;&lt;/div&gt;&lt;p&gt;When you want to display a measure, Foundation automatically formats your unit based on the device’s settings (locale, metric system, etc.). You can also configure it’s display format through the &lt;code&gt;formatted()&lt;/code&gt; instance method on &lt;code&gt;Measurement&lt;/code&gt;, which uses a DotSyntax &lt;code&gt;.measurement&lt;/code&gt; to create an instance of &lt;code&gt;FormatStyle&lt;/code&gt; dedicated to the Measurement API:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;let volume = Measurement(value: 10, unit: UnitVolume.cubicFeet)
-volume.formatted() // "283.168 cm³"
-volume.formatted(.measurement(width: .wide)) // "283.168 cubic centimetres"
-volume.formatted(.measurement(width: .narrow, usage: .asProvided)) // 10ft³"
-volume.formatted(.measurement(width: .abbreviated, usage: .liquid, numberFormatStyle: .number)) // "283 l"
-&lt;/code&gt;&lt;/pre&gt;&lt;div&gt;&lt;h3&gt;Wide Assortment of Default Units&lt;/h3&gt;&lt;/div&gt;&lt;p&gt;By default, Foundation provides over 22 specializations of &lt;code&gt;Unit&lt;/code&gt; and/or &lt;code&gt;Dimension&lt;/code&gt; (which amounts to over 200 predefined units), all with included formatting and display options for select unit types.&lt;/p&gt;&lt;blockquote&gt;&lt;p&gt;🔮 &lt;strong&gt;Fun Fact&lt;/strong&gt;: As of writing, the most recent unit added to the Measurement API is &lt;a href="https://developer.apple.com/documentation/foundation/unitenergy/energykit/milliwatthours"&gt;milliwattHours&lt;/a&gt;, a unit of energy added in OS 26 and meant for use with the brand new &lt;a href="https://developer.apple.com/documentation/EnergyKit"&gt;EnergyKit&lt;/a&gt;… yet the unit is not available for watchOS, tvOS or visionOS and has it’s own subtype inside of &lt;code&gt;UnitEnergy&lt;/code&gt; (&lt;code&gt;UnitEnergy.EnergyKit&lt;/code&gt;)&lt;/p&gt;&lt;/blockquote&gt;&lt;p&gt;This gives developers an out-of-the-box solution for most use cases that a traditional app would require. Add this with the easy extensibility for new and existing unit types and you have an API that’s user-friendly, battle-tested and well designed for most developer needs.&lt;/p&gt;&lt;p&gt;Except…&lt;/p&gt;&lt;div&gt;&lt;h2&gt;Limitations&lt;/h2&gt;&lt;/div&gt;&lt;p&gt;Well, as mentioned in the description of this post, there are some limitations that make the Measurement API not reach it’s full intended potential when looking at it from the perspective of a Swift package.&lt;/p&gt;&lt;div&gt;&lt;h3&gt;Objective-C constraints&lt;/h3&gt;&lt;/div&gt;&lt;p&gt;The current implementation in Swift is a Objective-C implementation into the language, sharing the same logic as the original module: with this, comes some important considerations before using it.&lt;/p&gt;&lt;p&gt;For starters, there’s no compile-time enforcement stopping you from instancing &lt;code&gt;Unit&lt;/code&gt; and &lt;code&gt;Dimension&lt;/code&gt; objects in your code, or using them as &lt;code&gt;Measurement&lt;/code&gt; filters, completely breaking the type-safety of the generic type. For example, the snippet below compiles and runs just fine with no errors:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;var generalMeasurement = Measurement(value: 32, unit: Unit(symbol: "#"))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Formatting and Display&lt;/h3&gt;
+&lt;p&gt;When you want to display a measure, Foundation automatically formats your unit based on the device’s settings (locale, metric system, etc.). You can also configure it’s display format through the &lt;code&gt;formatted()&lt;/code&gt; instance method on &lt;code&gt;Measurement&lt;/code&gt;, which uses a DotSyntax &lt;code&gt;.measurement&lt;/code&gt; to create an instance of &lt;code&gt;FormatStyle&lt;/code&gt; dedicated to the Measurement API:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;let volume = Measurement(value: 10, unit: UnitVolume.cubicFeet)
+volume.formatted() // &amp;quot;283.168 cm³&amp;quot;
+volume.formatted(.measurement(width: .wide)) // &amp;quot;283.168 cubic centimetres&amp;quot;
+volume.formatted(.measurement(width: .narrow, usage: .asProvided)) // 10ft³&amp;quot;
+volume.formatted(.measurement(width: .abbreviated, usage: .liquid, numberFormatStyle: .number)) // &amp;quot;283 l&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Wide Assortment of Default Units&lt;/h3&gt;
+&lt;p&gt;By default, Foundation provides over 22 specializations of &lt;code&gt;Unit&lt;/code&gt; and/or &lt;code&gt;Dimension&lt;/code&gt; (which amounts to over 200 predefined units), all with included formatting and display options for select unit types.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;🔮 &lt;strong&gt;Fun Fact&lt;/strong&gt;: As of writing, the most recent unit added to the Measurement API is &lt;a href="https://developer.apple.com/documentation/foundation/unitenergy/energykit/milliwatthours"&gt;milliwattHours&lt;/a&gt;, a unit of energy added in OS 26 and meant for use with the brand new &lt;a href="https://developer.apple.com/documentation/EnergyKit"&gt;EnergyKit&lt;/a&gt;… yet the unit is not available for watchOS, tvOS or visionOS and has it’s own subtype inside of &lt;code&gt;UnitEnergy&lt;/code&gt; (&lt;code&gt;UnitEnergy.EnergyKit&lt;/code&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This gives developers an out-of-the-box solution for most use cases that a traditional app would require. Add this with the easy extensibility for new and existing unit types and you have an API that’s user-friendly, battle-tested and well designed for most developer needs.&lt;/p&gt;
+&lt;p&gt;Except…&lt;/p&gt;
+&lt;h2&gt;Limitations&lt;/h2&gt;
+&lt;p&gt;Well, as mentioned in the description of this post, there are some limitations that make the Measurement API not reach it’s full intended potential when looking at it from the perspective of a Swift package.&lt;/p&gt;
+&lt;h3&gt;Objective-C constraints&lt;/h3&gt;
+&lt;p&gt;The current implementation in Swift is a Objective-C implementation into the language, sharing the same logic as the original module: with this, comes some important considerations before using it.&lt;/p&gt;
+&lt;p&gt;For starters, there’s no compile-time enforcement stopping you from instancing &lt;code&gt;Unit&lt;/code&gt; and &lt;code&gt;Dimension&lt;/code&gt; objects in your code, or using them as &lt;code&gt;Measurement&lt;/code&gt; filters, completely breaking the type-safety of the generic type. For example, the snippet below compiles and runs just fine with no errors:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;var generalMeasurement = Measurement(value: 32, unit: Unit(symbol: &amp;quot;#&amp;quot;))
 generalMeasurement = Measurement(value: 22, unit: UnitArea.ares)
 generalMeasurement = Measurement(value: 89, unit: UnitInformationStorage.bits)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You could even attempt to encode and decode the measurement under a generic measurement:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;var gameSize = Measurement(value: 40, unit: UnitInformationStorage.bits)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You could even attempt to encode and decode the measurement under a generic measurement:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;var gameSize = Measurement(value: 40, unit: UnitInformationStorage.bits)
 let encoded = try JSONEncoder().encode(gameSize)
 var decoded = try JSONDecoder().decode(Measurement&amp;lt;UnitInformationStorage&amp;gt;.self, from: encoded)
 decoded = Measurement(value: 20, unit: UnitPower.watts) // 🛑 Cannot convert value of type 'UnitPower' to expected argument type 'UnitInformationStorage'
 var decodedWithGeneric = try JSONDecoder().decode(Measurement&amp;lt;Unit&amp;gt;.self, from: encoded)
 decodedWithGeneric = Measurement(value: 20, unit: UnitPower.watts)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This could also lead to crashes at runtime, as the compiler’s type inference isn’t able to identify that these are two different types of &lt;code&gt;Measurement&lt;/code&gt;, with the code below compiling just fine and presenting an error at runtime:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;var path = Measurement(value: 32, unit: UnitLength.kilometers)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This could also lead to crashes at runtime, as the compiler’s type inference isn’t able to identify that these are two different types of &lt;code&gt;Measurement&lt;/code&gt;, with the code below compiling just fine and presenting an error at runtime:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;var path = Measurement(value: 32, unit: UnitLength.kilometers)
 var surface = Measurement(value: 21, unit: UnitArea.squareMiles)
 path &amp;lt; surface // 🛑 Fatal error: Attempt to compare measurements with non-equal dimensions
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Even when accounting for &lt;code&gt;Comparable&lt;/code&gt; and rewriting as &lt;code&gt;Measurement&amp;lt;Unit&amp;gt;&lt;/code&gt; instances provides the same results:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;var path2 = Measurement&amp;lt;Unit&amp;gt;(value: 32, unit: UnitLength.kilometers)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Even when accounting for &lt;code&gt;Comparable&lt;/code&gt; and rewriting as &lt;code&gt;Measurement&amp;lt;Unit&amp;gt;&lt;/code&gt; instances provides the same results:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;var path2 = Measurement&amp;lt;Unit&amp;gt;(value: 32, unit: UnitLength.kilometers)
 var surface2 = Measurement&amp;lt;Unit&amp;gt;(value: 21, unit: UnitArea.squareMiles)
 path2 &amp;lt; surface2 // 🛑 Fatal error: Attempt to compare measurements with non-equal dimensions
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Add in the Strict Concurrency Model, and even such a simple operation as this:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;func someOperation(_ measurement: Measurement&amp;lt;UnitLength&amp;gt;) -&amp;gt; UnitLength {
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Add in the Strict Concurrency Model, and even such a simple operation as this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;func someOperation(_ measurement: Measurement&amp;lt;UnitLength&amp;gt;) -&amp;gt; UnitLength {
     return measurement.unit
 }
 
 var height = Measurement(value: 1.82, unit: UnitLength.meters)
 let outcome = someOperation(height) // ✅ No issues
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Can have issues at runtime by adding a single &lt;code&gt;async&lt;/code&gt;, even if the method has no suspend points:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;func someOperation(_ measurement: Measurement&amp;lt;UnitLength&amp;gt;) async -&amp;gt; UnitLength {
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Can have issues at runtime by adding a single &lt;code&gt;async&lt;/code&gt;, even if the method has no suspend points:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;func someOperation(_ measurement: Measurement&amp;lt;UnitLength&amp;gt;) async -&amp;gt; UnitLength {
     return measurement.unit
 }
 
 var height = Measurement(value: 1.82, unit: UnitLength.meters)
 let outcome = await someOperation(height) // 🛑 error: execution stopped with unexpected state.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Even properly constraining the method to &lt;code&gt;@MainActor&lt;/code&gt; as per requirement of a type inheriting from &lt;code&gt;NSObject&lt;/code&gt; causes the same issue as above.&lt;/p&gt;&lt;p&gt;Dealing with an Objective-C class in Swift can be a very complex challenge already for developers with years of Swift experience given the Strict Concurrency requirements, so moving on to a pure Swift implementation in the future already will reduce many of the headaches listed above.&lt;/p&gt;&lt;p&gt;All of the above is temporary, up until a pure Swift implementation arrives, but there are some other things that&lt;/p&gt;&lt;div&gt;&lt;h3&gt;Not SI compliant&lt;/h3&gt;&lt;/div&gt;&lt;p&gt;Another downside to the current implementation lies in it’s default set of physical dimensions available, which does not encapsulate all SI units.&lt;/p&gt;&lt;p&gt;While there’s 22 unit types provided with the package, only 5 of the 7 fundamental units are contemplated: Time (under &lt;code&gt;UnitDuration&lt;/code&gt;). We also have a pretty big omission with Force not being an actual specialization in the package given it’s pretty useful role in Physics operations, being the basis to compose other already implemented dimensions such as &lt;code&gt;UnitEnergy&lt;/code&gt; and &lt;code&gt;UnitPressure&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;While the Measurement API has over 200 defined units, a sizeable number of them are just a redeclaration of the same unit under a different metric prefix and an adjusted converter to account for the new value. If we want any new unit system to follow SI’s metric prefix conventions, we require to implement &lt;em&gt;&lt;strong&gt;over 10 definitions per defined unit that we want to support Metric Prefixes on.&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;&lt;blockquote&gt;&lt;p&gt;For reference, while &lt;code&gt;UnitInformationStorage&lt;/code&gt; has by far the most amount of defined units in Foundation, the actual meaningful number of units for the domain are 3: &lt;code&gt;bit&lt;/code&gt;, &lt;code&gt;nibble&lt;/code&gt; and &lt;code&gt;byte&lt;/code&gt;. This is due to the fact it not only implements SI’s metric prefixes for &lt;code&gt;bit&lt;/code&gt; and &lt;code&gt;byte&lt;/code&gt;, but also a &lt;a href="https://en.wikipedia.org/w/index.php?title=Binary_prefix"&gt;Binary Prefix&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;&lt;div&gt;&lt;h3&gt;Restrictive API&lt;/h3&gt;&lt;/div&gt;&lt;p&gt;While the API is pretty robust and well-designed, there are some obstacles that could be patched up to provide a more accurate and flexible behaviour.&lt;/p&gt;&lt;p&gt;One example of this is when creating a &lt;code&gt;Measurement&lt;/code&gt; instance: while &lt;code&gt;Measurement&lt;/code&gt; accepts any &lt;code&gt;Double&lt;/code&gt; value, there are cases where constraining the value to another type would allow for more accurate representation in context (e.g. describing a file size using &lt;code&gt;Int&lt;/code&gt; or &lt;code&gt;Decimal&lt;/code&gt; in order to avoid floating-point errors or provide discrete measurement of units).&lt;/p&gt;&lt;p&gt;While the API itself is pretty descriptive and easy to understand by reading the code, it can also become pretty verbose: creating a variable to store a measure of “2m” can require 54 characters in it’s smallest, non-explicit form, as shown below:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;var x = Measurement(value: 2, unit: UnitLength.meters)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Speaking of less-verbose syntax, another issue lies in the lack of DotSyntax support for units, which is a result of &lt;code&gt;Unit&lt;/code&gt;, &lt;code&gt;Dimension&lt;/code&gt; and it’s inherited types defined in the packages being non-generic, non-&lt;code&gt;final&lt;/code&gt; classes.&lt;/p&gt;&lt;pre&gt;&lt;code&gt;final class CustomLength: UnitLength, @unchecked Sendable {
-    static var palms: Self { .init(symbol: "✋") }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Even properly constraining the method to &lt;code&gt;@MainActor&lt;/code&gt; as per requirement of a type inheriting from &lt;code&gt;NSObject&lt;/code&gt; causes the same issue as above.&lt;/p&gt;
+&lt;p&gt;Dealing with an Objective-C class in Swift can be a very complex challenge already for developers with years of Swift experience given the Strict Concurrency requirements, so moving on to a pure Swift implementation in the future already will reduce many of the headaches listed above.&lt;/p&gt;
+&lt;p&gt;All of the above is temporary, up until a pure Swift implementation arrives, but there are some other things that&lt;/p&gt;
+&lt;h3&gt;Not SI compliant&lt;/h3&gt;
+&lt;p&gt;Another downside to the current implementation lies in it’s default set of physical dimensions available, which does not encapsulate all SI units.&lt;/p&gt;
+&lt;p&gt;While there’s 22 unit types provided with the package, only 5 of the 7 fundamental units are contemplated: Time (under &lt;code&gt;UnitDuration&lt;/code&gt;). We also have a pretty big omission with Force not being an actual specialization in the package given it’s pretty useful role in Physics operations, being the basis to compose other already implemented dimensions such as &lt;code&gt;UnitEnergy&lt;/code&gt; and &lt;code&gt;UnitPressure&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;While the Measurement API has over 200 defined units, a sizeable number of them are just a redeclaration of the same unit under a different metric prefix and an adjusted converter to account for the new value. If we want any new unit system to follow SI’s metric prefix conventions, we require to implement &lt;em&gt;&lt;strong&gt;over 10 definitions per defined unit that we want to support Metric Prefixes on.&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For reference, while &lt;code&gt;UnitInformationStorage&lt;/code&gt; has by far the most amount of defined units in Foundation, the actual meaningful number of units for the domain are 3: &lt;code&gt;bit&lt;/code&gt;, &lt;code&gt;nibble&lt;/code&gt; and &lt;code&gt;byte&lt;/code&gt;. This is due to the fact it not only implements SI’s metric prefixes for &lt;code&gt;bit&lt;/code&gt; and &lt;code&gt;byte&lt;/code&gt;, but also a &lt;a href="https://en.wikipedia.org/w/index.php?title=Binary_prefix"&gt;Binary Prefix&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Restrictive API&lt;/h3&gt;
+&lt;p&gt;While the API is pretty robust and well-designed, there are some obstacles that could be patched up to provide a more accurate and flexible behaviour.&lt;/p&gt;
+&lt;p&gt;One example of this is when creating a &lt;code&gt;Measurement&lt;/code&gt; instance: while &lt;code&gt;Measurement&lt;/code&gt; accepts any &lt;code&gt;Double&lt;/code&gt; value, there are cases where constraining the value to another type would allow for more accurate representation in context (e.g. describing a file size using &lt;code&gt;Int&lt;/code&gt; or &lt;code&gt;Decimal&lt;/code&gt; in order to avoid floating-point errors or provide discrete measurement of units).&lt;/p&gt;
+&lt;p&gt;While the API itself is pretty descriptive and easy to understand by reading the code, it can also become pretty verbose: creating a variable to store a measure of “2m” can require 54 characters in it’s smallest, non-explicit form, as shown below:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;var x = Measurement(value: 2, unit: UnitLength.meters)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Speaking of less-verbose syntax, another issue lies in the lack of DotSyntax support for units, which is a result of &lt;code&gt;Unit&lt;/code&gt;, &lt;code&gt;Dimension&lt;/code&gt; and it’s inherited types defined in the packages being non-generic, non-&lt;code&gt;final&lt;/code&gt; classes.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-swift"&gt;final class CustomLength: UnitLength, @unchecked Sendable {
+    static var palms: Self { .init(symbol: &amp;quot;✋&amp;quot;) }
 }
 
 let failedDotSyntax1 = Measurement&amp;lt;Unit&amp;gt;(value: 23, unit: .palms) // 🛑 Type 'Unit' has no member 'palms'
 let failedDotSyntax2 = Measurement&amp;lt;UnitLength&amp;gt;(value: 23, unit: .palms) // 🛑 Type 'UnitLength' has no member 'palms'
 let validDotSyntax = Measurement&amp;lt;CustomLength&amp;gt;(value: 23, unit: .palms) // ✅ Success
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The implementation above still requires explicit declaration of generics, which limits the permisiveness of the notation.&lt;/p&gt;&lt;p&gt;Some other drawbacks include being unable to create ranges of measures with units conforming to &lt;code&gt;Dimension&lt;/code&gt; and using a &lt;code&gt;UnitConverterLinear&lt;/code&gt; and converting to derived units using the base operations (e.g. &lt;code&gt;Measurement&amp;lt;UnitLength&amp;gt;&lt;/code&gt; * &lt;code&gt;Measurement&amp;lt;UnitLength&amp;gt;&lt;/code&gt; = &lt;code&gt;Measurement&amp;lt;UnitArea&amp;gt;&lt;/code&gt;).&lt;/p&gt;&lt;p&gt;There’s probably more examples I could talk about, but overall the API has some areas of improvement so that it can become less diffuse, more visible and permissive.&lt;/p&gt;&lt;div&gt;&lt;h2&gt;Conclusion&lt;/h2&gt;&lt;/div&gt;&lt;p&gt;As with any framework design, there’s no absolutes on what is better and the current design of swift-foundation already is pretty great and works for most of use cases that a developer would need in their day-to-day, only requiring a pure Swift implementation to fix most of it’s issues.&lt;/p&gt;&lt;p&gt;Due to ABI and source stability requirements it’s unlikely that we’ll see any big redesign to the current code as it is required to be compatible with the current Foundation. However, we can look into Swift packages made by the community for alternatives made with modern features in mind:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;&lt;a href="https://github.com/alexandrehsaad/swift-measures"&gt;swift-measures&lt;/a&gt; is a very good reimplementation of the Measurement API that takes advantage of Swift features, such as structs, protocols and property wrappers. It also dips into new features like the composition of measures (e.g. Length / Time = Velocity) and adds in missing SI unit types such as Force, Magnetic Flux, Substance Amount and more.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;a href="https://github.com/hyperjeff/Physical"&gt;Physical&lt;/a&gt; goes for an unique approach: it builds on top of the current Foundation structure, composing units by chaining numbers with properties and mixing dimensions to create new ones using a base &lt;code&gt;Physical&lt;/code&gt; protocol.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;a href="https://github.com/NeedleInAJayStack/Units"&gt;Units&lt;/a&gt; also follows a similar approach to the packages above, creating it’s own implementation for composing units together, using a registry system to parse a measurement from a &lt;code&gt;String&lt;/code&gt;. The package also provides a CLI tool for use in conversions.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Beyond these, I’m also working on my &lt;a href="https://github.com/MartonioJunior/trinkets-swift"&gt;own implementation&lt;/a&gt; of Units and Measurements for Game Development purposes, focusing more on ergonomy, type-safety, generics and other Modern Swift features (e.g. Integer Generic Parameters) to provide a more structured approach for units that aids experimentation and prevents bugs and misuses at compile time.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;At the end of the day, the best approach is the one that actually fits the requirements of your software, so choosing the right tool for the job (or even implementing your own based on existing solutions) is the way to go.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</content>
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The implementation above still requires explicit declaration of generics, which limits the permisiveness of the notation.&lt;/p&gt;
+&lt;p&gt;Some other drawbacks include being unable to create ranges of measures with units conforming to &lt;code&gt;Dimension&lt;/code&gt; and using a &lt;code&gt;UnitConverterLinear&lt;/code&gt; and converting to derived units using the base operations (e.g. &lt;code&gt;Measurement&amp;lt;UnitLength&amp;gt;&lt;/code&gt; * &lt;code&gt;Measurement&amp;lt;UnitLength&amp;gt;&lt;/code&gt; = &lt;code&gt;Measurement&amp;lt;UnitArea&amp;gt;&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;There’s probably more examples I could talk about, but overall the API has some areas of improvement so that it can become less diffuse, more visible and permissive.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;As with any framework design, there’s no absolutes on what is better and the current design of swift-foundation already is pretty great and works for most of use cases that a developer would need in their day-to-day, only requiring a pure Swift implementation to fix most of it’s issues.&lt;/p&gt;
+&lt;p&gt;Due to ABI and source stability requirements it’s unlikely that we’ll see any big redesign to the current code as it is required to be compatible with the current Foundation. However, we can look into Swift packages made by the community for alternatives made with modern features in mind:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/alexandrehsaad/swift-measures"&gt;swift-measures&lt;/a&gt; is a very good reimplementation of the Measurement API that takes advantage of Swift features, such as structs, protocols and property wrappers. It also dips into new features like the composition of measures (e.g. Length / Time = Velocity) and adds in missing SI unit types such as Force, Magnetic Flux, Substance Amount and more.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/hyperjeff/Physical"&gt;Physical&lt;/a&gt; goes for an unique approach: it builds on top of the current Foundation structure, composing units by chaining numbers with properties and mixing dimensions to create new ones using a base &lt;code&gt;Physical&lt;/code&gt; protocol.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/NeedleInAJayStack/Units"&gt;Units&lt;/a&gt; also follows a similar approach to the packages above, creating it’s own implementation for composing units together, using a registry system to parse a measurement from a &lt;code&gt;String&lt;/code&gt;. The package also provides a CLI tool for use in conversions.&lt;/li&gt;
+&lt;li&gt;Beyond these, I’m also working on my &lt;a href="https://github.com/MartonioJunior/trinkets-swift"&gt;own implementation&lt;/a&gt; of Units and Measurements for Game Development purposes, focusing more on ergonomy, type-safety, generics and other Modern Swift features (e.g. Integer Generic Parameters) to provide a more structured approach for units that aids experimentation and prevents bugs and misuses at compile time.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;At the end of the day, the best approach is the one that actually fits the requirements of your software, so choosing the right tool for the job (or even implementing your own based on existing solutions) is the way to go.&lt;/p&gt;</content>
         <link rel="alternate" href="https://martoniojunior.github.io/posts/swift/foundation/units-and-measurements/"></link>
     </entry>
 </feed>
