@@ -19,7 +19,7 @@ public extension ArtsBlueprintsCodeWebsite {
             .registerAreas(self)
             .registerPosts(self)
             .registerProjects(self)
-            .registerStandalone(self)
+            .registerStandalone()
             .afterWrite {
                 try $0.deployFolder("Sources/Assets/Resources", to: "Resources/EnergyTheme")
                 try $0.deployFolder(source + "/assets", to: "assets")
