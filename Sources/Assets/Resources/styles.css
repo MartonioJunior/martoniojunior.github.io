@@ -177,7 +177,7 @@ MARK: *
         background-color: var(--cardboard);
 
         @media(prefers-color-scheme: dark) {
-            background-color: var(--darkgold);
+            background-color: var(--wood);
         }
     }
 }
